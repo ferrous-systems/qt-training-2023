@@ -1,0 +1,1726 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Workbook for Rust &amp; WebAssembly workshop</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">WebAssembly</a></li><li class="chapter-item expanded "><a href="preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="tooling-check.html"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Background</li><li class="chapter-item expanded "><a href="what-is-webassembly.html"><strong aria-hidden="true">2.</strong> What is WebAssembly?</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="wasm-hello-world.html"><strong aria-hidden="true">2.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="rust-and-wasm.html"><strong aria-hidden="true">2.2.</strong> Rust & Wasm</a></li></ol></li><li class="chapter-item expanded "><a href="on-the-web/usecases.html"><strong aria-hidden="true">3.</strong> Use cases on the web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="on-the-web/wasm-and-js.html"><strong aria-hidden="true">3.1.</strong> WASM & JavaScript</a></li></ol></li><li class="chapter-item expanded "><a href="on-the-server/usecases.html"><strong aria-hidden="true">4.</strong> Use cases everywhere else</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="on-the-server/wasi.html"><strong aria-hidden="true">4.1.</strong> WASI</a></li><li class="chapter-item expanded "><a href="on-the-server/compute-at-edge.html"><strong aria-hidden="true">4.2.</strong> Fastly's Compute@Edge</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="tutorial/index.html"><strong aria-hidden="true">5.</strong> Idea</a></li><li class="chapter-item expanded "><a href="tutorial/cli.html"><strong aria-hidden="true">6.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/cli/hello-world.html"><strong aria-hidden="true">6.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="tutorial/cli/building-cli.html"><strong aria-hidden="true">6.2.</strong> Building and running with wasmtime</a></li><li class="chapter-item expanded "><a href="tutorial/cli/image-filters.html"><strong aria-hidden="true">6.3.</strong> Image filter application</a></li><li class="chapter-item expanded "><a href="tutorial/cli/final-code.html"><strong aria-hidden="true">6.4.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="tutorial/web.html"><strong aria-hidden="true">7.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/web/hello-world.html"><strong aria-hidden="true">7.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="tutorial/web/wasm-bindgen.html"><strong aria-hidden="true">7.2.</strong> wasm-bindgen</a></li><li class="chapter-item expanded "><a href="tutorial/web/basic-setup.html"><strong aria-hidden="true">7.3.</strong> Basic setup</a></li><li class="chapter-item expanded "><a href="tutorial/web/image-filters.html"><strong aria-hidden="true">7.4.</strong> Image filter application</a></li><li class="chapter-item expanded "><a href="tutorial/web/frontend.html"><strong aria-hidden="true">7.5.</strong> HTML Frontend</a></li><li class="chapter-item expanded "><a href="tutorial/web/javascript.html"><strong aria-hidden="true">7.6.</strong> JavaScript</a></li><li class="chapter-item expanded "><a href="tutorial/web/run-locally.html"><strong aria-hidden="true">7.7.</strong> Running it locally</a></li><li class="chapter-item expanded "><a href="tutorial/web/final-code.html"><strong aria-hidden="true">7.8.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="tutorial/edge.html"><strong aria-hidden="true">8.</strong> Edge computing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/edge/spec.html"><strong aria-hidden="true">8.1.</strong> Application specification</a></li><li class="chapter-item expanded "><a href="tutorial/edge/new-project.html"><strong aria-hidden="true">8.2.</strong> New project</a></li><li class="chapter-item expanded "><a href="tutorial/edge/handling-requests.html"><strong aria-hidden="true">8.3.</strong> Handling requests</a></li><li class="chapter-item expanded "><a href="tutorial/edge/backend.html"><strong aria-hidden="true">8.4.</strong> Backend</a></li><li class="chapter-item expanded "><a href="tutorial/edge/frontend.html"><strong aria-hidden="true">8.5.</strong> HTML Frontend</a></li><li class="chapter-item expanded "><a href="tutorial/edge/javascript.html"><strong aria-hidden="true">8.6.</strong> JavaScript</a></li><li class="chapter-item expanded "><a href="tutorial/edge/run-locally.html"><strong aria-hidden="true">8.7.</strong> Running it locally</a></li><li class="chapter-item expanded "><a href="tutorial/edge/final-code.html"><strong aria-hidden="true">8.8.</strong> Final application</a></li><li class="chapter-item expanded "><a href="tutorial/edge/deploy.html"><strong aria-hidden="true">8.9.</strong> Optional: Deployment</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">9.</strong> References</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Workbook for Rust &amp; WebAssembly workshop</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/ferrous-systems/wasm-training-2022" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="rust--webassembly-workshop"><a class="header" href="#rust--webassembly-workshop">Rust &amp; WebAssembly workshop</a></h1>
+<p>This workbook contains the material for a Rust &amp; WebAssembly workshop
+held by <a href="https://ferrous-systems.com/">Ferrous Systems</a> and <a href="https://fnordig.de/">Jan-Erik Rediger</a>.</p>
+<p>It is split into 3 parts:</p>
+<h2 id="part-1-setup"><a class="header" href="#part-1-setup">Part 1: <a href="preparations.html">Setup</a></a></h2>
+<p>An installation guide for all tooling used throughout this book.</p>
+<h2 id="part-2-background"><a class="header" href="#part-2-background">Part 2: <a href="what-is-webassembly.html">Background</a></a></h2>
+<p>A bit of common knowledge &amp; history about WebAssembly and Rust,
+as well as notable use cases.</p>
+<h2 id="part-3-tutorial"><a class="header" href="#part-3-tutorial">Part 3: <a href="./tutorial/index.html">Tutorial</a></a></h2>
+<p>A hands-on tutorial writing Rust and compiling it to WebAssembly in 3 variations:
+as a command-line app, as a client-side web app and as an edge computing app in the cloud.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="preparations"><a class="header" href="#preparations">Preparations</a></h1>
+<p>This chapter contains information about the course material and an installation guide.</p>
+<h2 id="workshop-materials"><a class="header" href="#workshop-materials">Workshop Materials</a></h2>
+<p>Clone the <a href="https://github.com/ferrous-systems/wasm-training-2022">workshop git repository</a>:</p>
+<pre><code>git clone https://github.com/ferrous-systems/wasm-training-2022
+</code></pre>
+<p>The workshop repository contains all workshop materials, e.g. code examples,
+and the source for this workbook.</p>
+<h2 id="required-software"><a class="header" href="#required-software">Required Software</a></h2>
+<p>The <a href="./setup.html">Setup guide</a> helps you install the required software used throughout this book.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="setup"><a class="header" href="#setup">Setup</a></h1>
+<p>This section describes how to set up the toolchain
+for compiling Rust programs to WebAssembly
+and integrate them with the different environments we will look at.</p>
+<h2 id="the-rust-toolchain"><a class="header" href="#the-rust-toolchain">The Rust Toolchain</a></h2>
+<p>You will need the standard Rust toolchain, including <code>rustup</code>, <code>rustc</code>, and
+<code>cargo</code>.</p>
+<p><a href="https://www.rust-lang.org/tools/install">Follow these instructions to install the Rust toolchain.</a></p>
+<p>Rust and WebAssembly is available on Rust stable.
+That means we don't require any experimental feature flags.
+The latest Rust should work best.</p>
+<h3 id="wasm-targets"><a class="header" href="#wasm-targets">WASM targets</a></h3>
+<p>Install the WASM targets:</p>
+<pre><code>rustup target add wasm32-unknown-unknown
+rustup target add wasm32-wasi
+</code></pre>
+<h3 id="additional-tooling"><a class="header" href="#additional-tooling">Additional tooling</a></h3>
+<p>Some of these are optional.
+They make some tasks easier to handle, but it can be done without them.</p>
+<h4 id="wasmtime"><a class="header" href="#wasmtime">wasmtime</a></h4>
+<p>A fast and secure runtime for WebAssembly.</p>
+<p>Full installation instructions: <a href="https://docs.wasmtime.dev/cli-install.html">https://docs.wasmtime.dev/cli-install.html</a></p>
+<p>Linux and macOS users can execute the following:</p>
+<pre><code>curl https://wasmtime.dev/install.sh -sSf | bash
+</code></pre>
+<p>Alternatively, on macOS with <code>brew</code>:</p>
+<pre><code>brew install wasmtime
+</code></pre>
+<p>This will download a precompiled version of wasmtime and place it in <code>$HOME/.wasmtime</code>,
+and update your shell configuration to place the right directory in <code>PATH</code>.</p>
+<p>Windows users should visit the <a href="https://github.com/bytecodealliance/wasmtime/releases">releases page</a>
+and download the MSI installer (<code>wasmtime-v2.0.0-x86_64-windows.msi</code> for example)
+and use that to install.</p>
+<h4 id="wasm-bindgen"><a class="header" href="#wasm-bindgen">wasm-bindgen</a></h4>
+<p>Tool to generate JavaScript bindings for a wasm file.</p>
+<pre><code>cargo install wasm-bindgen-cli
+</code></pre>
+<h4 id="serving-local-content-over-http"><a class="header" href="#serving-local-content-over-http">Serving local content over HTTP</a></h4>
+<p>&quot;Host These Things Please&quot; (<code>https</code>) is a basic http server for serving files in a folder over HTTP locally.</p>
+<p>Install it using <code>cargo</code>:</p>
+<pre><code>cargo install https
+</code></pre>
+<p>You can later simply use <code>http</code> to run it.</p>
+<h4 id="wasm2wat-optional"><a class="header" href="#wasm2wat-optional">wasm2wat (optional)</a></h4>
+<p>Translate from the binary WebAssembly format back to the text format (also known as a .wat).
+Part of the WebAssembly Binary Toolkit (WABT).</p>
+<p>macOS:</p>
+<pre><code>brew install wabt
+</code></pre>
+<p>Others:</p>
+<p>Download the release from the <a href="https://github.com/WebAssembly/wabt/releases">WABT release page</a>.</p>
+<h4 id="fastly-cli-optional"><a class="header" href="#fastly-cli-optional">Fastly CLI (optional)</a></h4>
+<p><code>fastly</code> is an open-source command line tool for interacting with the Fastly API.
+It can be used to create, build and run Compute@Edge projects locally and deploy them on Fastly.</p>
+<p><a href="https://developer.fastly.com/learning/tools/cli/#installing">Installation instructions</a>.</p>
+<p>For macOS:</p>
+<pre><code>brew install fastly/tap/fastly
+</code></pre>
+<p>For Windows and Linux:</p>
+<p>Download a release from the <a href="https://github.com/fastly/cli/releases/latest">fastly GitHub Release page</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tooling-check"><a class="header" href="#tooling-check">Tooling check</a></h1>
+<h2 id="setup-check"><a class="header" href="#setup-check">Setup check</a></h2>
+<p>✅ Fully restart your terminal (not just open a fresh tab).</p>
+<p>✅ Let's check that you have installed Rust.</p>
+<pre><code class="language-console">$ rustc --version
+rustc 1.64.0 (a55dd71d5 2022-09-19)
+</code></pre>
+<pre><code class="language-console">$ cargo --version
+cargo 1.64.0 (387270bc7 2022-09-16)
+</code></pre>
+<pre><code class="language-console">$ rustup target list --installed
+(cut)
+wasm32-unknown-unknown
+wasm32-wasi
+(cut)
+</code></pre>
+<p>✅ Let's check that you have installed the tools listed in the previous section (Note: not all are required).</p>
+<pre><code class="language-console">$ wasmtime --version
+wasmtime-cli 2.0.0
+</code></pre>
+<pre><code class="language-console">$ wasm-bindgen --version
+wasm-bindgen 0.2.83
+</code></pre>
+<pre><code class="language-console">$ http
+Hosting &quot;.&quot; on port 8000 without TLS and no authentication...
+Ctrl-C to stop.
+</code></pre>
+<p><em>Note: This will host the current directory over HTTP. Use <code>Ctrl-C</code> to stop it.</em></p>
+<pre><code class="language-console">$ wasm2wat --version
+1.0.30
+</code></pre>
+<pre><code class="language-console">$ fastly version
+Fastly CLI version v4.2.0 (a1e8772)
+Built with go version go1.18.6 linux/amd64
+Viceroy version: viceroy 0.3.1
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="what-is-webassembly"><a class="header" href="#what-is-webassembly">What is WebAssembly?</a></h1>
+<p>WebAssembly is a technology that allows you to compile application code written in pretty much any language
+(including Rust, C, C++, JavaScript, and Go)
+and run it inside sandboxed environments.
+WebAssembly is often known as just &quot;wasm&quot;.</p>
+<p>WebAssembly originated as a successor to asm.js, a low-level subset of JavaScript,
+and Google Native Client (NaCl), a technology to run a subset of native code in a sandboxed environment within the browser.</p>
+<p>WebAssembly itself started in 2015, with a first release of the specification in 2017.
+By 2019 it became an official web standard with implementations across all major browsers.</p>
+<p>Since then it became a compilation target for a wide variety of programming languages,
+gained usage across the web and other execution environments
+and got several independent runtime implementations inside and outside of browsers</p>
+<p>Contrary to what the name might make you believe it is not tied to the web only.
+But the web is where it originated.</p>
+<p>In the next chapters you will learn what WebAssembly looks like and where it is used.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-hello-world-of-webassembly"><a class="header" href="#the-hello-world-of-webassembly">The Hello World of WebAssembly</a></h1>
+<p>We will work with Rust throughout this book.
+The first &quot;Hello World&quot; application is thus a small Rust function to add 2 numbers together
+and return the result.</p>
+<pre><code class="language-rust">#[no_mangle]
+pub extern &quot;C&quot; fn add(left: i32, right: i32) -&gt; i32 {
+    left + right
+}</code></pre>
+<p>WebAssembly is a binary format.
+The above function compiled to a WebAssembly module results in the following binary blob (hexdumped).</p>
+<pre><code class="language-hex">00 61 73 6d 01 00 00 00 01 07 01 60 02 7f 7f 01
+7f 03 02 01 00 05 03 01 00 10 07 10 02 06 6d 65
+6d 6f 72 79 02 00 03 61 64 64 00 00 0a 09 01 07
+00 20 00 20 01 6a 0b
+</code></pre>
+<p>Along with the binary format there's also the WebAssembly text format, <code>wat</code>.
+The above module represented as <code>wat</code>:</p>
+<pre><code class="language-wasm">(module
+  (type (;0;) (func (param i32 i32) (result i32)))
+  (func $add (type 0) (param i32 i32) (result i32)
+    local.get 0
+    local.get 1
+    i32.add)
+  (export &quot;memory&quot; (memory 0))
+  (export &quot;add&quot; (func $add))
+)
+</code></pre>
+<p><em>(The <code>wasm2wat</code> tool transforms the binary output to its equivalent text format)</em></p>
+<p>In later chapters of this book you will learn how to write, compile and run these WebAssembly modules in different environments.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rust--wasm"><a class="header" href="#rust--wasm">Rust &amp; Wasm</a></h1>
+<p>The Rust compiler gained proper asm.js support (a wasm predecessor) using Emscripten some time in 2016
+and experimental WebAssembly support shortly after the same year with Rust 1.14 (the <code>wasm32-unknown-emscripten</code> target).</p>
+<p>The <code>wasm32-unknown-unknown</code> target became available on Rust Nightly in November 2017.
+<code>wasm32-wasi</code> was added in 2019 (initially as <code>wasm32-unknown-wasi</code>).
+These are the two main targets you will work with.</p>
+<p>A <a href="https://github.com/rustwasm/">WebAssembly Domain Working Group</a> was started within the Rust project in 2018.
+Their plan was to drive WebAssembly support in the Rust compiler forward,
+create tooling and libraries for Rust &amp; WebAssembly and provide learning material.</p>
+<p>Early on WebAssembly tooling was written in Rust,
+often to simplify Rust &amp; WebAssembly development,
+but sometimes acting as general tooling as well.
+Tools such as <a href="https://github.com/rustwasm/wasm-bindgen"><code>wasm-bindgen</code></a>
+or <a href="https://github.com/rustwasm/wasm-pack"><code>wasm-pack</code></a>
+became early examples of what great WebAssembly tooling can provide for the ecosystem.</p>
+<p>Some WebAssembly runtimes were written in Rust, most notably <a href="https://wasmtime.dev/">wasmtime</a>.
+The community started developing libraries and frameworks for WebAssembly development,
+e.g. <a href="https://crates.io/crates/yew">Yew</a>, a framework for making client-side single-page apps.</p>
+<p>From the get-go Rust was a first-class citizen in the WebAssembly world,
+both as a language targeting WebAssembly as well as the language tools and libraries for WebAssembly were written in.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="use-cases"><a class="header" href="#use-cases">Use cases</a></h1>
+<p>WebAssembly originated as a successor to browser technology like asm.js
+and Google Native Client (NaCl).
+Naturally WebAssembly gained popularity across a wide range of use cases on the web.</p>
+<p>WebAssembly on the web allows to build existing software written in a variety of languages
+and run them as part of ordinary web applications.</p>
+<p>The following is a list of interesting existing web applications using WebAssembly.</p>
+<h2 id="pyodide"><a class="header" href="#pyodide"><a href="https://pyodide.org/">Pyodide</a></a></h2>
+<p>A full Python distribution running in your browser.
+It comes with builtin packages as well as support to install pure-Python packages from PyPi.</p>
+<p>An in-browser REPL is available at <a href="https://pyodide.org/en/stable/console.html">https://pyodide.org/en/stable/console.html</a>.</p>
+<h2 id="datasette-lite"><a class="header" href="#datasette-lite"><a href="https://lite.datasette.io/">Datasette Lite</a></a></h2>
+<p>Datasette is an open source multi-tool for exploring and publishing data.
+It provides an interface to SQLite databases.</p>
+<p>Datasette Lite is based on Pyodide and brings the full application to the browser.
+You can open remote database and CSV files, execute queries and browse through the loaded database.</p>
+<h2 id="squooshapp"><a class="header" href="#squooshapp"><a href="https://squoosh.app/">squoosh.app</a></a></h2>
+<p>squoosh is an image compression web app, fully client-side.
+It provides an interactive interface to resize an image and supports different output codecs.
+Everything is happening client-side and images never leave the browser.</p>
+<p>Source code is available on <a href="https://github.com/GoogleChromeLabs/squoosh">GitHub</a>.</p>
+<h2 id="photoshop-on-the-web"><a class="header" href="#photoshop-on-the-web"><a href="https://creativecloud.adobe.com/cc/photoshop">Photoshop on the Web</a></a></h2>
+<p>Photoshop on the Web is the nearly-complete Photoshop experience running in the browser.
+It's currently in beta and not yet fully supported in all browsers.</p>
+<h2 id="tailscale-ssh-console"><a class="header" href="#tailscale-ssh-console"><a href="https://tailscale.com/blog/ssh-console/">Tailscale SSH Console</a></a></h2>
+<p>Tailscale is a VPN service that allows you to make your devices accessible within an overlay network, no matter where those devices are physically located.
+It recently started to support SSH over their service with next to no setup.
+They now offer an SSH console directly in the browser.
+Their VPN client and networking code has been compiled to WebAssembly
+and (encrypted) traffic goes directly to relay servers, but not through additional proxies.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wasm--javascript"><a class="header" href="#wasm--javascript">WASM &amp; JavaScript</a></h1>
+<p>WebAssembly is available to every website now through the JavaScript web API.
+It is supported in all recent versions of all major browsers<sup class="footnote-reference"><a href="#1">1</a></sup>.</p>
+<p>The WebAssembly web API is available on the <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface"><code>WebAssembly</code> JavaScript object</a>.
+The available API allows to compile and instantiate WebAssembly modules,
+access exported functionality and access the shared memory block
+used to share data between the WebAssembly module and the JavaScript environment.
+The <a href="on-the-web/../tutorial/web.html">web tutorial chapter</a> will guide you through some of the usage later.</p>
+<hr />
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>See <a href="https://caniuse.com/?search=webassembly">caniuse.com</a>.</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="use-cases-everywhere-else"><a class="header" href="#use-cases-everywhere-else">Use cases everywhere else</a></h1>
+<p>WebAssembly is also supported outside of the browser environment.
+There it can be used for a wide variety of applications,
+making use of its sandboxing and security functionality.</p>
+<p>Some possible use cases include:</p>
+<h2 id="plugins"><a class="header" href="#plugins">Plugins</a></h2>
+<p>User-facing native applications can safely support user-contributed plugins.
+These plugins are compiled to WebAssembly modules and the application can run them in a restricted environment within the application, allowing access to only a small part of the application.</p>
+<h2 id="serverless"><a class="header" href="#serverless">Serverless</a></h2>
+<p>&quot;Serverless&quot; can describe a wide variety of concepts.
+In recent times it became known as a cloud computing execution model,
+where cloud providers allocate machine resources on demand, managing it for their users
+and executing the user's application code on request.</p>
+<p>Most commonly this is offered as a Function as a Service (FaaS) platform,
+where small application logic is executed on incoming requests, using limited resources (CPU, time, memory).</p>
+<p>WebAssembly allows that users can write this logic in a language of their choice
+and the provider supports a general WebAssembly execution environment, often accompanied with a provider-specific SDK.
+The provider can leverage the WebAssembly sandbox mechanism to provide per-request isolation &amp; performance.</p>
+<p>We look at one of these serverless offerings:
+<a href="on-the-server/compute-at-edge.html">Fastly's Compute@Edge</a>.</p>
+<h2 id="docker"><a class="header" href="#docker">Docker</a></h2>
+<p>Docker recently announced a <a href="https://www.docker.com/blog/docker-wasm-technical-preview/">Technical Preview of their WebAssembly support</a>.
+Docker containers can be used to build and distribute WebAssembly applications.
+The Docker engine can then extract and run this WebAssembly application in a wasm runtime,
+all while using the familiar Docker tooling.</p>
+<h2 id="third-party-library-sandboxing"><a class="header" href="#third-party-library-sandboxing">Third-party library sandboxing</a></h2>
+<p><a href="https://rlbox.dev/">RLBox</a> is a toolkit for sandboxing third party C libraries.
+This allows to run third-party libraries within an existing application,
+but restricting the access to only what is directly provided to the library as input,
+thus reducing the attack surface of this part of the code.
+It is in use in Mozilla Firefox.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wasi"><a class="header" href="#wasi">WASI</a></h1>
+<p>The WebAssembly specification describes a very limited interface that the environment a WebAssembly module runs in need to provide.
+It essentially has 3 important parts:</p>
+<ul>
+<li>Imports. Functionality provided by the environment for use within the WebAssembly code.</li>
+<li>Exports. The functions the WebAssembly module exports, making them callable from the outside.</li>
+<li>Linear Memory. The WebAssembly module has access to a block of linear memory, which it potentially can expand on request. This memory can be read by the host environment as well.</li>
+</ul>
+<p>Therefore WebAssembly code is limited to self-contained computation, calls to imported functions and reading and writing from memory.
+No default imports are provided and how data is laid out in the linear memory is also unspecified.</p>
+<p>And this is where WASI comes in:</p>
+<blockquote>
+<p>WASI is a modular system interface for WebAssembly.
+As described in the initial announcement, it’s focused on security and portability.</p>
+<p><em>(via <a href="https://wasi.dev/">wasi.dev</a>)</em></p>
+</blockquote>
+<p>WASI is a specification of the interfaces a program can use to communicate with the host environment.
+It is up to the host environment how these interfaces are implemented and if additional security mechanisms are enforced.</p>
+<p>Rust supports the <code>wasm32-wasi</code> target and the Rust standard library is implemented for this target,
+allowing for most Rust programs and libraries to just work with this target.
+The WebAssembly runtime <code>wasmtime</code> implements the required WASI interfaces in a capability-based security model</p>
+<p>The <a href="https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/">initial announcement for WASI</a> has a lot more details on how it works.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fastlys-computeedge"><a class="header" href="#fastlys-computeedge">Fastly's Compute@Edge</a></h1>
+<p>Fastly is a cloud computing provider and content delivery network (CDN).</p>
+<p>Earlier this year they released their Compute@Edge platform.
+This platform allows to run WebAssembly code at the Fastly edge.
+They chose WebAssembly for exactly the reasons we listed in <a href="on-the-server/usecases.html#serverless">the previous chapter</a>: lightweight sandboxing, per-request isolation and performance.</p>
+<p>They released a Rust SDK (<a href="https://docs.rs/fastly/0.8.9/fastly/"><code>fastly</code></a>),
+which provides the necessary integration to read an incoming request and generate an appropriate response.
+The host runtime uses <a href="on-the-server/wasi.html">WASI</a> to provide the necessary system interfaces.
+This means that you can write normal Rust code, using most of the Rust standard library and a large number of available Rust crates without issues.
+They also support JavaScript and Go as languages on this platform.</p>
+<p>You can find the Fastly Compute@Edge documentation at <a href="https://docs.fastly.com/products/compute-at-edge">https://docs.fastly.com/products/compute-at-edge</a>.</p>
+<p>You will learn how to write a small application for this platform in the <a href="on-the-server/../tutorial/edge.html">Edge computing tutorial</a> later in this book.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="idea"><a class="header" href="#idea">Idea</a></h1>
+<p>We now want to build a slightly more complex application.</p>
+<p>The idea is to use an existing image manipulation library
+to apply filters to a given image<sup class="footnote-reference"><a href="#1">1</a></sup>.
+This example will show us how to use an existing Rust crate,
+how to handle input and output and how to interact with the different environments.</p>
+<p>We start off with building a command-line tool run using <code>wasmtime</code>,
+then build a web application running completely client-side,
+and last as an edge computing API that processes images posted to it.</p>
+<p>We will work with the following example image (but really any image will work).
+Right-click it and save it to disk for later use.</p>
+<p><img src="tutorial/kongelige-slott.jpg" alt="" /></p>
+<p>When applying the filter named &quot;1977&quot;, this is the result:</p>
+<p><img src="tutorial/kongelige-slott-1977.png" alt="" /></p>
+<p>Several more filters are available in the library.</p>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>The image filters are inspired by Instagram. The implementation is based on <a href="https://github.com/una/CSSgram">CSSgram</a>, which was ported to Rust by <a href="https://github.com/ha-shine">@ha-shine</a>. The example image was taken on 2022-10-28 by Jan-Erik Rediger.</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-interface"><a class="header" href="#command-line-interface">Command-line interface</a></h1>
+<p>In this tutorial you'll get familiar with:</p>
+<ul>
+<li>Building Rust code for the <code>wasm32-wasi</code> target</li>
+<li>Running applications on the command-line using <code>wasmtime</code></li>
+<li>Re-using existing crates in a WASM application</li>
+<li><code>wasmtime</code>'s capability-based system</li>
+</ul>
+<p>We start with a command-line tool that takes an image and a filter name as input.
+It applies the given filter to the image and produces an <code>output.png</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world-on-the-command-line"><a class="header" href="#hello-world-on-the-command-line">Hello World on the command line</a></h1>
+<p>✅ Create a new Rust project</p>
+<pre><code>cargo new rustagram
+cd rustagram
+</code></pre>
+<p>✅ To start the tool will only print a message. Open <code>src/main.rs</code> and add</p>
+<pre><code class="language-rust">fn main() {
+    println!(&quot;Hello World from wasmtime!&quot;);
+}</code></pre>
+<p>Next, <a href="tutorial/cli/building-cli.html">read how to build and run the application</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building-and-running-with-wasmtime"><a class="header" href="#building-and-running-with-wasmtime">Building and running with <code>wasmtime</code></a></h1>
+<p>✅ You can build for the <code>wasm32-wasi</code> manually like this:</p>
+<pre><code>cargo build --target wasm32-wasi
+</code></pre>
+<p>This should create a file <code>target/wasm32-wasi/debug/rustagram.wasm</code>.</p>
+<p>✅ Now that the application is built you can run it using <code>wasmtime</code>:</p>
+<pre><code>wasmtime target/wasm32-wasi/debug/rustagram.wasm
+</code></pre>
+<p>You should see the message printed:</p>
+<pre><code>$ wasmtime target/wasm32-wasi/debug/rustagram.wasm
+Hello World from wasmtime!
+</code></pre>
+<p>✅ (Optional) You can transform the generated WebAssembly code into its text representation using <code>wasm2wat</code></p>
+<pre><code>wasm2wat target/wasm32-wasi/debug/rustagram.wasm
+</code></pre>
+<p><em>Caution: this produces a lot of output.</em></p>
+<p>You should see something like this:</p>
+<pre><code>(module
+  (type (;0;) (func))
+  (type (;1;) (func (result i32)))
+  (type (;2;) (func (param i32)))
+...
+</code></pre>
+<p>Try to identify your &quot;Hello World&quot; code.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="image-filter-application"><a class="header" href="#image-filter-application">Image filter application</a></h1>
+<p>Now that you can build and run an application compiled to WebAssembly,
+it's time to build some functionality into it.</p>
+<p>The goal is:</p>
+<ul>
+<li>Take an input file, a filter name and, optionally, an output file (or &quot;output.jpg&quot; as the default).</li>
+<li>Load the input file, apply the given filter to this image, then write the resulting image to the output file.</li>
+</ul>
+<p>You can continue with the previously created project.</p>
+<p>✅ Open <code>src/main.rs</code> again and replace the <code>println!</code> line with code to parse the arguments.</p>
+<pre><code class="language-rust">fn main() {
+    let mut args = std::env::args().skip(1);
+    let input = args.next().expect(&quot;INPUT required&quot;);
+    let filter = args.next().expect(&quot;FILTER required&quot;);
+    let output = args.next().unwrap_or_else(|| &quot;output.jpg&quot;.to_string());
+
+    dbg!((input, filter, output));
+}</code></pre>
+<p>✅ Build and run this to make sure it works as expected.</p>
+<p>✅ Now add a dependency to handle image manipulation. The image filters are readily available in the <a href="https://crates.io/crates/rustagram2"><code>rustagram2</code></a> crate.
+Add the <code>rustagram2</code> crate as a dependency in <code>rustagram/Cargo.toml</code></p>
+<pre><code class="language-toml">[dependencies]
+rustagram2 = &quot;2.0.0&quot;
+</code></pre>
+<p>The documentation is available on <a href="https://docs.rs/rustagram2/2.0.0/rustagram/">docs.rs/rustagram2</a>.</p>
+<p>✅ You need a <a href="https://docs.rs/rustagram2/2.0.0/rustagram/enum.FilterType.html"><code>FilterType</code></a> to apply later.
+<code>rustagram2</code> shows the available filters <a href="https://docs.rs/rustagram2/2.0.0/rustagram/enum.FilterType.html">in the <code>FilterType</code> documentation</a>.
+It also has <a href="https://doc.rust-lang.org/nightly/core/str/trait.FromStr.html"><code>FromStr</code></a> from the standard library implemented for it, so you can parse strings into the filter type by calling <code>parse()</code> on the string.</p>
+<pre><code class="language-rust">let filter_type = filter.parse().expect(&quot;can't parse filter name&quot;);</code></pre>
+<p>An unknown filter name would cause an error.
+For now you don't need to handle that.
+Your application can just panic and exit.</p>
+<p>If you compile everything at this point you will probably hit a type annotation error.
+You can try to resolve that now.
+You can also continue and observe how this error will be resolved once you add more code in the next steps.</p>
+<p>Now comes the main part of the application: load the image, apply the filter and save the resulting file.
+This is a small challenge for you to write, but the next steps guide you through it.</p>
+<p>✅ You need to read the file from disk and turn it into an object you can work with.
+<a href="https://docs.rs/image/0.24.4/image/fn.open.html"><code>image::open</code></a> does that for you easily.
+Don't worry about error handling and just <code>unwrap</code>.</p>
+<p>✅ The image type you get is able to represent a wide variety of image types.
+For this tutorial you want an <a href="https://docs.rs/image/0.24.4/image/type.RgbaImage.html"><code>RgbaImage</code></a>. You can convert your image using the <a href="https://docs.rs/image/0.24.4/image/enum.DynamicImage.html#method.to_rgba8"><code>to_rgba8</code></a> method.</p>
+<p>✅ Last but not least you need to apply the selected filter on this image.
+The <code>rustagram2</code> crate implements that as the <a href="https://docs.rs/rustagram2/2.0.0/rustagram/trait.RustagramFilter.html#tymethod.apply_filter"><code>apply_filter</code></a> method on a trait.
+This trait is automatically implemented for the <code>RgbaImage</code> type you got from <code>to_rgba8</code>.</p>
+<p>✅ Save back to the file <code>output</code> by using the <a href="https://docs.rs/image/latest/image/enum.DynamicImage.html#method.save"><code>save</code></a> method available on the image.</p>
+<p>With the help of the documentation this should be achievable in a couple of lines of code.</p>
+<p>Try it for yourself!</p>
+<p>✅ Once you wrote the code, build it again and try to run it.</p>
+<p>Expected output when you don't pass any arguments:</p>
+<pre><code class="language-console">$ wasmtime target/wasm32-wasi/debug/rustagram.wasm
+thread 'main' panicked at 'INPUT required', src/main.rs:7:29
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
+
+Caused by:
+    0: failed to invoke command default
+[...]
+</code></pre>
+<p>Expected output when you pass a file path and a filter name:</p>
+<pre><code class="language-console">$ wasmtime target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
+thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: IoError(Custom { kind: Uncategorized, error: &quot;failed to find a pre-opened file descriptor through which \&quot;kongelige-slott.jpg\&quot; could be opened&quot; })', src/main.rs:12:34
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
+
+Caused by:
+    0: failed to invoke command default
+[...]
+</code></pre>
+<hr />
+<p>What did just happen?</p>
+<p><code>wasmtime</code> ran your code up until it tried to read the image from disk.
+By default <code>wasmtime</code> blocks all filesystem access.
+You need to explicitly give permission to specific directories in order to be able to read and writes files within.</p>
+<pre><code class="language-console">$ wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
+$
+</code></pre>
+<p>This should now have created <code>output.jpg</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="final-application"><a class="header" href="#final-application">Final application</a></h1>
+<p>You should have this file tree layout:</p>
+<pre><code class="language-console">$ tree
+.
+├── Cargo.lock
+├── Cargo.toml
+└── src
+    └── main.rs
+</code></pre>
+<p>To recap your final code should look something like this:</p>
+<pre><code class="language-rust">use rustagram::{image, RustagramFilter};
+
+fn main() {
+    let mut args = std::env::args().skip(1);
+    let input = args.next().expect(&quot;INPUT required&quot;);
+    let filter = args.next().expect(&quot;FILTER required&quot;);
+    let output = args.next().unwrap_or_else(|| &quot;output.jpg&quot;.to_string());
+
+    let filter_type = filter.parse().expect(&quot;can't parse filter name&quot;);
+    let img = image::open(input).unwrap();
+    let out = img.to_rgba8().apply_filter(filter_type);
+    out.save(output).unwrap();
+}</code></pre>
+<p>You can build your code like this:</p>
+<pre><code>cargo build --target wasm32-wasi
+</code></pre>
+<p>And run it with <code>wasmtime</code>:</p>
+<pre><code>wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm skyline.jpg 1977
+</code></pre>
+<hr />
+<p>Some ideas on what to do next:</p>
+<ul>
+<li>Run the application natively: <code>cargo run</code>. Any complications or differences?</li>
+<li>Inspect the built wasm module using <code>wasm2wat</code>. Can you spot the parts of the code that you've written? Can you find the names of all available filters?</li>
+<li>Try some other crate you know. Does it work as-is on WebAssembly/with Wasi?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="web"><a class="header" href="#web">Web</a></h1>
+<p>In this tutorial you'll get familiar with:</p>
+<ul>
+<li>Building Rust code for the <code>wasm32-unknown-unknown</code> target</li>
+<li>Interacting with a WASM application from JavaScript</li>
+<li>The <code>wasm-bindgen</code> tool to handle more complex types passed over the boundary</li>
+</ul>
+<p>Next we build a web application that processes images client-side in the browser.
+No server processing involved.</p>
+<p>We re-use the same Rust crate to apply the image filter,
+but this time load the image directly from a binary blob.
+That binary blob is passed in from the JavaScript side.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world-on-the-web"><a class="header" href="#hello-world-on-the-web">Hello World on the web</a></h1>
+<p>You already saw the <a href="tutorial/web/../../wasm-hello-world.html">&quot;Hello World of WebAssembly&quot;</a> earlier.
+You will now run this on the web without additional tools.</p>
+<p>✅ Create a new crate</p>
+<pre><code class="language-console">cargo new --lib hello-world
+cd hello-world
+</code></pre>
+<p>✅ Set the crate type to <code>cdylib</code> in <code>Cargo.toml</code></p>
+<pre><code class="language-toml">[lib]
+crate-type = [&quot;cdylib&quot;]
+</code></pre>
+<p>✅ Write the <code>add</code> function.</p>
+<pre><code class="language-rust">#[no_mangle]
+pub extern &quot;C&quot; fn add(left: i32, right: i32) -&gt; i32 {
+    left + right
+}</code></pre>
+<p>The <code>no_mangle</code> attribute ensures that the function name lands in the binary as is,
+otherwise you couldn't later call it by name.
+<code>extern &quot;C&quot;</code> ensures it uses the C-compatible ABI, and thus what WebAssembly (and JavaScript) expects.</p>
+<p>✅ Compile it to WebAssembly.</p>
+<pre><code>cargo build --target wasm32-unknown-unknown
+</code></pre>
+<p>This will create <code>target/wasm32-unknown-unknown/debug/hello_world.wasm</code>.</p>
+<p>✅ Next create an HTML file <code>index.html</code> in your crate's directory (next to <code>Cargo.toml</code>):</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Rust WASM Demo&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;script type=&quot;module&quot;&gt;
+      &lt;!-- to be filled in --&gt;
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>✅ Now you need to load, compile and instantiate the WebAssembly module.
+All of this is part of the web API.
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch"><code>fetch</code></a> can load data from URLs,
+<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate"><code>WebAssembly.instantiate()</code></a> compiles and instantiates the WebAssembly module.</p>
+<pre><code class="language-javascript">      let response = await fetch('target/wasm32-unknown-unknown/debug/hello_world.wasm');
+      let bytes = await response.arrayBuffer();
+      let result = await WebAssembly.instantiate(bytes, {});
+</code></pre>
+<p>The result of this is an instance that has accessors for the exported functions of the module.</p>
+<p>✅ Call the <code>add</code> method on the Wasm module instance.</p>
+<pre><code class="language-javascript">      const sum = result.instance.exports.add(1, 2);
+      console.log(`1 + 2 = ${sum}`);
+</code></pre>
+<p>✅ Serve your HTML file and the WebAssembly over HTTP.</p>
+<pre><code>http
+</code></pre>
+<p>Open <a href="http://localhost:8000">http://localhost:8000</a> in your web browser and open the Developer Tools.
+In the console you should now see the result:</p>
+<pre><code>1 + 2 = 3
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="short-introduction-to-wasm-bindgen"><a class="header" href="#short-introduction-to-wasm-bindgen">Short introduction to <code>wasm-bindgen</code></a></h1>
+<p>WebAssembly is limited to basic integer and float types,
+but does not itself support rich types like strings, objects, enums or closures.
+However an instantiated WebAssembly module has access to memory where it can place more data.
+This block of memory is also accessible by the host side, e.g. the JavaScript environment of a website.
+Both sides, the WebAssembly code and the host side, need to agree what bytes in that memory block mean in order to work with them.</p>
+<p><code>wasm-bindgen</code> is a tool that can generate the necessary code on both sides
+to handle more rich types.
+It supports a variety of Rust types, including <code>String</code>, <code>Vec</code>, <code>Result</code> and slices,
+and allows to export Rust types for use in JavaScript (see <a href="https://rustwasm.github.io/docs/wasm-bindgen/reference/types.html"><code>wasm-bindgen</code>'s Supported Rust types</a>).</p>
+<hr />
+<h2 id="how-to-use"><a class="header" href="#how-to-use">How to use</a></h2>
+<p>The <code>wasm-bindgen</code> CLI utility works on the compiled <code>.wasm</code> file.
+It supports several different output targets.
+For this tutorial we focus only on JavaScript and the <code>web</code> target.</p>
+<pre><code>wasm-bindgen path/to/module.wasm --out-dir app --target web --no-typescript
+</code></pre>
+<h2 id="wasm_bindgenstart"><a class="header" href="#wasm_bindgenstart"><code>#[wasm_bindgen(start)]</code></a></h2>
+<p>This annotation should be put on a public function.
+That function essentially becomes your <code>start</code> function,
+which gets automatically called when you instantiate the WebAssembly module.</p>
+<p>You would for example use this to set up a panic handler and logging.</p>
+<pre><code class="language-rust">#[wasm_bindgen(start)]
+pub fn main() {
+    panic::set_hook(Box::new(console_error_panic_hook::hook));
+    console_log::init_with_level(log::Level::Debug).unwrap();
+}</code></pre>
+<h2 id="wasm_bindgen-on-a-function"><a class="header" href="#wasm_bindgen-on-a-function"><code>#[wasm_bindgen]</code> on a function</a></h2>
+<p>If used without additional attributes this wraps the annotated function
+to be exported.
+You can use the supported Rust types and <code>wasm-bindgen</code> will ensure the conversion happens on either side.</p>
+<pre><code class="language-rust">#[wasm_bindgen]
+pub fn say_hello(name: String) -&gt; String {
+    format!(&quot;Hello, {}&quot;, name)
+}</code></pre>
+<h2 id="wasm_bindgen-on-a-struct"><a class="header" href="#wasm_bindgen-on-a-struct"><code>#[wasm_bindgen]</code> on a struct</a></h2>
+<p>Annotating a Rust <code>struct</code> makes that struct available on the JavaScript side as an object.</p>
+<pre><code class="language-rust">#[wasm_bindgen]
+struct Country {
+    string shortcode;
+}</code></pre>
+<p>Methods of that struct need to be annotated to be available in JavaScript, too.</p>
+<pre><code class="language-rust">impl Country {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -&gt; Country {
+        Country { shortcode: &quot;NO&quot;.to_string() }
+    }
+
+    #[wasm_bindgen(getter)]
+    pub fn shortcode(&amp;self) -&gt; String {
+        self.shortcode.clone()
+    }
+}</code></pre>
+<p>The tutorial won't use this, but feel free to play around.</p>
+<p>See <a href="https://rustwasm.github.io/docs/wasm-bindgen/reference/attributes/on-rust-exports/index.html">On Rust exports</a> in the <code>wasm-bindgen</code> documentation for more.</p>
+<hr />
+<p>In the next chapter you will start building the image filter application for the web,
+using <code>wasm-bindgen</code> to help with the rich types.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basic-setup"><a class="header" href="#basic-setup">Basic setup</a></h1>
+<p>✅ Create a new Rust project.</p>
+<pre><code>cargo new --lib image-filter
+cd image-filter
+</code></pre>
+<p>✅ Set the crate type to <code>cdylib</code> in <code>Cargo.toml</code></p>
+<pre><code class="language-toml">[lib]
+crate-type = [&quot;cdylib&quot;]
+</code></pre>
+<p>✅ To simplify the build later on you can use <code>make</code> to build the Rust crate and call <code>wasm-bindgen</code> to generate the JavaScript shim. Create a <code>Makefile</code> and add this:</p>
+<pre><code class="language-makefile">.PHONY: build
+build:
+	cargo build --release --target=wasm32-unknown-unknown
+	wasm-bindgen target/wasm32-unknown-unknown/release/image_filter.wasm \
+	    --out-dir app \
+	    --target web \
+	    --no-typescript
+</code></pre>
+<p>You can also use a shell script to do the same or simply run these commands manually.</p>
+<p>✅ Add <code>wasm-bindgen</code> and <code>rustagram2</code> dependencies to <code>Cargo.toml</code>:
+`</p>
+<pre><code class="language-toml">[dependencies]
+rustagram2 = &quot;2&quot;
+wasm-bindgen = &quot;0.2.83&quot;
+</code></pre>
+<p>✅ To help with debugging and logging add these 3 dependencies to <code>Cargo.toml</code></p>
+<pre><code class="language-toml">[dependencies]
+console_error_panic_hook = &quot;0.1.7&quot;
+console_log = &quot;0.2.0&quot;
+log = &quot;0.4.17&quot;
+</code></pre>
+<p><code>console_error_panic_hook</code> ensures that you get Rust's panic message &amp; stack trace in your browser's console.
+<code>console_log</code> ensures you can use Rust's <code>log</code> crate for logging as you are used to.</p>
+<p>✅ It's time to set up the above mentioned crates in the module's start function.
+Annotate your <code>main</code> function with <code>wasm_bindgen(start)</code>.</p>
+<pre><code class="language-rust">use std::panic;
+use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen(start)]
+pub fn main() {
+    panic::set_hook(Box::new(console_error_panic_hook::hook));
+    console_log::init_with_level(log::Level::Debug).unwrap();
+}
+</code></pre>
+<p><em>Note: The name of this function actually doesn't matter.
+The annotation is what tells <code>wasm-bindgen</code> that this becomes the setup function.</em></p>
+<p>✅ You should now be able to compile the Rust code to WebAssembly and use <code>wasm-bindgen</code> to generate the JavaScript shim.
+If you are using the <code>Makefile</code> as above you can now run</p>
+<pre><code>make
+</code></pre>
+<p>Otherwise run the commands directly:</p>
+<pre><code>cargo build --release --target=wasm32-unknown-unknown
+wasm-bindgen target/wasm32-unknown-unknown/release/image_filter.wasm --out-dir app --target web --no-typescript
+</code></pre>
+<p>You should find 2 new files in the <code>app</code> directory:
+<code>image_filter.js</code> and <code>image_filter_bg.wasm</code>.</p>
+<hr />
+<p>In the <a href="tutorial/web/image-filters.html">next chapter</a> you will write the few Rust pieces necessary for the image filter application.
+After that you build the web frontend to load and run the WebAssembly module.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="image-filter-application-1"><a class="header" href="#image-filter-application-1">Image filter application</a></h1>
+<p>With the basic setup for the Rust code done you can now write a function that applies the image filter to a given image.</p>
+<p>✅ Start by importing the necessary modules and structs from the <code>rustagram2</code> crate and the standard library in your <code>src/lib.rs</code>.</p>
+<pre><code class="language-rust">use rustagram::image::io::Reader;
+use rustagram::image::ImageOutputFormat;
+use rustagram::RustagramFilter;</code></pre>
+<p>✅ Next create a new function. It will get a slice of bytes representing the image and a filter name as a string.
+It should return a <code>Vec&lt;u8&gt;</code>, a vector of bytes representing the modified image in PNG format.</p>
+<pre><code class="language-rust">#[wasm_bindgen]
+pub fn apply_filter(img: &amp;[u8], filter: &amp;str) -&gt; Vec&lt;u8&gt; {
+    log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);
+    // (to be filled in)
+}</code></pre>
+<p>The code from the next steps will go in this function.</p>
+<p>✅ You previously set up logging, use that and log something to ensure you get the data that you expect.</p>
+<pre><code class="language-rust">    log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);</code></pre>
+<p>✅ The image data needs to be read from the buffer.
+The application allows multiple file formats, luckily the <code>image</code> format can guess the format and then decode it.
+The <a href="https://docs.rs/image/0.24.4/image/io/struct.Reader.html">documentation for the <code>Reader</code> type</a> goes into some detail.</p>
+<pre><code class="language-rust">    let img = Reader::new(Cursor::new(img))
+        .with_guessed_format()
+        .unwrap()
+        .decode()
+        .unwrap();</code></pre>
+<p>For now just <code>unwrap</code> on errors.
+As you have set up the panic handler you should see it in the browser's console if you hit an error.</p>
+<p>✅ As you have done in the CLI application parse the filter name into a <a href="https://docs.rs/rustagram2/2.0.0/rustagram/enum.FilterType.html"><code>FilterType</code></a>.</p>
+<pre><code class="language-rust">    let filter_type = filter.parse().unwrap();</code></pre>
+<p>Again if you compile everything at this point you will probably hit a type annotation error.
+That is expected and you can observe how this changes as you fill in the rest of the code in the next steps.</p>
+<p>✅ You now have everything you need to apply the filter to the decoded image.
+This is exactly the same as in the previous tutorial.</p>
+<pre><code class="language-rust">    let out = img.to_rgba8().apply_filter(filter_type);</code></pre>
+<p>✅ But now instead of saving that changed image to a file you should store it in a buffer and return that buffer.
+<a href="https://docs.rs/image/0.24.4/image/struct.ImageBuffer.html#method.write_to"><code>ImageBuffer#write_to</code></a> does just that.
+Don't forget to specify its format as PNG.</p>
+<pre><code class="language-rust">    let mut bytes: Vec&lt;u8&gt; = Vec::new();
+    out.write_to(&amp;mut Cursor::new(&amp;mut bytes), ImageOutputFormat::Png)
+        .unwrap();
+
+    bytes</code></pre>
+<p>And that is already all the code you need to be able to apply an image filter to a passed in image.</p>
+<p>✅ Again build all code and run <code>wasm-bindgen</code> to generate the JavaScript shim.
+If you are using the <code>Makefile</code> as above you can now run</p>
+<pre><code>make
+</code></pre>
+<p>Otherwise run the commands directly:</p>
+<pre><code>cargo build --release --target=wasm32-unknown-unknown
+wasm-bindgen target/wasm32-unknown-unknown/release/image_filter.wasm --out-dir app --target web --no-typescript
+</code></pre>
+<p>The JavaScript shim (<code>image_filter.js</code>) and the wasm file (<code>image_filter_bg.wasm</code>) in your <code>app</code> directory should be updated.</p>
+<hr />
+<p>In the <a href="tutorial/web/frontend.html">next chapter</a> you will work on the other side of this application:
+First the HTML frontend and then the necessary JavaScript code to load and run the WebAssembly module.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="html-frontend"><a class="header" href="#html-frontend">HTML Frontend</a></h1>
+<p>Your image filter application needs some basic UI to allow a user to specify an image on disk
+and select the image filter to be applied.</p>
+<p>✅ Start with a new file <code>app/index.html</code> with a basic HTML structure.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Rust Image filter&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>✅ To upload a picture the frontend needs a file selector, so add the following in between the <code>&lt;body&gt;</code> tags.</p>
+<pre><code class="language-html">    &lt;input type=&quot;file&quot; id=&quot;files&quot; name=&quot;file&quot; accept=&quot;image/png, image/jpeg&quot; /&gt;
+</code></pre>
+<p>The <code>accept</code> attribute limits what files a user can select.
+As this application is for images it's enough to limit it to PNG and JPEG files for now.</p>
+<p>✅ Additionally the user should be able to select a filter. List out all available ones manually.</p>
+<pre><code class="language-html">    &lt;select name=&quot;filter&quot;&gt;
+      &lt;option value=&quot;None&quot;&gt;none&lt;/option&gt;
+      &lt;option value=&quot;1977&quot; selected&gt;1977&lt;/option&gt;
+      &lt;option value=&quot;Aden&quot;&gt;Aden&lt;/option&gt;
+      &lt;option value=&quot;Brannan&quot;&gt;Brannan&lt;/option&gt;
+      &lt;option value=&quot;Brooklyn&quot;&gt;Brooklyn&lt;/option&gt;
+      &lt;option value=&quot;Clarendon&quot;&gt;Clarendon&lt;/option&gt;
+      &lt;option value=&quot;Earlybird&quot;&gt;Earlybird&lt;/option&gt;
+      &lt;option value=&quot;Gingham&quot;&gt;Gingham&lt;/option&gt;
+      &lt;option value=&quot;Hudson&quot;&gt;Hudson&lt;/option&gt;
+      &lt;option value=&quot;Inkwell&quot;&gt;Inkwell&lt;/option&gt;
+      &lt;option value=&quot;Kelvin&quot;&gt;Kelvin&lt;/option&gt;
+      &lt;option value=&quot;Lark&quot;&gt;Lark&lt;/option&gt;
+      &lt;option value=&quot;Lofi&quot;&gt;Lofi&lt;/option&gt;
+      &lt;option value=&quot;Maven&quot;&gt;Maven&lt;/option&gt;
+      &lt;option value=&quot;Mayfair&quot;&gt;Mayfair&lt;/option&gt;
+      &lt;option value=&quot;Moon&quot;&gt;Moon&lt;/option&gt;
+      &lt;option value=&quot;Nashville&quot;&gt;Nashville&lt;/option&gt;
+      &lt;option value=&quot;Reyes&quot;&gt;Reyes&lt;/option&gt;
+      &lt;option value=&quot;Rise&quot;&gt;Rise&lt;/option&gt;
+      &lt;option value=&quot;Slumber&quot;&gt;Slumber&lt;/option&gt;
+      &lt;option value=&quot;Stinson&quot;&gt;Stinson&lt;/option&gt;
+      &lt;option value=&quot;Toaster&quot;&gt;Toaster&lt;/option&gt;
+      &lt;option value=&quot;Valencia&quot;&gt;Valencia&lt;/option&gt;
+      &lt;option value=&quot;Walden&quot;&gt;Walden&lt;/option&gt;
+    &lt;/select&gt;
+</code></pre>
+<p>In case of <code>None</code> no filter should be applied and the user should see the image they selected unchanged.</p>
+<p>✅ To show that an upload is in progress add a <code>&lt;span&gt;</code> where you can show a message.</p>
+<pre><code class="language-html">    &lt;span&gt;&lt;/span&gt;
+</code></pre>
+<p>✅ You also need a place to display the resulting image.</p>
+<pre><code class="language-html">    &lt;img /&gt;
+</code></pre>
+<p>✅ And last but not least include the JavaScript frontend code.</p>
+<pre><code class="language-html">    &lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>The JavaScript file does not exist yet.
+You will create that in the next chapter.</p>
+<p>✅ To ensure everything is working as expected for now serve the files over HTTP using <code>http</code></p>
+<pre><code>cd app
+http
+</code></pre>
+<p>Your application should be reachable at <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.
+It should look something like this:</p>
+<p><img src="tutorial/web/webapp.png" alt="" /></p>
+<hr />
+<p>In the <a href="tutorial/web/javascript.html">next chapter</a> you will finally write the JavaScript code to load and run the WebAssembly module.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="javascript"><a class="header" href="#javascript">JavaScript</a></h1>
+<p>JavaScript is used to handle events from the HTML form
+and pass the data over to the WebAssembly module,
+which first needs to be loaded and instantiated of course.</p>
+<p>✅ Start by creating an empty <code>app/app.js</code> file.
+This is where all the code will go now.</p>
+<p>✅ You already have the JavaScript shim and the wasm file ready to go, so you can start by importing it.</p>
+<pre><code class="language-javascript">import init, { apply_filter } from './image_filter.js';
+</code></pre>
+<p>✅ You need to call and await <code>init</code> to actually load, compile and instantiate the WebAssembly module.
+Once you have done that imported <code>apply_filter</code> will be a function you can call.</p>
+<pre><code class="language-javascript">await init();
+</code></pre>
+<p>✅ Whenever the user selects an image or changes the filter you should load the image and apply the filter. Hook up the <code>onchange</code> events of both the file input and the select now.</p>
+<pre><code class="language-javascript">document.querySelector('input[type=file]').onchange = (evt) =&gt; {
+  imageFilter();
+};
+document.querySelector('select').onchange = (evt) =&gt; {
+  imageFilter();
+};
+</code></pre>
+<p><code>imageFilter</code> will be the function that handles all the logic.</p>
+<p>✅ But first add a small helper <code>typedArrayToURL</code>.
+JavaScript's <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray"><code>TypedArray</code></a> is an array-like view of a binary data buffer.
+Your converted image will be in such a buffer.
+To display that in the browser you need to turn it into an object url.
+It's enough to only handle the PNG image format.</p>
+<pre><code class="language-javascript">function typedArrayToURL(typedArray) {
+  return URL.createObjectURL(
+    new Blob([typedArray.buffer], { type: &quot;image/png&quot; })
+  );
+}
+</code></pre>
+<p>✅ Now start writing your <code>imageFilter</code> function.</p>
+<pre><code class="language-javascript">async function imageFilter() {
+  // (to be filled in)
+}
+</code></pre>
+<p>✅ You should start by checking for the file the user selected.</p>
+<pre><code class="language-javascript">  let files = document.getElementById('files').files;
+  if (!files.length) {
+    return;
+  }
+  let file = files[0];
+</code></pre>
+<p>✅ This is a good time to let the user now that the application is working.
+You can also display the original image without a filter applied yet.</p>
+<pre><code class="language-javascript">  let span = document.querySelector('span');
+  span.innerText = &quot;working...&quot;;
+
+  let imgEl = document.querySelector('img');
+  imgEl.src = URL.createObjectURL(file);
+  imgEl.width = &quot;500&quot;;
+</code></pre>
+<p>✅ Next fetch the selected image filter name. If it's &quot;none&quot; you don't need to do any work!</p>
+<pre><code class="language-javascript">  let filter = document.querySelector(&quot;select&quot;).value.toLowerCase();
+  if (filter == &quot;none&quot;) {
+    span.innerText = &quot;done.&quot;;
+    return;
+  }
+</code></pre>
+<p>✅ Reading the file to then pass it to your WebAssembly function requires to read it and turn it into an array buffer first. That's available directly on the file object you already have.</p>
+<pre><code class="language-javascript">  let img = await file.arrayBuffer();
+</code></pre>
+<p>✅ The <code>apply_filter</code> function expects an array of <code>u8</code> and the filter name as a string.
+To get that array from our <code>img</code> you can call <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array"><code>new Uint8Array</code></a>, passing your image data.
+A string is automatically handled by the <code>wasm-bindgen</code> shim.</p>
+<pre><code class="language-javascript">  let result = apply_filter(new Uint8Array(img), filter);
+</code></pre>
+<p>And that is all you need to call a function in the WebAssembly module already.</p>
+<p>✅ What's left to do is turn the image into a blob URL you can display and inform the user that the work is done.</p>
+<pre><code class="language-javascript">  let blobUrl = typedArrayToURL(result);
+  imgEl.src = blobUrl;
+  imgEl.width = &quot;500&quot;;
+  span.innerText = &quot;done.&quot;;
+</code></pre>
+<hr />
+<p>The <a href="tutorial/web/run-locally.html">next chapter</a> will tell you again how to build and run the application locally.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="running-it-locally"><a class="header" href="#running-it-locally">Running it locally</a></h1>
+<p>✅ First build your Rust code to WebAssembly and run <code>wasm-bindgen</code> to generate the JavaScript shim.
+If you are using the <code>Makefile</code> you can now run:</p>
+<pre><code>make
+</code></pre>
+<p>Otherwise run the commands directly:</p>
+<pre><code>cargo build --release --target=wasm32-unknown-unknown
+wasm-bindgen target/wasm32-unknown-unknown/release/image_filter.wasm --out-dir app --target web --no-typescript
+</code></pre>
+<p>You should find 2 additional files in the <code>app</code> directory:
+<code>image_filter.js</code> and <code>image_filter_bg.wasm</code>.</p>
+<p>✅ Serve your application locally using <code>http</code>:</p>
+<pre><code>cd app
+http
+</code></pre>
+<p>Your application should be reachable at <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.</p>
+<p>Play around with it, upload an image and change filters.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="final-application-1"><a class="header" href="#final-application-1">Final application</a></h1>
+<p>You should have this file tree layout:</p>
+<pre><code class="language-console">$ tree
+.
+├── Cargo.lock
+├── Cargo.toml
+├── Makefile
+├── app
+│   ├── app.js
+│   ├── image_filter.js       &lt;-- generated file
+│   ├── image_filter_bg.wasm  &lt;-- generated file
+│   └── index.html
+└── src
+    └── lib.rs
+</code></pre>
+<p>To recap your final Rust code should look something like this:</p>
+<pre><code class="language-rust">use std::io::Cursor;
+use std::panic;
+use wasm_bindgen::prelude::*;
+
+use rustagram::image::io::Reader;
+use rustagram::image::ImageOutputFormat;
+use rustagram::RustagramFilter;
+
+#[wasm_bindgen(start)]
+pub fn main() {
+    panic::set_hook(Box::new(console_error_panic_hook::hook));
+    console_log::init_with_level(log::Level::Debug).unwrap();
+}
+
+#[wasm_bindgen]
+pub fn apply_filter(img: &amp;[u8], filter: &amp;str) -&gt; Vec&lt;u8&gt; {
+    log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);
+
+    let img = Reader::new(Cursor::new(img))
+        .with_guessed_format()
+        .unwrap()
+        .decode()
+        .unwrap();
+    let filter_type = filter.parse().unwrap();
+    let out = img.to_rgba8().apply_filter(filter_type);
+    let mut bytes: Vec&lt;u8&gt; = Vec::new();
+    out.write_to(&amp;mut Cursor::new(&amp;mut bytes), ImageOutputFormat::Png)
+        .unwrap();
+
+    bytes
+}</code></pre>
+<p>The frontend in HTML:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Rust Image filter&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;input type=&quot;file&quot; id=&quot;files&quot; name=&quot;file&quot; accept=&quot;image/png, image/jpeg&quot; /&gt;
+    &lt;select name=&quot;filter&quot;&gt;
+      &lt;option value=&quot;None&quot;&gt;none&lt;/option&gt;
+      &lt;option value=&quot;1977&quot; selected&gt;1977&lt;/option&gt;
+      &lt;option value=&quot;Aden&quot;&gt;Aden&lt;/option&gt;
+      &lt;option value=&quot;Brannan&quot;&gt;Brannan&lt;/option&gt;
+      &lt;option value=&quot;Brooklyn&quot;&gt;Brooklyn&lt;/option&gt;
+      &lt;option value=&quot;Clarendon&quot;&gt;Clarendon&lt;/option&gt;
+      &lt;option value=&quot;Earlybird&quot;&gt;Earlybird&lt;/option&gt;
+      &lt;option value=&quot;Gingham&quot;&gt;Gingham&lt;/option&gt;
+      &lt;option value=&quot;Hudson&quot;&gt;Hudson&lt;/option&gt;
+      &lt;option value=&quot;Inkwell&quot;&gt;Inkwell&lt;/option&gt;
+      &lt;option value=&quot;Kelvin&quot;&gt;Kelvin&lt;/option&gt;
+      &lt;option value=&quot;Lark&quot;&gt;Lark&lt;/option&gt;
+      &lt;option value=&quot;Lofi&quot;&gt;Lofi&lt;/option&gt;
+      &lt;option value=&quot;Maven&quot;&gt;Maven&lt;/option&gt;
+      &lt;option value=&quot;Mayfair&quot;&gt;Mayfair&lt;/option&gt;
+      &lt;option value=&quot;Moon&quot;&gt;Moon&lt;/option&gt;
+      &lt;option value=&quot;Nashville&quot;&gt;Nashville&lt;/option&gt;
+      &lt;option value=&quot;Reyes&quot;&gt;Reyes&lt;/option&gt;
+      &lt;option value=&quot;Rise&quot;&gt;Rise&lt;/option&gt;
+      &lt;option value=&quot;Slumber&quot;&gt;Slumber&lt;/option&gt;
+      &lt;option value=&quot;Stinson&quot;&gt;Stinson&lt;/option&gt;
+      &lt;option value=&quot;Toaster&quot;&gt;Toaster&lt;/option&gt;
+      &lt;option value=&quot;Valencia&quot;&gt;Valencia&lt;/option&gt;
+      &lt;option value=&quot;Walden&quot;&gt;Walden&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;span&gt;&lt;/span&gt;
+    &lt;br&gt;
+    &lt;img /&gt;
+    &lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>The JavaScript frontend code:</p>
+<pre><code class="language-javascript">import init, { apply_filter } from './image_filter.js';
+
+await init();
+
+document.querySelector('input[type=file]').onchange = (evt) =&gt; {
+  imageFilter();
+};
+document.querySelector('select').onchange = (evt) =&gt; {
+  imageFilter();
+};
+
+function typedArrayToURL(typedArray) {
+  return URL.createObjectURL(
+    new Blob([typedArray.buffer], { type: &quot;image/png&quot; })
+  );
+}
+
+async function imageFilter() {
+  let files = document.getElementById('files').files;
+  if (!files.length) {
+    return;
+  }
+  let file = files[0];
+  let span = document.querySelector('span');
+  span.innerText = &quot;working...&quot;;
+
+  let imgEl = document.querySelector('img');
+  imgEl.src = URL.createObjectURL(file);
+  imgEl.width = &quot;500&quot;;
+
+  let filter = document.querySelector(&quot;select&quot;).value.toLowerCase();
+  if (filter == &quot;none&quot;) {
+    span.innerText = &quot;done.&quot;;
+    return;
+  }
+
+  let img = await file.arrayBuffer();
+  let result = apply_filter(new Uint8Array(img), filter);
+  let blobUrl = typedArrayToURL(result);
+  imgEl.src = blobUrl;
+  imgEl.width = &quot;500&quot;;
+  span.innerText = &quot;done.&quot;;
+}
+</code></pre>
+<p>A demo deployment is available at:</p>
+<p><a href="https://tmp.fnordig.de/wasm/image-filter/">https://tmp.fnordig.de/wasm/image-filter/</a></p>
+<hr />
+<p>Some ideas on what to do next:</p>
+<ul>
+<li>The code <code>unwrap</code>s a lot. Introduce some error handling. Can you return an error from your wasm module?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="edge"><a class="header" href="#edge">Edge</a></h1>
+<p>In this tutorial you'll get familiar with:</p>
+<ul>
+<li>Building Rust code for Fastly's Compute@Edge platform</li>
+<li>Handling and responding to a web request</li>
+<li>A little bit of HTML and JavaScript for the frontend</li>
+</ul>
+<p>We build a web API that applies a given filter to an image posted to it.
+It returns the produced image over HTTP.
+Additionally we also serve a bare-bones HTML form that allows us to use this API.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="application-specification"><a class="header" href="#application-specification">Application specification</a></h1>
+<p>Our image filter application provides 3 endpoints:</p>
+<p><strong><code>GET /</code></strong></p>
+<p>The HTML frontend to load, post and display images.</p>
+<p><strong><code>GET /app.js</code></strong></p>
+<p>The JavaScript frontend code to handle the logic of sending and displaying the image.</p>
+<p><strong><code>POST /image</code></strong></p>
+<p>The actual image filter API.
+It receives the image in the request body and returns the converted image.</p>
+<hr />
+<p>In the next chapters we go through creating this project step by step.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="new-compute-project"><a class="header" href="#new-compute-project">New compute project</a></h1>
+<h2 id="initialize-a-new-package-locally-using-fastly"><a class="header" href="#initialize-a-new-package-locally-using-fastly">Initialize a new package locally using <code>fastly</code></a></h2>
+<p>No Fastly account required for local development.
+For the manual way see below.</p>
+<p>✅ Create a new compute project from a starter kit.</p>
+<pre><code class="language-console">mkdir edge-image-filter
+cd edge-image-filter
+fastly compute init
+</code></pre>
+<p>Give it a name of your choice.<br />
+When asked for the language to use select &quot;Rust&quot;.<br />
+When asked for the Starter kit, use &quot;[5] Empty starter for Rust&quot;.</p>
+<p>✅ Finally run the project locally</p>
+<pre><code>fastly compute serve
+</code></pre>
+<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
+<hr />
+<h2 id="initialize-a-new-package-locally"><a class="header" href="#initialize-a-new-package-locally">Initialize a new package locally.</a></h2>
+<p>The <code>fastly</code> CLI handles creation of a new package.
+It essentially does the below steps.</p>
+<p>✅ Create a new project using <code>cargo</code></p>
+<pre><code class="language-console">cargo new edge-image-filter
+cd edge-image-filter
+</code></pre>
+<p>✅ Add the <code>fastly</code> dependency</p>
+<pre><code class="language-console">cargo add fastly
+</code></pre>
+<p>Alternatively add it to your <code>Cargo.toml</code> under <code>[dependencies]</code>:</p>
+<pre><code class="language-toml">fastly = &quot;0.8.6&quot;
+</code></pre>
+<p>✅ Add the scaffolding to <code>src/main.rs</code>:</p>
+<pre><code class="language-rust">use fastly::http::StatusCode;
+use fastly::{Error, Request, Response};
+
+#[fastly::main]
+fn main(req: Request) -&gt; Result&lt;Response, Error&gt; {
+    Ok(Response::from_status(StatusCode::OK))
+}</code></pre>
+<p>✅ You also need a <code>fastly.toml</code> file with some configuration. Create that file and add this content:</p>
+<pre><code class="language-toml">authors = [&quot;your@email.com&quot;]
+description = &quot;&quot;
+language = &quot;rust&quot;
+manifest_version = 2
+name = &quot;edge-image-filter&quot;
+service_id = &quot;&quot;
+</code></pre>
+<p>✅ Finally run the project locally</p>
+<pre><code>fastly compute serve
+</code></pre>
+<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="handling-requests"><a class="header" href="#handling-requests">Handling requests</a></h1>
+<p>A Compute@Edge application follows a simple request-response model:
+The main function of the application receives a <code>Request</code> object as an argument,
+and produces a <code>Response</code> object or an <code>Error</code>.</p>
+<p>✅ Write a basic handler that returns &quot;Hello World&quot; when <code>/</code> is accessed.</p>
+<pre><code class="language-rust">use fastly::http::{Method, StatusCode};
+use fastly::{Error, Request, Response};
+
+#[fastly::main]
+fn main(req: Request) -&gt; Result&lt;Response, Error&gt; {
+    match (req.get_method(), req.get_path()) {
+        (&amp;Method::GET, &quot;/&quot;) =&gt; {
+            Ok(Response::from_status(StatusCode::OK).with_body_text_plain(&quot;Hello World!\n&quot;))
+        }
+
+        _ =&gt; Ok(Response::from_status(StatusCode::NOT_FOUND)
+            .with_body_text_plain(&quot;The page you requested could not be found\n&quot;)),
+    }
+}</code></pre>
+<p>This uses the <code>fastly</code> crate.
+Documentation is available at <a href="https://docs.rs/fastly/0.8.9/fastly/">docs.rs/fastly</a>.</p>
+<p>✅ Run the project locally:</p>
+<pre><code>fastly compute serve
+</code></pre>
+<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="backend"><a class="header" href="#backend">Backend</a></h1>
+<p>You will now implement the actual logic of this API: the image filter.</p>
+<p>✅ Start of with a new import at the top of your <code>src/main.rs</code> file.
+You later need to specify the image's mime type:</p>
+<pre><code class="language-rust">use fastly::mime;</code></pre>
+<p>✅ In your <code>main</code> function match for a  <code>POST</code> request on the <code>/image</code> path and call a handler function.</p>
+<pre><code class="language-rust">match (req.get_method(), req.get_path()) {
+    // (cut)
+
+    (&amp;Method::POST, &quot;/image&quot;) =&gt; convert_image(req),</code></pre>
+<p>✅ Create this new handler function, taking in the request and returning a response or an error.</p>
+<pre><code class="language-rust">pub fn convert_image(mut req: Request) -&gt; Result&lt;Response, Error&gt; {
+    // (to be filled in)
+}</code></pre>
+<p>✅ Next you need to get the required data from the request. Start with the filter name from the query.</p>
+<pre><code class="language-rust">    let filter_str = req.get_query_parameter(&quot;filter&quot;).unwrap();
+    let filter = filter_str.parse().unwrap();</code></pre>
+<p>✅ Now you can check and read the body from the request.</p>
+<pre><code class="language-rust">    if !req.has_body() {
+        return Ok(
+            Response::from_status(StatusCode::BAD_REQUEST)
+                .with_body_text_plain(&quot;missing image&quot;)
+        );
+    }
+
+    let body = req.take_body();
+    let body = body.into_bytes();</code></pre>
+<p>✅ You can decode the image data using the <code>image</code> crate, which is re-exported from <code>rustagram</code>.
+The documentation is available at <a href="https://docs.rs/image/0.24.4/image/">docs.rs/image</a>.</p>
+<p>Import the modules using the following lines on the top of your <code>src/main.rs</code> file.</p>
+<pre><code class="language-rust">use rustagram::image;
+use rustagram::image::io::Reader;
+use rustagram::RustagramFilter;</code></pre>
+<p>✅ Now use the <code>Reader</code> type to load the image from the buffer.</p>
+<pre><code class="language-rust">    let img = Reader::new(Cursor::new(body))
+        .with_guessed_format()
+        .unwrap();
+
+    let img = img.decode().unwrap();</code></pre>
+<p>✅ Currently Fastly enforces very small resource limits (memory usage, computation time), so you need to limit the work the application does if you want to deploy it.
+The easiest is to scale down the image before applying an image filter.</p>
+<pre><code class="language-rust">    let img = img.thumbnail(500, 500);</code></pre>
+<p>Locally you can skip this if you want.
+Larger images just take longer to process.</p>
+<p>✅ Now that you have the image and a filter you can apply this filter as before.
+Instead of writing the result to a file it should be written to a buffer in PNG format.</p>
+<pre><code class="language-rust">    let out = img.to_rgba8().apply_filter(filter);
+    let mut bytes: Vec&lt;u8&gt; = Vec::new();
+    out.write_to(&amp;mut Cursor::new(&amp;mut bytes), image::ImageOutputFormat::Png)?;</code></pre>
+<p>✅ The buffer containing the final image can now be returned as the response.
+Don't forget to set the correct content type.</p>
+<pre><code class="language-rust">    Ok(Response::from_status(StatusCode::OK)
+        .with_body(bytes)
+        .with_content_type(mime::IMAGE_PNG))</code></pre>
+<p>✅ Run the project locally:</p>
+<pre><code>fastly compute serve
+</code></pre>
+<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
+<p>✅ In another terminal you can use <code>curl</code> to send an image and save the converted file.</p>
+<pre><code>curl http://127.0.0.1:7676/image?filter=valencia -X POST -H &quot;Content-Type: application/octet-stream&quot; -T skyline.jpg -o result.png
+</code></pre>
+<hr />
+<p>In the <a href="tutorial/edge/frontend.html">next chapter</a> you learn how to build a small web frontend and serve that along your image filter application.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="html-frontend-1"><a class="header" href="#html-frontend-1">HTML Frontend</a></h1>
+<p>If your image filter API is working now you can already use that using <code>curl</code> from the command line.
+To make it easier to use and test you will now build a small web frontend and serve that along the API.</p>
+<p><em>Note: The HTML used here is the same that was used in the previous tutorial.</em></p>
+<p>✅ In your <code>main</code> function match <code>/</code> and <code>/app.js</code> and serve the respective files.
+To simplify deployment you can embed the files directly into the binary using <code>include_str!</code>.</p>
+<pre><code class="language-rust">match (req.get_method(), req.get_path()) {
+    (&amp;Method::GET, &quot;/&quot;) =&gt; Ok(Response::from_status(StatusCode::OK)
+        .with_content_type(mime::TEXT_HTML_UTF_8)
+        .with_body(include_str!(&quot;index.html&quot;))),
+
+    (&amp;Method::GET, &quot;/app.js&quot;) =&gt; Ok(Response::from_status(StatusCode::OK)
+        .with_content_type(mime::APPLICATION_JAVASCRIPT)
+        .with_body(include_str!(&quot;app.js&quot;))),
+
+    // (cut)
+}</code></pre>
+<p>✅ Create a <code>src/index.html</code> file with a basic HTML structure.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Rust WASM Demo&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>✅ To upload a picture the frontend needs a file selector, so add the following in between the <code>&lt;body&gt;</code> tags.</p>
+<pre><code class="language-html">    &lt;input type=&quot;file&quot; id=&quot;files&quot; name=&quot;file&quot; accept=&quot;image/png, image/jpeg&quot; /&gt;
+</code></pre>
+<p>✅ Additionally the user should be able to select a filter. List out all available ones manually.</p>
+<pre><code class="language-html">    &lt;select name=&quot;filter&quot;&gt;
+      &lt;option value=&quot;None&quot;&gt;none&lt;/option&gt;
+      &lt;option value=&quot;1977&quot; selected&gt;1977&lt;/option&gt;
+      &lt;option value=&quot;Aden&quot;&gt;Aden&lt;/option&gt;
+      &lt;option value=&quot;Brannan&quot;&gt;Brannan&lt;/option&gt;
+      &lt;option value=&quot;Brooklyn&quot;&gt;Brooklyn&lt;/option&gt;
+      &lt;option value=&quot;Clarendon&quot;&gt;Clarendon&lt;/option&gt;
+      &lt;option value=&quot;Earlybird&quot;&gt;Earlybird&lt;/option&gt;
+      &lt;option value=&quot;Gingham&quot;&gt;Gingham&lt;/option&gt;
+      &lt;option value=&quot;Hudson&quot;&gt;Hudson&lt;/option&gt;
+      &lt;option value=&quot;Inkwell&quot;&gt;Inkwell&lt;/option&gt;
+      &lt;option value=&quot;Kelvin&quot;&gt;Kelvin&lt;/option&gt;
+      &lt;option value=&quot;Lark&quot;&gt;Lark&lt;/option&gt;
+      &lt;option value=&quot;Lofi&quot;&gt;Lofi&lt;/option&gt;
+      &lt;option value=&quot;Maven&quot;&gt;Maven&lt;/option&gt;
+      &lt;option value=&quot;Mayfair&quot;&gt;Mayfair&lt;/option&gt;
+      &lt;option value=&quot;Moon&quot;&gt;Moon&lt;/option&gt;
+      &lt;option value=&quot;Nashville&quot;&gt;Nashville&lt;/option&gt;
+      &lt;option value=&quot;Reyes&quot;&gt;Reyes&lt;/option&gt;
+      &lt;option value=&quot;Rise&quot;&gt;Rise&lt;/option&gt;
+      &lt;option value=&quot;Slumber&quot;&gt;Slumber&lt;/option&gt;
+      &lt;option value=&quot;Stinson&quot;&gt;Stinson&lt;/option&gt;
+      &lt;option value=&quot;Toaster&quot;&gt;Toaster&lt;/option&gt;
+      &lt;option value=&quot;Valencia&quot;&gt;Valencia&lt;/option&gt;
+      &lt;option value=&quot;Walden&quot;&gt;Walden&lt;/option&gt;
+    &lt;/select&gt;
+</code></pre>
+<p>✅ To show that an upload is in progress add a <code>&lt;span&gt;</code> where you can show a message.</p>
+<pre><code class="language-html">    &lt;span&gt;&lt;/span&gt;
+</code></pre>
+<p>✅ You also need a place to display the resulting image.</p>
+<pre><code class="language-html">    &lt;img /&gt;
+</code></pre>
+<p>✅ And last but not least include the JavaScript frontend code.</p>
+<pre><code class="language-html">    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<hr />
+<p>The <a href="tutorial/edge/javascript.html">next chapter</a> will guide you through writing the JavaScript frontend code.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="javascript-1"><a class="header" href="#javascript-1">JavaScript</a></h1>
+<p>In the previous chapter you already created a handler in your application returning an <code>app.js</code> file and also referenced that in your HTML code.
+Time to write the JavaScript code now.</p>
+<p>The plan is to:</p>
+<ul>
+<li>load the image data from the selected file</li>
+<li>post this image data with the selected filter name to the backend</li>
+<li>display the resulting file on the web page</li>
+</ul>
+<p><em>Note: A lot of this JavaScript code is similar to the one from the <a href="tutorial/edge/../web.html">Web tutorial</a>. The important difference is in the last step where instead of calling into WebAssembly you send the image to a server.</em></p>
+<p>✅ If there's a change on the file selector (&quot;the user selected a file&quot;) or a new filter is selected you should send the image to the backend.</p>
+<pre><code class="language-javascript">document.querySelector('input[type=file]').onchange = (evt) =&gt; {
+  postImage();
+};
+document.querySelector('select').onchange = (evt) =&gt; {
+  postImage();
+};
+</code></pre>
+<p>✅ The above calls a new function.</p>
+<pre><code class="language-javascript">async function postImage() {
+  // (to be filled in)
+}
+</code></pre>
+<p>✅ First grab the selected file and let the user know the application is working.</p>
+<pre><code class="language-javascript">  let files = document.getElementById('files').files;
+  if (!files.length) {
+    return;
+  }
+  let file = files[0];
+  let span = document.querySelector('span');
+  span.innerText = &quot;working...&quot;;
+</code></pre>
+<p>✅ Start by displaying the image.
+The JavaScript web API lets you turn the file object into an object URL that can be displayed.</p>
+<pre><code class="language-javascript">  let imgEl = document.querySelector('img');
+  imgEl.src = URL.createObjectURL(file);
+  imgEl.width = &quot;500&quot;;
+</code></pre>
+<p>✅ Next fetch the selected image filter name. If it's <code>none</code> you don't need to do any work!</p>
+<pre><code class="language-javascript">  let span = document.querySelector('span');
+  span.innerText = &quot;working...&quot;;
+
+  let imgEl = document.querySelector('img');
+  imgEl.src = URL.createObjectURL(file);
+</code></pre>
+<p>✅ Reading the file to then submit it requires to read it and turn it into an array buffer first. That's available directly on the file object you already have.</p>
+<pre><code class="language-javascript">  let img = await file.arrayBuffer();
+</code></pre>
+<p>✅ Now you can create a <code>POST</code> request to the <code>/image</code> API endpoint using the <code>fetch</code> API, using the image data as the body.</p>
+<pre><code class="language-javascript">  let url = `/image?filter=${filter}`;
+  let response = await fetch(url, {
+    method: &quot;POST&quot;,
+    body: img,
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+</code></pre>
+<p>✅ The response can be turned back into an object URL, that you can then display again as before.</p>
+<pre><code class="language-javascript">  let blob = await response.blob();
+  imgEl.src = URL.createObjectURL(blob);
+  span.innerText = &quot;done.&quot;;
+</code></pre>
+<hr />
+<p>And that's it for the frontend.
+<a href="tutorial/edge/run-locally.html">Next</a> you can run the full application locally.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="running-it-locally-1"><a class="header" href="#running-it-locally-1">Running it locally</a></h1>
+<p>✅ Use <code>fastly</code> to serve the application locally.</p>
+<pre><code>fastly compute serve
+</code></pre>
+<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
+<p>Play around with it, upload an image and change filters.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="final-application-2"><a class="header" href="#final-application-2">Final application</a></h1>
+<p>You should have this file tree layout:</p>
+<pre><code class="language-console">$ tree
+.
+├── Cargo.lock
+├── Cargo.toml
+├── fastly.toml
+└── src
+    ├── app.js
+    ├── index.html
+    └── main.rs
+</code></pre>
+<p>To recap your final Rust code should look something like this:</p>
+<pre><code class="language-rust">use std::io::Cursor;
+
+use fastly::http::{Method, StatusCode};
+use fastly::{mime, Error, Request, Response};
+use rustagram::image;
+use rustagram::image::io::Reader;
+use rustagram::RustagramFilter;
+
+#[fastly::main]
+fn main(req: Request) -&gt; Result&lt;Response, Error&gt; {
+    // Pattern match on the path...
+    match (req.get_method(), req.get_path()) {
+        // If request is to the `/` path...
+        (&amp;Method::GET, &quot;/&quot;) =&gt; Ok(Response::from_status(StatusCode::OK)
+            .with_content_type(mime::TEXT_HTML_UTF_8)
+            .with_body(include_str!(&quot;index.html&quot;))),
+        (&amp;Method::GET, &quot;/app.js&quot;) =&gt; Ok(Response::from_status(StatusCode::OK)
+            .with_content_type(mime::APPLICATION_JAVASCRIPT)
+            .with_body(include_str!(&quot;app.js&quot;))),
+
+        (&amp;Method::POST, &quot;/image&quot;) =&gt; convert_image(req),
+
+        // Catch all other requests and return a 404.
+        _ =&gt; Ok(Response::from_status(StatusCode::NOT_FOUND)
+            .with_body_text_plain(&quot;The page you requested could not be found\n&quot;)),
+    }
+}
+
+pub fn convert_image(mut req: Request) -&gt; Result&lt;Response, Error&gt; {
+    let filter_str = req.get_query_parameter(&quot;filter&quot;).unwrap();
+    let filter = filter_str.parse().unwrap();
+
+    if !req.has_body() {
+        return Ok(
+            Response::from_status(StatusCode::BAD_REQUEST)
+                .with_body_text_plain(&quot;missing image&quot;)
+        );
+    }
+
+    let body = req.take_body();
+    let body = body.into_bytes();
+
+    let img = Reader::new(Cursor::new(body))
+        .with_guessed_format()
+        .unwrap();
+
+    let img = img.decode().unwrap();
+
+    let img = img.thumbnail(500, 500);
+    let out = img.to_rgba8().apply_filter(filter);
+    let mut bytes: Vec&lt;u8&gt; = Vec::new();
+    out.write_to(&amp;mut Cursor::new(&amp;mut bytes), image::ImageOutputFormat::Png)?;
+
+    Ok(Response::from_status(StatusCode::OK)
+        .with_body(bytes)
+        .with_content_type(mime::IMAGE_PNG))
+}</code></pre>
+<p>The frontend in HTML:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Rust WASM Demo&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;input type=&quot;file&quot; id=&quot;files&quot; name=&quot;file&quot; accept=&quot;image/png, image/jpeg&quot; /&gt;
+    &lt;select name=&quot;filter&quot;&gt;
+      &lt;option value=&quot;None&quot;&gt;none&lt;/option&gt;
+      &lt;option value=&quot;1977&quot; selected&gt;1977&lt;/option&gt;
+      &lt;option value=&quot;Aden&quot;&gt;Aden&lt;/option&gt;
+      &lt;option value=&quot;Brannan&quot;&gt;Brannan&lt;/option&gt;
+      &lt;option value=&quot;Brooklyn&quot;&gt;Brooklyn&lt;/option&gt;
+      &lt;option value=&quot;Clarendon&quot;&gt;Clarendon&lt;/option&gt;
+      &lt;option value=&quot;Earlybird&quot;&gt;Earlybird&lt;/option&gt;
+      &lt;option value=&quot;Gingham&quot;&gt;Gingham&lt;/option&gt;
+      &lt;option value=&quot;Hudson&quot;&gt;Hudson&lt;/option&gt;
+      &lt;option value=&quot;Inkwell&quot;&gt;Inkwell&lt;/option&gt;
+      &lt;option value=&quot;Kelvin&quot;&gt;Kelvin&lt;/option&gt;
+      &lt;option value=&quot;Lark&quot;&gt;Lark&lt;/option&gt;
+      &lt;option value=&quot;Lofi&quot;&gt;Lofi&lt;/option&gt;
+      &lt;option value=&quot;Maven&quot;&gt;Maven&lt;/option&gt;
+      &lt;option value=&quot;Mayfair&quot;&gt;Mayfair&lt;/option&gt;
+      &lt;option value=&quot;Moon&quot;&gt;Moon&lt;/option&gt;
+      &lt;option value=&quot;Nashville&quot;&gt;Nashville&lt;/option&gt;
+      &lt;option value=&quot;Reyes&quot;&gt;Reyes&lt;/option&gt;
+      &lt;option value=&quot;Rise&quot;&gt;Rise&lt;/option&gt;
+      &lt;option value=&quot;Slumber&quot;&gt;Slumber&lt;/option&gt;
+      &lt;option value=&quot;Stinson&quot;&gt;Stinson&lt;/option&gt;
+      &lt;option value=&quot;Toaster&quot;&gt;Toaster&lt;/option&gt;
+      &lt;option value=&quot;Valencia&quot;&gt;Valencia&lt;/option&gt;
+      &lt;option value=&quot;Walden&quot;&gt;Walden&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;span&gt;&lt;/span&gt;
+    &lt;br&gt;
+    &lt;img /&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>And the JavaScript frontend code:</p>
+<pre><code class="language-javascript">document.querySelector('input[type=file]').onchange = (evt) =&gt; {
+  postImage();
+};
+document.querySelector('select').onchange = (evt) =&gt; {
+  postImage();
+};
+
+async function postImage() {
+  let files = document.getElementById('files').files;
+  if (!files.length) {
+    return;
+  }
+  let file = files[0];
+  let span = document.querySelector('span');
+  span.innerText = &quot;working...&quot;;
+
+  let imgEl = document.querySelector('img');
+  imgEl.src = URL.createObjectURL(file);
+  imgEl.width = &quot;500&quot;;
+
+  let filter = document.querySelector(&quot;select&quot;).value.toLowerCase();
+  if (filter == &quot;none&quot;) {
+    span.innerText = &quot;done.&quot;;
+    return;
+  }
+
+  let img = await file.arrayBuffer();
+  let url = `/image?filter=${filter}`;
+  let response = await fetch(url, {
+    method: &quot;POST&quot;,
+    body: img,
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  let blob = await response.blob();
+  imgEl.src = URL.createObjectURL(blob);
+  span.innerText = &quot;done.&quot;;
+}
+</code></pre>
+<p>You can build and serve your application locally like this:</p>
+<pre><code>fastly compute serve
+</code></pre>
+<hr />
+<p>Some ideas on what to do next:</p>
+<ul>
+<li>Did you even notice that this was compiled to WebAssembly?</li>
+<li>What happens if you compile it natively?</li>
+<li>Can you return different image formats? Different sizes?</li>
+<li>What other task could be suitable for edge computing?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="optional-deployment"><a class="header" href="#optional-deployment">Optional: Deployment</a></h1>
+<p>So far the image filter application has been running locally only.
+Of course this can now be deployed to Fastly's servers.</p>
+<p><em>Note: This requires a Fastly account. You can <a href="https://www.fastly.com/signup/">create an account</a> for free.</em></p>
+<p>✅ You can now deploy this application:</p>
+<pre><code>fastly compute deploy
+</code></pre>
+<p>The first time you run this it will ask you if you want to create a new service.
+Follow the instructions, give it a name,
+define a domain to use (or use the suggested one).
+You don't need to define any backends.</p>
+<p>Subsequent runs will deploy your code as a new version.</p>
+<p>When finished this will print the full URL of your new service.
+A demo deployment is available at:</p>
+<p><a href="https://forcibly-advanced-eft.edgecompute.app/">https://forcibly-advanced-eft.edgecompute.app/</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
+<ul>
+<li><a href="https://webassembly.org/">The official WebAssembly website</a></li>
+<li><a href="https://rustwasm.github.io/docs/book/">The Rust Wasm Book</a></li>
+<li><a href="https://rustwasm.github.io/docs/wasm-bindgen">wasm-bindgen documentation</a></li>
+<li><a href="https://wasi.dev/">WASI website</a></li>
+<li><a href="https://wasmtime.dev/">wasmtime website</a></li>
+<li>Blog post: <a href="https://tung.github.io/posts/rust-and-webassembly-without-a-bundler/">Rust and WebAssembly without a Bundler</a></li>
+<li>Image filter web app demo: <a href="https://tmp.fnordig.de/wasm/image-filter/">https://tmp.fnordig.de/wasm/image-filter/</a></li>
+<li>Image filter edge computing demo: <a href="https://forcibly-advanced-eft.edgecompute.app/">https://forcibly-advanced-eft.edgecompute.app/</a></li>
+<li><a href="https://docs.fastly.com/products/compute-at-edge">Fastly Compute@Edge documentation</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
