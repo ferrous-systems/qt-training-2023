@@ -1,6 +1,6 @@
 # Summary
 
-[WebAssembly](./README.md)
+[Rust and QT](./README.md)
 
 - [Preparations](./preparations.md)
   - [Setup](./setup.md)

@@ -8,50 +8,28 @@
 
 ```console
 $ rustc --version
-rustc 1.64.0 (a55dd71d5 2022-09-19)
+rustc 1.73.0 (cc66ad468 2023-10-03)
 ```
 
 ```console
 $ cargo --version
-cargo 1.64.0 (387270bc7 2022-09-16)
+cargo 1.73.0 (9c4383fb5 2023-08-26)
 ```
+
+✅ In a work directory, run:
 
 ```console
-$ rustup target list --installed
-(cut)
-wasm32-unknown-unknown
-wasm32-wasi
-(cut)
+$ cargo new --bin hello-world
+$ cd hello-world
+$ cargo run --release
+   Compiling hello-world v0.1.0 (C:\Code\ferrous\hello-world)
+    Finished release [optimized] target(s) in 0.99s
+     Running `target\release\hello-world.exe`
+Hello, world!
 ```
 
-✅ Let's check that you have installed the tools listed in the previous section (Note: not all are required).
+This ensures that the whole toolchain works correctly and finds the system linker. This should work at all times, if it doesn't, immediately ask for a trainer.
 
-```console
-$ wasmtime --version
-wasmtime-cli 2.0.0
-```
+# QT specifics
 
-```console
-$ wasm-bindgen --version
-wasm-bindgen 0.2.83
-```
-
-```console
-$ http
-Hosting "." on port 8000 without TLS and no authentication...
-Ctrl-C to stop.
-```
-
-_Note: This will host the current directory over HTTP. Use `Ctrl-C` to stop it._
-
-```console
-$ wasm2wat --version
-1.0.30
-```
-
-```console
-$ fastly version
-Fastly CLI version v4.2.0 (a1e8772)
-Built with go version go1.18.6 linux/amd64
-Viceroy version: viceroy 0.3.1
-```
+TODO tool check for QT, compiling a hello world app.
