@@ -1,7 +1,6 @@
-# Rust & WebAssembly workshop
+# Rust & QT workshop
 
-This workbook contains the material for a Rust & QT workshop
-held by [Ferrous Systems](https://ferrous-systems.com/), developed and held together with [KDAB](https://kdab.com). It is based on work by [Jan-Erik Rediger](https://fnordig.de/).
+This workbook contains the material for a Rust & QT workshop held by [Ferrous Systems](https://ferrous-systems.com/), developed and held together with [KDAB](https://kdab.com). It is based on work by [Jan-Erik Rediger](https://fnordig.de/).
 
 It is split into 3 parts:
 
