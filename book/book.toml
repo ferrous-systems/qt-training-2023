@@ -1,11 +1,11 @@
 [book]
-authors = ["Jan-Erik Rediger"]
+authors = ["Jan-Erik Rediger", "Florian Gilcher"]
 multilingual = false
 src = "src"
-title = "Workbook for Rust & WebAssembly workshop"
+title = "Workbook for Rust & QT workshop"
 
 [output.html]
-git-repository-url = "https://github.com/ferrous-systems/wasm-training-2022"
+git-repository-url = "https://github.com/ferrous-systems/qt-training-2023"
 
 [output.html.playground]
 runnable = false
