@@ -22,9 +22,9 @@ The latest Rust should work best, though older versions have no known issues.
 
 ### Additional tooling
 
-For those interested in following the QT section of the course,
-installation of QT is needed.
+For those interested in following the Qt section of the course,
+installation of Qt is needed.
 
-TODO: fill QT installation instructions
+TODO: fill Qt installation instructions
 
 

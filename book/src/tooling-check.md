@@ -30,6 +30,6 @@ Hello, world!
 
 This ensures that the whole toolchain works correctly and finds the system linker. This should work at all times, if it doesn't, immediately ask for a trainer.
 
-# QT specifics
+# Qt specifics
 
-TODO tool check for QT, compiling a hello world app.
+TODO tool check for Qt, compiling a hello world app.

@@ -1,6 +1,6 @@
 # Summary
 
-[Rust and QT](./README.md)
+[Rust and Qt](./README.md)
 
 - [Preparations](./preparations.md)
   - [Setup](./setup.md)
