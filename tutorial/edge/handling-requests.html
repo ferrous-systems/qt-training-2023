@@ -175,30 +175,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="handling-requests"><a class="header" href="#handling-requests">Handling requests</a></h1>
-<p>A Compute@Edge application follows a simple request-response model:
-The main function of the application receives a <code>Request</code> object as an argument,
-and produces a <code>Response</code> object or an <code>Error</code>.</p>
-<p>✅ Write a basic handler that returns &quot;Hello World&quot; when <code>/</code> is accessed.</p>
-<pre><code class="language-rust">use fastly::http::{Method, StatusCode};
-use fastly::{Error, Request, Response};
-
-#[fastly::main]
-fn main(req: Request) -&gt; Result&lt;Response, Error&gt; {
-    match (req.get_method(), req.get_path()) {
-        (&amp;Method::GET, &quot;/&quot;) =&gt; {
-            Ok(Response::from_status(StatusCode::OK).with_body_text_plain(&quot;Hello World!\n&quot;))
-        }
-
-        _ =&gt; Ok(Response::from_status(StatusCode::NOT_FOUND)
-            .with_body_text_plain(&quot;The page you requested could not be found\n&quot;)),
-    }
-}</code></pre>
-<p>This uses the <code>fastly</code> crate.
-Documentation is available at <a href="https://docs.rs/fastly/0.8.9/fastly/">docs.rs/fastly</a>.</p>
-<p>✅ Run the project locally:</p>
-<pre><code>fastly compute serve
-</code></pre>
-<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
 
                     </main>
 

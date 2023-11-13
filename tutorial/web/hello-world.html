@@ -174,63 +174,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="hello-world-on-the-web"><a class="header" href="#hello-world-on-the-web">Hello World on the web</a></h1>
-<p>You already saw the <a href="../../wasm-hello-world.html">&quot;Hello World of WebAssembly&quot;</a> earlier.
-You will now run this on the web without additional tools.</p>
-<p>✅ Create a new crate</p>
-<pre><code class="language-console">cargo new --lib hello-world
-cd hello-world
-</code></pre>
-<p>✅ Set the crate type to <code>cdylib</code> in <code>Cargo.toml</code></p>
-<pre><code class="language-toml">[lib]
-crate-type = [&quot;cdylib&quot;]
-</code></pre>
-<p>✅ Write the <code>add</code> function.</p>
-<pre><code class="language-rust">#[no_mangle]
-pub extern &quot;C&quot; fn add(left: i32, right: i32) -&gt; i32 {
-    left + right
-}</code></pre>
-<p>The <code>no_mangle</code> attribute ensures that the function name lands in the binary as is,
-otherwise you couldn't later call it by name.
-<code>extern &quot;C&quot;</code> ensures it uses the C-compatible ABI, and thus what WebAssembly (and JavaScript) expects.</p>
-<p>✅ Compile it to WebAssembly.</p>
-<pre><code>cargo build --target wasm32-unknown-unknown
-</code></pre>
-<p>This will create <code>target/wasm32-unknown-unknown/debug/hello_world.wasm</code>.</p>
-<p>✅ Next create an HTML file <code>index.html</code> in your crate's directory (next to <code>Cargo.toml</code>):</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot;&gt;
-    &lt;title&gt;Rust WASM Demo&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;script type=&quot;module&quot;&gt;
-      &lt;!-- to be filled in --&gt;
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>✅ Now you need to load, compile and instantiate the WebAssembly module.
-All of this is part of the web API.
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/fetch"><code>fetch</code></a> can load data from URLs,
-<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate"><code>WebAssembly.instantiate()</code></a> compiles and instantiates the WebAssembly module.</p>
-<pre><code class="language-javascript">      let response = await fetch('target/wasm32-unknown-unknown/debug/hello_world.wasm');
-      let bytes = await response.arrayBuffer();
-      let result = await WebAssembly.instantiate(bytes, {});
-</code></pre>
-<p>The result of this is an instance that has accessors for the exported functions of the module.</p>
-<p>✅ Call the <code>add</code> method on the Wasm module instance.</p>
-<pre><code class="language-javascript">      const sum = result.instance.exports.add(1, 2);
-      console.log(`1 + 2 = ${sum}`);
-</code></pre>
-<p>✅ Serve your HTML file and the WebAssembly over HTTP.</p>
-<pre><code>http
-</code></pre>
-<p>Open <a href="http://localhost:8000">http://localhost:8000</a> in your web browser and open the Developer Tools.
-In the console you should now see the result:</p>
-<pre><code>1 + 2 = 3
-</code></pre>
+                        <h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
 
                     </main>
 

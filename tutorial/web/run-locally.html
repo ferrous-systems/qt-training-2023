@@ -175,22 +175,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="running-it-locally"><a class="header" href="#running-it-locally">Running it locally</a></h1>
-<p>✅ First build your Rust code to WebAssembly and run <code>wasm-bindgen</code> to generate the JavaScript shim.
-If you are using the <code>Makefile</code> you can now run:</p>
-<pre><code>make
-</code></pre>
-<p>Otherwise run the commands directly:</p>
-<pre><code>cargo build --release --target=wasm32-unknown-unknown
-wasm-bindgen target/wasm32-unknown-unknown/release/image_filter.wasm --out-dir app --target web --no-typescript
-</code></pre>
-<p>You should find 2 additional files in the <code>app</code> directory:
-<code>image_filter.js</code> and <code>image_filter_bg.wasm</code>.</p>
-<p>✅ Serve your application locally using <code>http</code>:</p>
-<pre><code>cd app
-http
-</code></pre>
-<p>Your application should be reachable at <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.</p>
-<p>Play around with it, upload an image and change filters.</p>
 
                     </main>
 

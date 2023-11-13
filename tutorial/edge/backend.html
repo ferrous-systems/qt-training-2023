@@ -175,68 +175,6 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="backend"><a class="header" href="#backend">Backend</a></h1>
-<p>You will now implement the actual logic of this API: the image filter.</p>
-<p>✅ Start of with a new import at the top of your <code>src/main.rs</code> file.
-You later need to specify the image's mime type:</p>
-<pre><code class="language-rust">use fastly::mime;</code></pre>
-<p>✅ In your <code>main</code> function match for a  <code>POST</code> request on the <code>/image</code> path and call a handler function.</p>
-<pre><code class="language-rust">match (req.get_method(), req.get_path()) {
-    // (cut)
-
-    (&amp;Method::POST, &quot;/image&quot;) =&gt; convert_image(req),</code></pre>
-<p>✅ Create this new handler function, taking in the request and returning a response or an error.</p>
-<pre><code class="language-rust">pub fn convert_image(mut req: Request) -&gt; Result&lt;Response, Error&gt; {
-    // (to be filled in)
-}</code></pre>
-<p>✅ Next you need to get the required data from the request. Start with the filter name from the query.</p>
-<pre><code class="language-rust">    let filter_str = req.get_query_parameter(&quot;filter&quot;).unwrap();
-    let filter = filter_str.parse().unwrap();</code></pre>
-<p>✅ Now you can check and read the body from the request.</p>
-<pre><code class="language-rust">    if !req.has_body() {
-        return Ok(
-            Response::from_status(StatusCode::BAD_REQUEST)
-                .with_body_text_plain(&quot;missing image&quot;)
-        );
-    }
-
-    let body = req.take_body();
-    let body = body.into_bytes();</code></pre>
-<p>✅ You can decode the image data using the <code>image</code> crate, which is re-exported from <code>rustagram</code>.
-The documentation is available at <a href="https://docs.rs/image/0.24.4/image/">docs.rs/image</a>.</p>
-<p>Import the modules using the following lines on the top of your <code>src/main.rs</code> file.</p>
-<pre><code class="language-rust">use rustagram::image;
-use rustagram::image::io::Reader;
-use rustagram::RustagramFilter;</code></pre>
-<p>✅ Now use the <code>Reader</code> type to load the image from the buffer.</p>
-<pre><code class="language-rust">    let img = Reader::new(Cursor::new(body))
-        .with_guessed_format()
-        .unwrap();
-
-    let img = img.decode().unwrap();</code></pre>
-<p>✅ Currently Fastly enforces very small resource limits (memory usage, computation time), so you need to limit the work the application does if you want to deploy it.
-The easiest is to scale down the image before applying an image filter.</p>
-<pre><code class="language-rust">    let img = img.thumbnail(500, 500);</code></pre>
-<p>Locally you can skip this if you want.
-Larger images just take longer to process.</p>
-<p>✅ Now that you have the image and a filter you can apply this filter as before.
-Instead of writing the result to a file it should be written to a buffer in PNG format.</p>
-<pre><code class="language-rust">    let out = img.to_rgba8().apply_filter(filter);
-    let mut bytes: Vec&lt;u8&gt; = Vec::new();
-    out.write_to(&amp;mut Cursor::new(&amp;mut bytes), image::ImageOutputFormat::Png)?;</code></pre>
-<p>✅ The buffer containing the final image can now be returned as the response.
-Don't forget to set the correct content type.</p>
-<pre><code class="language-rust">    Ok(Response::from_status(StatusCode::OK)
-        .with_body(bytes)
-        .with_content_type(mime::IMAGE_PNG))</code></pre>
-<p>✅ Run the project locally:</p>
-<pre><code>fastly compute serve
-</code></pre>
-<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
-<p>✅ In another terminal you can use <code>curl</code> to send an image and save the converted file.</p>
-<pre><code>curl http://127.0.0.1:7676/image?filter=valencia -X POST -H &quot;Content-Type: application/octet-stream&quot; -T skyline.jpg -o result.png
-</code></pre>
-<hr />
-<p>In the <a href="frontend.html">next chapter</a> you learn how to build a small web frontend and serve that along your image filter application.</p>
 
                     </main>
 

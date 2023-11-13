@@ -174,56 +174,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="new-compute-project"><a class="header" href="#new-compute-project">New compute project</a></h1>
-<h2 id="initialize-a-new-package-locally-using-fastly"><a class="header" href="#initialize-a-new-package-locally-using-fastly">Initialize a new package locally using <code>fastly</code></a></h2>
-<p>No Fastly account required for local development.
-For the manual way see below.</p>
-<p>✅ Create a new compute project from a starter kit.</p>
-<pre><code class="language-console">mkdir edge-image-filter
-cd edge-image-filter
-fastly compute init
-</code></pre>
-<p>Give it a name of your choice.<br />
-When asked for the language to use select &quot;Rust&quot;.<br />
-When asked for the Starter kit, use &quot;[5] Empty starter for Rust&quot;.</p>
-<p>✅ Finally run the project locally</p>
-<pre><code>fastly compute serve
-</code></pre>
-<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
-<hr />
-<h2 id="initialize-a-new-package-locally"><a class="header" href="#initialize-a-new-package-locally">Initialize a new package locally.</a></h2>
-<p>The <code>fastly</code> CLI handles creation of a new package.
-It essentially does the below steps.</p>
-<p>✅ Create a new project using <code>cargo</code></p>
-<pre><code class="language-console">cargo new edge-image-filter
-cd edge-image-filter
-</code></pre>
-<p>✅ Add the <code>fastly</code> dependency</p>
-<pre><code class="language-console">cargo add fastly
-</code></pre>
-<p>Alternatively add it to your <code>Cargo.toml</code> under <code>[dependencies]</code>:</p>
-<pre><code class="language-toml">fastly = &quot;0.8.6&quot;
-</code></pre>
-<p>✅ Add the scaffolding to <code>src/main.rs</code>:</p>
-<pre><code class="language-rust">use fastly::http::StatusCode;
-use fastly::{Error, Request, Response};
-
-#[fastly::main]
-fn main(req: Request) -&gt; Result&lt;Response, Error&gt; {
-    Ok(Response::from_status(StatusCode::OK))
-}</code></pre>
-<p>✅ You also need a <code>fastly.toml</code> file with some configuration. Create that file and add this content:</p>
-<pre><code class="language-toml">authors = [&quot;your@email.com&quot;]
-description = &quot;&quot;
-language = &quot;rust&quot;
-manifest_version = 2
-name = &quot;edge-image-filter&quot;
-service_id = &quot;&quot;
-</code></pre>
-<p>✅ Finally run the project locally</p>
-<pre><code>fastly compute serve
-</code></pre>
-<p>Your application should be reachable at <a href="http://127.0.0.1:7676/">http://127.0.0.1:7676/</a>.</p>
+                        <h1 id="new-project"><a class="header" href="#new-project">New project</a></h1>
 
                     </main>
 
