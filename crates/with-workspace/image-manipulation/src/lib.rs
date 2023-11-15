@@ -7,15 +7,18 @@ use rustagram::{RustagramFilter, FilterType};
 pub fn apply_filter(img: &[u8], filter: FilterType) -> Vec<u8> {
     log::debug!("image: {} bytes, filter: {:?}", img.len(), filter);
 
-    let img = Reader::new(Cursor::new(img))
+    let read_cursor = Cursor::new(img);
+    let img = Reader::new(cursor)
         .with_guessed_format()
         .unwrap()
         .decode()
         .unwrap();
 
-        let out = img.to_rgba8().apply_filter(filter);
+    let out = img.to_rgba8().apply_filter(filter);
+    
     let mut bytes: Vec<u8> = Vec::new();
-    out.write_to(&mut Cursor::new(&mut bytes), ImageOutputFormat::Png)
+    let mut write_cursor = Cursor::new(&mut bytes);
+    out.write_to(&mut write_cursor, ImageOutputFormat::Png)
         .unwrap();
 
     bytes
