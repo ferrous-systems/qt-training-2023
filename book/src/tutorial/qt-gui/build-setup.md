@@ -29,6 +29,32 @@ ApplicationWindow {
 [dependencies]
 rustagram2="2"
 cxx="1.0.95"
+cxx-qt = { git="https://github.com/LeonMatthesKDAB/cxx-qt", branch="qimage" }
+cxx-qt-lib = { git="https://github.com/LeonMatthesKDAB/cxx-qt", branch="qimage" }
+
+[build-dependencies]
+# The "link_qt_object_files" is required when using Cargo to link to Qt statically.
+cxx-qt-build = { git="https://github.com/LeonMatthesKDAB/cxx-qt", branch="qimage", features = [ "qt_qml", "link_qt_object_files" ] } 
+```
+
+```diff
+- At the time of writing (15.11.2023), CXX-Qt 0.6 hasn't been released yet.
+- To keep the training material up-to-date with the new API introduced in version 0.6,
+- we'll use the version from Github for now.
+- The training material on Github will be updated as soon as version 0.6 is released!
+
+- Do note that the public documentation for CXX-Qt is still for version 0.5.
+- You should wait before following this tutorial until version 0.6 is
+- released in the coming weeks.
+```
+
+<details>
+<summary> Future imports once CXX-Qt 0.6 is released </summary>
+
+```toml
+[dependencies]
+rustagram2="2"
+cxx="1.0.95"
 cxx-qt="0.6"
 cxx-qt-lib="0.6"
 
@@ -36,6 +62,7 @@ cxx-qt-lib="0.6"
 # The "link_qt_object_files" is required when using Cargo to link to Qt statically.
 cxx-qt-build = { version="0.6", features = [ "qt_qml", "link_qt_object_files" ] } 
 ```
+</details>
 
 CXX-Qt is split up into multiple crates.
 * CXX-Qt - Allows you to create QObjects from Rust and to interact with existing QObjects
@@ -99,8 +126,8 @@ fn main() {
 > Take a minute to thoroughly read this code and compare it to a typical C++ main
 > function that launches a Qt application.
 >
-> ❔ What is different? What is similar?\
-> ❔ Why are the `if let Some(...)` expressions necessary?
+> ❓ What is different? What is similar?\
+> ❓ Why are the `if let Some(...)` expressions necessary?
 
 ✅ Run the application
 ```console

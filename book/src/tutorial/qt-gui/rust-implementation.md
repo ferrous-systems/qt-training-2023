@@ -121,8 +121,8 @@ impl cxx_qt::Initialize for qobject::ImagePainter {
 ```
 > Try finding explanations for these answers in the [CXX-Qt book][CXX-Qt book].
 >
-> ❔ Why is the `release()` call necessary after connecting to a signal?\
-> ❔ How can you change the [connection type](https://doc.qt.io/qt-6/qt.html#ConnectionType-enum) when connecting to a signal from Rust?
+> ❓ Why is the `release()` call necessary after connecting to a signal?\
+> ❓ How can you change the [connection type](https://doc.qt.io/qt-6/qt.html#ConnectionType-enum) when connecting to a signal from Rust?
 
 ✅ Check that you can successfully print "Hello world from CXX-Qt!" by selecting a file path or changing the image filter
 

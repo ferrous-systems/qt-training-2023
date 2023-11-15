@@ -58,7 +58,7 @@ fn main() {
 > It is a common mistake to forget to include CXX-Qt files in the `build.rs` script.
 > Make sure to try removing the file from the list so you know what happens in this case.
 >
-> ❔ What error do you get?
+> ❓ What error do you get?
 
 Now we can start adding a new `QQuickPaintedItem` subclass.
 
@@ -173,9 +173,9 @@ pub mod qobject {
 ```
 > Some food for thought:
 >
-> ❔ What does the `#[qml_element]` attribute do?\
-> ❔ Why does `paint` need to be marked `unsafe`? What happens without it?\
-> ❔ Is the `cxx_qt::Constructor` declaration always needed? Why is it necessary in this case?
+> ❓ What does the `#[qml_element]` attribute do?\
+> ❓ Why does `paint` need to be marked `unsafe`? What happens without it?\
+> ❓ Is the `cxx_qt::Constructor` declaration always needed? Why is it necessary in this case?
 >
 > Try figuring this out using the [CXX][CXX] and the [CXX-Qt books](https://kdab.github.io/cxx-qt/book/).
 
