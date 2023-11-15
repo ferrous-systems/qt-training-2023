@@ -59,11 +59,18 @@ let img = Reader::new(cursor)
     .unwrap();
 ```
 
+Now we got the image read and know it works.
+
 ✅ Apply the filter
 
 ```rust
 let out = img.to_rgba8().apply_filter(filter);
 ```
+
+On the output side, things are the same, but a little bit more complex.
+We need to create the output vector. For writing to it, we can again create
+a `Cursor` around it, but this time, we'll do it by _mutably borrowing_ the
+`Cursor`. We can then write to it like to any other IO type.
 
 ✅ Write to an output buffer
 
@@ -76,8 +83,17 @@ out.write_to(&mut write_cursor, ImageOutputFormat::Png)
 bytes
 ```
 
+The last statement - a bare `bytes` - uses Rusts expression-based nature to mark
+`bytes` as the variable to be returned. If you feel more comfortable, you may use
+`return bytes`.
 
+The final code of the library should now read:
 
+``` rust
+{{#include ../../../../crates/with-workspace/image-manipulation/src/lib.rs}}
+```
+
+Now that we have a library [let's use it in our CLI](cli-with-library.md)
 
 ---
 
@@ -85,3 +101,4 @@ bytes
 Some ideas on what to do next:
 
 * Create further utility functions
+* Extend the signature and return a `Result`
