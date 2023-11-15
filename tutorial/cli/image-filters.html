@@ -224,34 +224,20 @@ This trait is automatically implemented for the <code>RgbaImage</code> type you 
 <p>Try it for yourself!</p>
 <p>✅ Once you wrote the code, build it again and try to run it.</p>
 <p>Expected output when you don't pass any arguments:</p>
-<pre><code class="language-console">$ wasmtime target/wasm32-wasi/debug/rustagram.wasm
-thread 'main' panicked at 'INPUT required', src/main.rs:7:29
+<pre><code class="language-console">$ cargo run
+thread 'main' panicked at src\main.rs:5:29:
+INPUT required
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
-
-Caused by:
-    0: failed to invoke command default
-[...]
 </code></pre>
 <p>Expected output when you pass a file path and a filter name:</p>
-<pre><code class="language-console">$ wasmtime target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
-thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: IoError(Custom { kind: Uncategorized, error: &quot;failed to find a pre-opened file descriptor through which \&quot;kongelige-slott.jpg\&quot; could be opened&quot; })', src/main.rs:12:34
+<pre><code class="language-console">$ cargo run -- kongelige-slott.jpg 1977
+    Finished dev [unoptimized + debuginfo] target(s) in 0.09s
+     Running `target\debug\rustagram.exe kongelige-slott.jpg 1977`
+thread 'main' panicked at src\main.rs:10:34:
+called `Result::unwrap()` on an `Err` value: IoError(Os { code: 2, kind: NotFound, message: &quot;The system cannot find the file specified.&quot; })
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
-
-Caused by:
-    0: failed to invoke command default
-[...]
 </code></pre>
-<hr />
-<p>What did just happen?</p>
-<p><code>wasmtime</code> ran your code up until it tried to read the image from disk.
-By default <code>wasmtime</code> blocks all filesystem access.
-You need to explicitly give permission to specific directories in order to be able to read and writes files within.</p>
-<pre><code class="language-console">$ wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
-$
-</code></pre>
-<p>This should now have created <code>output.jpg</code>.</p>
+<p>TODO: document positive case</p>
 
                     </main>
 

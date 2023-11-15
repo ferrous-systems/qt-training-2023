@@ -174,30 +174,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="building-and-running-with-wasmtime"><a class="header" href="#building-and-running-with-wasmtime">Building and running with <code>wasmtime</code></a></h1>
-<p>✅ You can build for the <code>wasm32-wasi</code> manually like this:</p>
-<pre><code>cargo build --target wasm32-wasi
-</code></pre>
-<p>This should create a file <code>target/wasm32-wasi/debug/rustagram.wasm</code>.</p>
-<p>✅ Now that the application is built you can run it using <code>wasmtime</code>:</p>
-<pre><code>wasmtime target/wasm32-wasi/debug/rustagram.wasm
-</code></pre>
-<p>You should see the message printed:</p>
-<pre><code>$ wasmtime target/wasm32-wasi/debug/rustagram.wasm
-Hello World from wasmtime!
-</code></pre>
-<p>✅ (Optional) You can transform the generated WebAssembly code into its text representation using <code>wasm2wat</code></p>
-<pre><code>wasm2wat target/wasm32-wasi/debug/rustagram.wasm
-</code></pre>
-<p><em>Caution: this produces a lot of output.</em></p>
-<p>You should see something like this:</p>
-<pre><code>(module
-  (type (;0;) (func))
-  (type (;1;) (func (result i32)))
-  (type (;2;) (func (param i32)))
-...
-</code></pre>
-<p>Try to identify your &quot;Hello World&quot; code.</p>
+                        <h1 id="building-and-running-with-wasmtime"><a class="header" href="#building-and-running-with-wasmtime">Building and running with wasmtime</a></h1>
 
                     </main>
 

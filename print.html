@@ -278,31 +278,8 @@ cd rustagram
 <pre><code class="language-rust">fn main() {
     println!(&quot;Hello World from wasmtime!&quot;);
 }</code></pre>
-<p>Next, <a href="tutorial/cli/building-cli.html">read how to build and run the application</a>.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="building-and-running-with-wasmtime"><a class="header" href="#building-and-running-with-wasmtime">Building and running with <code>wasmtime</code></a></h1>
-<p>✅ You can build for the <code>wasm32-wasi</code> manually like this:</p>
-<pre><code>cargo build --target wasm32-wasi
-</code></pre>
-<p>This should create a file <code>target/wasm32-wasi/debug/rustagram.wasm</code>.</p>
-<p>✅ Now that the application is built you can run it using <code>wasmtime</code>:</p>
-<pre><code>wasmtime target/wasm32-wasi/debug/rustagram.wasm
-</code></pre>
-<p>You should see the message printed:</p>
-<pre><code>$ wasmtime target/wasm32-wasi/debug/rustagram.wasm
-Hello World from wasmtime!
-</code></pre>
-<p>✅ (Optional) You can transform the generated WebAssembly code into its text representation using <code>wasm2wat</code></p>
-<pre><code>wasm2wat target/wasm32-wasi/debug/rustagram.wasm
-</code></pre>
-<p><em>Caution: this produces a lot of output.</em></p>
-<p>You should see something like this:</p>
-<pre><code>(module
-  (type (;0;) (func))
-  (type (;1;) (func (result i32)))
-  (type (;2;) (func (param i32)))
-...
-</code></pre>
-<p>Try to identify your &quot;Hello World&quot; code.</p>
+<p>Next, <a href="tutorial/cli/image-filters.html">start integrating image filters</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building-and-running-with-wasmtime"><a class="header" href="#building-and-running-with-wasmtime">Building and running with wasmtime</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="image-filter-application"><a class="header" href="#image-filter-application">Image filter application</a></h1>
 <p>Now that you can build and run an application compiled to WebAssembly,
 it's time to build some functionality into it.</p>
@@ -353,34 +330,20 @@ This trait is automatically implemented for the <code>RgbaImage</code> type you 
 <p>Try it for yourself!</p>
 <p>✅ Once you wrote the code, build it again and try to run it.</p>
 <p>Expected output when you don't pass any arguments:</p>
-<pre><code class="language-console">$ wasmtime target/wasm32-wasi/debug/rustagram.wasm
-thread 'main' panicked at 'INPUT required', src/main.rs:7:29
+<pre><code class="language-console">$ cargo run
+thread 'main' panicked at src\main.rs:5:29:
+INPUT required
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
-
-Caused by:
-    0: failed to invoke command default
-[...]
 </code></pre>
 <p>Expected output when you pass a file path and a filter name:</p>
-<pre><code class="language-console">$ wasmtime target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
-thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: IoError(Custom { kind: Uncategorized, error: &quot;failed to find a pre-opened file descriptor through which \&quot;kongelige-slott.jpg\&quot; could be opened&quot; })', src/main.rs:12:34
+<pre><code class="language-console">$ cargo run -- kongelige-slott.jpg 1977
+    Finished dev [unoptimized + debuginfo] target(s) in 0.09s
+     Running `target\debug\rustagram.exe kongelige-slott.jpg 1977`
+thread 'main' panicked at src\main.rs:10:34:
+called `Result::unwrap()` on an `Err` value: IoError(Os { code: 2, kind: NotFound, message: &quot;The system cannot find the file specified.&quot; })
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
-
-Caused by:
-    0: failed to invoke command default
-[...]
 </code></pre>
-<hr />
-<p>What did just happen?</p>
-<p><code>wasmtime</code> ran your code up until it tried to read the image from disk.
-By default <code>wasmtime</code> blocks all filesystem access.
-You need to explicitly give permission to specific directories in order to be able to read and writes files within.</p>
-<pre><code class="language-console">$ wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
-$
-</code></pre>
-<p>This should now have created <code>output.jpg</code>.</p>
+<p>TODO: document positive case</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="final-application"><a class="header" href="#final-application">Final application</a></h1>
 <p>You should have this file tree layout:</p>
 <pre><code class="language-console">$ tree
@@ -437,6 +400,7 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="final-application-2"><a class="header" href="#final-application-2">Final application</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="optional-deployment"><a class="header" href="#optional-deployment">Optional: Deployment</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
+<p>TODO: Redo References</p>
 <ul>
 <li><a href="https://webassembly.org/">The official WebAssembly website</a></li>
 <li><a href="https://rustwasm.github.io/docs/book/">The Rust Wasm Book</a></li>
