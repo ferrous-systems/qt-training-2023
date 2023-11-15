@@ -1,5 +1,7 @@
 # References
 
+TODO: Redo References
+
 * [The official WebAssembly website](https://webassembly.org/)
 * [The Rust Wasm Book](https://rustwasm.github.io/docs/book/)
 * [wasm-bindgen documentation](https://rustwasm.github.io/docs/wasm-bindgen)

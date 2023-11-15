@@ -77,40 +77,21 @@ Try it for yourself!
 Expected output when you don't pass any arguments:
 
 ```console
-$ wasmtime target/wasm32-wasi/debug/rustagram.wasm
-thread 'main' panicked at 'INPUT required', src/main.rs:7:29
+$ cargo run
+thread 'main' panicked at src\main.rs:5:29:
+INPUT required
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
-
-Caused by:
-    0: failed to invoke command default
-[...]
 ```
 
 Expected output when you pass a file path and a filter name:
 
 ```console
-$ wasmtime target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
-thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: IoError(Custom { kind: Uncategorized, error: "failed to find a pre-opened file descriptor through which \"kongelige-slott.jpg\" could be opened" })', src/main.rs:12:34
+$ cargo run -- kongelige-slott.jpg 1977
+    Finished dev [unoptimized + debuginfo] target(s) in 0.09s
+     Running `target\debug\rustagram.exe kongelige-slott.jpg 1977`
+thread 'main' panicked at src\main.rs:10:34:
+called `Result::unwrap()` on an `Err` value: IoError(Os { code: 2, kind: NotFound, message: "The system cannot find the file specified." })
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-Error: failed to run main module `target/wasm32-wasi/debug/rustagram.wasm`
-
-Caused by:
-    0: failed to invoke command default
-[...]
 ```
 
----
-
-What did just happen?
-
-`wasmtime` ran your code up until it tried to read the image from disk.
-By default `wasmtime` blocks all filesystem access.
-You need to explicitly give permission to specific directories in order to be able to read and writes files within.
-
-```console
-$ wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm kongelige-slott.jpg 1977
-$
-```
-
-This should now have created `output.jpg`.
+TODO: document positive case
