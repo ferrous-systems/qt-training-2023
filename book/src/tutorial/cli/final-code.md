@@ -20,13 +20,23 @@ To recap your final code should look something like this:
 You can build your code like this:
 
 ```
-cargo build --target wasm32-wasi
+cargo build
 ```
 
-And run it with `wasmtime`:
+And run it using cargo:
 
 ```
-wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm skyline.jpg 1977
+cargo run
+```
+
+For an optimized build use:
+
+```
+cargo build --release
+```
+
+```
+cargo run --release
 ```
 
 ---
@@ -34,5 +44,5 @@ wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm skyline.jpg 1977
 Some ideas on what to do next:
 
 * Run the application natively: `cargo run`. Any complications or differences?
-* Inspect the built wasm module using `wasm2wat`. Can you spot the parts of the code that you've written? Can you find the names of all available filters?
-* Try some other crate you know. Does it work as-is on WebAssembly/with Wasi?
+* Heard of WebAssembly? You can actually run this in WebAssembly - see our [WASM Training](https://github.com/ferrous-systems/wasm-training-2022)
+* Try a full command line parser crate - see [blessed.rs for suggestions](https://blessed.rs/crates#section-cli-tools-subsection-argument-parsing)
