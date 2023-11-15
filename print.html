@@ -368,17 +368,22 @@ fn main() {
     out.save(output).unwrap();
 }</code></pre>
 <p>You can build your code like this:</p>
-<pre><code>cargo build --target wasm32-wasi
+<pre><code>cargo build
 </code></pre>
-<p>And run it with <code>wasmtime</code>:</p>
-<pre><code>wasmtime --dir . target/wasm32-wasi/debug/rustagram.wasm skyline.jpg 1977
+<p>And run it using cargo:</p>
+<pre><code>cargo run
+</code></pre>
+<p>For an optimized build use:</p>
+<pre><code>cargo build --release
+</code></pre>
+<pre><code>cargo run --release
 </code></pre>
 <hr />
 <p>Some ideas on what to do next:</p>
 <ul>
 <li>Run the application natively: <code>cargo run</code>. Any complications or differences?</li>
-<li>Inspect the built wasm module using <code>wasm2wat</code>. Can you spot the parts of the code that you've written? Can you find the names of all available filters?</li>
-<li>Try some other crate you know. Does it work as-is on WebAssembly/with Wasi?</li>
+<li>Heard of WebAssembly? You can actually run this in WebAssembly - see our <a href="https://github.com/ferrous-systems/wasm-training-2022">WASM Training</a></li>
+<li>Try a full command line parser crate - see <a href="https://blessed.rs/crates#section-cli-tools-subsection-argument-parsing">blessed.rs for suggestions</a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="web"><a class="header" href="#web">Web</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world-1"><a class="header" href="#hello-world-1">Hello World</a></h1>
