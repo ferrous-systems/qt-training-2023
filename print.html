@@ -235,176 +235,13 @@ Hello, world!
 <h1 id="qt-specifics"><a class="header" href="#qt-specifics">QT specifics</a></h1>
 <p>TODO tool check for QT, compiling a hello world app.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="what-is-webassembly"><a class="header" href="#what-is-webassembly">What is WebAssembly?</a></h1>
-<p>WebAssembly is a technology that allows you to compile application code written in pretty much any language
-(including Rust, C, C++, JavaScript, and Go)
-and run it inside sandboxed environments.
-WebAssembly is often known as just &quot;wasm&quot;.</p>
-<p>WebAssembly originated as a successor to asm.js, a low-level subset of JavaScript,
-and Google Native Client (NaCl), a technology to run a subset of native code in a sandboxed environment within the browser.</p>
-<p>WebAssembly itself started in 2015, with a first release of the specification in 2017.
-By 2019 it became an official web standard with implementations across all major browsers.</p>
-<p>Since then it became a compilation target for a wide variety of programming languages,
-gained usage across the web and other execution environments
-and got several independent runtime implementations inside and outside of browsers</p>
-<p>Contrary to what the name might make you believe it is not tied to the web only.
-But the web is where it originated.</p>
-<p>In the next chapters you will learn what WebAssembly looks like and where it is used.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="the-hello-world-of-webassembly"><a class="header" href="#the-hello-world-of-webassembly">The Hello World of WebAssembly</a></h1>
-<p>We will work with Rust throughout this book.
-The first &quot;Hello World&quot; application is thus a small Rust function to add 2 numbers together
-and return the result.</p>
-<pre><code class="language-rust">#[no_mangle]
-pub extern &quot;C&quot; fn add(left: i32, right: i32) -&gt; i32 {
-    left + right
-}</code></pre>
-<p>WebAssembly is a binary format.
-The above function compiled to a WebAssembly module results in the following binary blob (hexdumped).</p>
-<pre><code class="language-hex">00 61 73 6d 01 00 00 00 01 07 01 60 02 7f 7f 01
-7f 03 02 01 00 05 03 01 00 10 07 10 02 06 6d 65
-6d 6f 72 79 02 00 03 61 64 64 00 00 0a 09 01 07
-00 20 00 20 01 6a 0b
-</code></pre>
-<p>Along with the binary format there's also the WebAssembly text format, <code>wat</code>.
-The above module represented as <code>wat</code>:</p>
-<pre><code class="language-wasm">(module
-  (type (;0;) (func (param i32 i32) (result i32)))
-  (func $add (type 0) (param i32 i32) (result i32)
-    local.get 0
-    local.get 1
-    i32.add)
-  (export &quot;memory&quot; (memory 0))
-  (export &quot;add&quot; (func $add))
-)
-</code></pre>
-<p><em>(The <code>wasm2wat</code> tool transforms the binary output to its equivalent text format)</em></p>
-<p>In later chapters of this book you will learn how to write, compile and run these WebAssembly modules in different environments.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rust--wasm"><a class="header" href="#rust--wasm">Rust &amp; Wasm</a></h1>
-<p>The Rust compiler gained proper asm.js support (a wasm predecessor) using Emscripten some time in 2016
-and experimental WebAssembly support shortly after the same year with Rust 1.14 (the <code>wasm32-unknown-emscripten</code> target).</p>
-<p>The <code>wasm32-unknown-unknown</code> target became available on Rust Nightly in November 2017.
-<code>wasm32-wasi</code> was added in 2019 (initially as <code>wasm32-unknown-wasi</code>).
-These are the two main targets you will work with.</p>
-<p>A <a href="https://github.com/rustwasm/">WebAssembly Domain Working Group</a> was started within the Rust project in 2018.
-Their plan was to drive WebAssembly support in the Rust compiler forward,
-create tooling and libraries for Rust &amp; WebAssembly and provide learning material.</p>
-<p>Early on WebAssembly tooling was written in Rust,
-often to simplify Rust &amp; WebAssembly development,
-but sometimes acting as general tooling as well.
-Tools such as <a href="https://github.com/rustwasm/wasm-bindgen"><code>wasm-bindgen</code></a>
-or <a href="https://github.com/rustwasm/wasm-pack"><code>wasm-pack</code></a>
-became early examples of what great WebAssembly tooling can provide for the ecosystem.</p>
-<p>Some WebAssembly runtimes were written in Rust, most notably <a href="https://wasmtime.dev/">wasmtime</a>.
-The community started developing libraries and frameworks for WebAssembly development,
-e.g. <a href="https://crates.io/crates/yew">Yew</a>, a framework for making client-side single-page apps.</p>
-<p>From the get-go Rust was a first-class citizen in the WebAssembly world,
-both as a language targeting WebAssembly as well as the language tools and libraries for WebAssembly were written in.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="use-cases"><a class="header" href="#use-cases">Use cases</a></h1>
-<p>WebAssembly originated as a successor to browser technology like asm.js
-and Google Native Client (NaCl).
-Naturally WebAssembly gained popularity across a wide range of use cases on the web.</p>
-<p>WebAssembly on the web allows to build existing software written in a variety of languages
-and run them as part of ordinary web applications.</p>
-<p>The following is a list of interesting existing web applications using WebAssembly.</p>
-<h2 id="pyodide"><a class="header" href="#pyodide"><a href="https://pyodide.org/">Pyodide</a></a></h2>
-<p>A full Python distribution running in your browser.
-It comes with builtin packages as well as support to install pure-Python packages from PyPi.</p>
-<p>An in-browser REPL is available at <a href="https://pyodide.org/en/stable/console.html">https://pyodide.org/en/stable/console.html</a>.</p>
-<h2 id="datasette-lite"><a class="header" href="#datasette-lite"><a href="https://lite.datasette.io/">Datasette Lite</a></a></h2>
-<p>Datasette is an open source multi-tool for exploring and publishing data.
-It provides an interface to SQLite databases.</p>
-<p>Datasette Lite is based on Pyodide and brings the full application to the browser.
-You can open remote database and CSV files, execute queries and browse through the loaded database.</p>
-<h2 id="squooshapp"><a class="header" href="#squooshapp"><a href="https://squoosh.app/">squoosh.app</a></a></h2>
-<p>squoosh is an image compression web app, fully client-side.
-It provides an interactive interface to resize an image and supports different output codecs.
-Everything is happening client-side and images never leave the browser.</p>
-<p>Source code is available on <a href="https://github.com/GoogleChromeLabs/squoosh">GitHub</a>.</p>
-<h2 id="photoshop-on-the-web"><a class="header" href="#photoshop-on-the-web"><a href="https://creativecloud.adobe.com/cc/photoshop">Photoshop on the Web</a></a></h2>
-<p>Photoshop on the Web is the nearly-complete Photoshop experience running in the browser.
-It's currently in beta and not yet fully supported in all browsers.</p>
-<h2 id="tailscale-ssh-console"><a class="header" href="#tailscale-ssh-console"><a href="https://tailscale.com/blog/ssh-console/">Tailscale SSH Console</a></a></h2>
-<p>Tailscale is a VPN service that allows you to make your devices accessible within an overlay network, no matter where those devices are physically located.
-It recently started to support SSH over their service with next to no setup.
-They now offer an SSH console directly in the browser.
-Their VPN client and networking code has been compiled to WebAssembly
-and (encrypted) traffic goes directly to relay servers, but not through additional proxies.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="use-cases-on-the-web"><a class="header" href="#use-cases-on-the-web">Use cases on the web</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wasm--javascript"><a class="header" href="#wasm--javascript">WASM &amp; JavaScript</a></h1>
-<p>WebAssembly is available to every website now through the JavaScript web API.
-It is supported in all recent versions of all major browsers<sup class="footnote-reference"><a href="#1">1</a></sup>.</p>
-<p>The WebAssembly web API is available on the <a href="https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface"><code>WebAssembly</code> JavaScript object</a>.
-The available API allows to compile and instantiate WebAssembly modules,
-access exported functionality and access the shared memory block
-used to share data between the WebAssembly module and the JavaScript environment.
-The <a href="on-the-web/../tutorial/web.html">web tutorial chapter</a> will guide you through some of the usage later.</p>
-<hr />
-<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
-<p>See <a href="https://caniuse.com/?search=webassembly">caniuse.com</a>.</p>
-</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="use-cases-everywhere-else"><a class="header" href="#use-cases-everywhere-else">Use cases everywhere else</a></h1>
-<p>WebAssembly is also supported outside of the browser environment.
-There it can be used for a wide variety of applications,
-making use of its sandboxing and security functionality.</p>
-<p>Some possible use cases include:</p>
-<h2 id="plugins"><a class="header" href="#plugins">Plugins</a></h2>
-<p>User-facing native applications can safely support user-contributed plugins.
-These plugins are compiled to WebAssembly modules and the application can run them in a restricted environment within the application, allowing access to only a small part of the application.</p>
-<h2 id="serverless"><a class="header" href="#serverless">Serverless</a></h2>
-<p>&quot;Serverless&quot; can describe a wide variety of concepts.
-In recent times it became known as a cloud computing execution model,
-where cloud providers allocate machine resources on demand, managing it for their users
-and executing the user's application code on request.</p>
-<p>Most commonly this is offered as a Function as a Service (FaaS) platform,
-where small application logic is executed on incoming requests, using limited resources (CPU, time, memory).</p>
-<p>WebAssembly allows that users can write this logic in a language of their choice
-and the provider supports a general WebAssembly execution environment, often accompanied with a provider-specific SDK.
-The provider can leverage the WebAssembly sandbox mechanism to provide per-request isolation &amp; performance.</p>
-<p>We look at one of these serverless offerings:
-<a href="on-the-server/compute-at-edge.html">Fastly's Compute@Edge</a>.</p>
-<h2 id="docker"><a class="header" href="#docker">Docker</a></h2>
-<p>Docker recently announced a <a href="https://www.docker.com/blog/docker-wasm-technical-preview/">Technical Preview of their WebAssembly support</a>.
-Docker containers can be used to build and distribute WebAssembly applications.
-The Docker engine can then extract and run this WebAssembly application in a wasm runtime,
-all while using the familiar Docker tooling.</p>
-<h2 id="third-party-library-sandboxing"><a class="header" href="#third-party-library-sandboxing">Third-party library sandboxing</a></h2>
-<p><a href="https://rlbox.dev/">RLBox</a> is a toolkit for sandboxing third party C libraries.
-This allows to run third-party libraries within an existing application,
-but restricting the access to only what is directly provided to the library as input,
-thus reducing the attack surface of this part of the code.
-It is in use in Mozilla Firefox.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wasi"><a class="header" href="#wasi">WASI</a></h1>
-<p>The WebAssembly specification describes a very limited interface that the environment a WebAssembly module runs in need to provide.
-It essentially has 3 important parts:</p>
-<ul>
-<li>Imports. Functionality provided by the environment for use within the WebAssembly code.</li>
-<li>Exports. The functions the WebAssembly module exports, making them callable from the outside.</li>
-<li>Linear Memory. The WebAssembly module has access to a block of linear memory, which it potentially can expand on request. This memory can be read by the host environment as well.</li>
-</ul>
-<p>Therefore WebAssembly code is limited to self-contained computation, calls to imported functions and reading and writing from memory.
-No default imports are provided and how data is laid out in the linear memory is also unspecified.</p>
-<p>And this is where WASI comes in:</p>
-<blockquote>
-<p>WASI is a modular system interface for WebAssembly.
-As described in the initial announcement, it’s focused on security and portability.</p>
-<p><em>(via <a href="https://wasi.dev/">wasi.dev</a>)</em></p>
-</blockquote>
-<p>WASI is a specification of the interfaces a program can use to communicate with the host environment.
-It is up to the host environment how these interfaces are implemented and if additional security mechanisms are enforced.</p>
-<p>Rust supports the <code>wasm32-wasi</code> target and the Rust standard library is implemented for this target,
-allowing for most Rust programs and libraries to just work with this target.
-The WebAssembly runtime <code>wasmtime</code> implements the required WASI interfaces in a capability-based security model</p>
-<p>The <a href="https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/">initial announcement for WASI</a> has a lot more details on how it works.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="fastlys-computeedge"><a class="header" href="#fastlys-computeedge">Fastly's Compute@Edge</a></h1>
-<p>Fastly is a cloud computing provider and content delivery network (CDN).</p>
-<p>Earlier this year they released their Compute@Edge platform.
-This platform allows to run WebAssembly code at the Fastly edge.
-They chose WebAssembly for exactly the reasons we listed in <a href="on-the-server/usecases.html#serverless">the previous chapter</a>: lightweight sandboxing, per-request isolation and performance.</p>
-<p>They released a Rust SDK (<a href="https://docs.rs/fastly/0.8.9/fastly/"><code>fastly</code></a>),
-which provides the necessary integration to read an incoming request and generate an appropriate response.
-The host runtime uses <a href="on-the-server/wasi.html">WASI</a> to provide the necessary system interfaces.
-This means that you can write normal Rust code, using most of the Rust standard library and a large number of available Rust crates without issues.
-They also support JavaScript and Go as languages on this platform.</p>
-<p>You can find the Fastly Compute@Edge documentation at <a href="https://docs.fastly.com/products/compute-at-edge">https://docs.fastly.com/products/compute-at-edge</a>.</p>
-<p>You will learn how to write a small application for this platform in the <a href="on-the-server/../tutorial/edge.html">Edge computing tutorial</a> later in this book.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="idea"><a class="header" href="#idea">Idea</a></h1>
 <p>We now want to build a slightly more complex application.</p>
 <p>The idea is to use an existing image manipulation library
@@ -426,10 +263,9 @@ Right-click it and save it to disk for later use.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-interface"><a class="header" href="#command-line-interface">Command-line interface</a></h1>
 <p>In this tutorial you'll get familiar with:</p>
 <ul>
-<li>Building Rust code for the <code>wasm32-wasi</code> target</li>
-<li>Running applications on the command-line using <code>wasmtime</code></li>
-<li>Re-using existing crates in a WASM application</li>
-<li><code>wasmtime</code>'s capability-based system</li>
+<li>Building Rust code for your local target</li>
+<li>Running applications on the command-line</li>
+<li>Re-using existing crates in your application</li>
 </ul>
 <p>We start with a command-line tool that takes an image and a filter name as input.
 It applies the given filter to the image and produces an <code>output.png</code>.</p>
@@ -582,7 +418,7 @@ fn main() {
 <li>Try some other crate you know. Does it work as-is on WebAssembly/with Wasi?</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="web"><a class="header" href="#web">Web</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-world-1"><a class="header" href="#hello-world-1">Hello World</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wasm-bindgen"><a class="header" href="#wasm-bindgen">wasm-bindgen</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="basic-setup"><a class="header" href="#basic-setup">Basic setup</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="image-filter-application-1"><a class="header" href="#image-filter-application-1">Image filter application</a></h1>

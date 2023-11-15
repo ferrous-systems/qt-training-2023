@@ -174,35 +174,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-hello-world-of-webassembly"><a class="header" href="#the-hello-world-of-webassembly">The Hello World of WebAssembly</a></h1>
-<p>We will work with Rust throughout this book.
-The first &quot;Hello World&quot; application is thus a small Rust function to add 2 numbers together
-and return the result.</p>
-<pre><code class="language-rust">#[no_mangle]
-pub extern &quot;C&quot; fn add(left: i32, right: i32) -&gt; i32 {
-    left + right
-}</code></pre>
-<p>WebAssembly is a binary format.
-The above function compiled to a WebAssembly module results in the following binary blob (hexdumped).</p>
-<pre><code class="language-hex">00 61 73 6d 01 00 00 00 01 07 01 60 02 7f 7f 01
-7f 03 02 01 00 05 03 01 00 10 07 10 02 06 6d 65
-6d 6f 72 79 02 00 03 61 64 64 00 00 0a 09 01 07
-00 20 00 20 01 6a 0b
-</code></pre>
-<p>Along with the binary format there's also the WebAssembly text format, <code>wat</code>.
-The above module represented as <code>wat</code>:</p>
-<pre><code class="language-wasm">(module
-  (type (;0;) (func (param i32 i32) (result i32)))
-  (func $add (type 0) (param i32 i32) (result i32)
-    local.get 0
-    local.get 1
-    i32.add)
-  (export &quot;memory&quot; (memory 0))
-  (export &quot;add&quot; (func $add))
-)
-</code></pre>
-<p><em>(The <code>wasm2wat</code> tool transforms the binary output to its equivalent text format)</em></p>
-<p>In later chapters of this book you will learn how to write, compile and run these WebAssembly modules in different environments.</p>
+                        <h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
 
                     </main>
 
