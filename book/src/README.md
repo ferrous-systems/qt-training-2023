@@ -2,7 +2,7 @@
 
 This workbook contains the material for a Rust & Qt workshop held by [Ferrous Systems](https://ferrous-systems.com/), developed and held together with [KDAB](https://kdab.com). It is based on work by [Jan-Erik Rediger](https://fnordig.de/).
 
-It is split into 3 parts:
+It is split into 2 parts:
 
 ## Part 1: [Setup](preparations.md)
 
