@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>QQuickPaintedItem in Rust - Workbook for Rust &amp; Qt workshop</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">Rust and Qt</a></li><li class="chapter-item expanded "><a href="../../preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="../../tooling-check.html"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="../../tutorial/index.html"><strong aria-hidden="true">2.</strong> Idea</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/cli/hello-world.html"><strong aria-hidden="true">3.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli/image-filters.html"><strong aria-hidden="true">3.2.</strong> Image filter CLI application</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli/final-code.html"><strong aria-hidden="true">3.3.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="../../tutorial/library.html"><strong aria-hidden="true">4.</strong> Implementing a library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/library/recreate-as-workspace.html"><strong aria-hidden="true">4.1.</strong> Recreate the project as a workspace</a></li><li class="chapter-item expanded "><a href="../../tutorial/library/create-library.html"><strong aria-hidden="true">4.2.</strong> Creating the library</a></li><li class="chapter-item expanded "><a href="../../tutorial/library/cli-with-library.html"><strong aria-hidden="true">4.3.</strong> Using the library in your CLI binary</a></li></ol></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/index.html"><strong aria-hidden="true">5.</strong> Qt GUI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/build-setup.html"><strong aria-hidden="true">5.1.</strong> Setting up the build system</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/creating-the-gui.html"><strong aria-hidden="true">5.2.</strong> Creating the QML GUI</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/qquickpainteditem.html" class="active"><strong aria-hidden="true">5.3.</strong> QQuickPaintedItem in Rust</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/rust-implementation.html"><strong aria-hidden="true">5.4.</strong> Adding behavior in Rust</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../references.html"><strong aria-hidden="true">6.</strong> References</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Workbook for Rust &amp; Qt workshop</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/ferrous-systems/qt-training-2023" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="creating-a-qquickpainteditem-in-rust"><a class="header" href="#creating-a-qquickpainteditem-in-rust">Creating a QQuickPaintedItem in Rust</a></h1>
+<p>To render a QImage instance in QML there are two simple approaches</p>
+<ul>
+<li>Subclass <a href="https://doc.qt.io/qt-6/qquickpainteditem.html"><code>QQuickPaintedItem</code></a> and use the <a href="https://doc.qt.io/qt-6/qpainter.html"><code>QPainter</code></a> interface</li>
+<li>Provide a custom <a href="https://doc.qt.io/qt-6/qquickimageprovider.html"><code>QQuickImageProvider</code></a>.</li>
+</ul>
+<p>Because <code>QPainter</code> is very versatile and easy to implement with CXX-Qt, we'll use the first approach for our use-case.</p>
+<p>✅ Add a new Rust file for the <code>QQuickPaintedItem</code> subclass (e.g. called <code>image_painter.rs</code>).</p>
+<pre><code class="language-console">$ tree -I &quot;target/&quot;
+.
+├── build.rs
+├── Cargo.lock
+├── Cargo.toml
+├── qml
+│   └── main.qml
+└── src
+    ├── image_painter.rs
+    └── main.rs
+
+3 directories, 6 files
+</code></pre>
+<p>Before you do anything else, make sure to</p>
+<p>✅ Register this file with the build system</p>
+<p>Because we will be using the <code>#[cxx_qt::bridge]</code> macro, we have to register this file twice.</p>
+<ol>
+<li>In the <code>src/main.rs</code> file, add a line: <code>pub mod image_painter;</code><br />
+This registers the new file as a module of our application and makes it known to Cargo.</li>
+<li>In the <code>build.rs</code> file, add the file to the list of rust_files of the QmlModule.<br />
+This registers the new file with CXX-Qt.
+It tells CXX-Qt to generate a C++ class from it, run moc and link the resulting class into our application.
+This is only necessary because we want to use CXX-Qt within the file.
+Doing this second step is not necessary for a normal Rust module.</li>
+</ol>
+<pre><code class="language-rust">use cxx_qt_build::{CxxQtBuilder, QmlModule};
+
+fn main() {
+    CxxQtBuilder::new()
+        // - Qt Core is always linked
+        // - Qt Qml is linked by enabling the qt_qml Cargo feature.
+        // - Qt Qml requires linking Qt Network on macOS
+        .qt_module(&quot;Network&quot;)
+        .qt_module(&quot;Quick&quot;)
+        .qml_module(QmlModule {
+            uri: &quot;com.kdab.cxx_qt.demo&quot;,
+            rust_files: &amp;[&quot;src/image_painter.rs&quot;], // &lt;- Add all files that
+            qml_files: &amp;[&quot;qml/main.qml&quot;],          //    include a #[cxx_qt::bridge].
+            ..Default::default()
+        })
+        .build();
+}</code></pre>
+<blockquote>
+<p>It is a common mistake to forget to include CXX-Qt files in the <code>build.rs</code> script.
+Make sure to try removing the file from the list so you know what happens in this case.</p>
+<p>❓ What error do you get?</p>
+</blockquote>
+<p>Now we can start adding a new <code>QQuickPaintedItem</code> subclass.</p>
+<p>CXX-Qt allows us to create new <code>QObject</code> (and therefore <code>QQuickPaintedItem</code>) subclasses.
+These subclasses are defined in C++ and their data layout cannot be changed from Rust directly.
+Instead, every subclass generated by CXX-Qt contains an instance of a Rust struct.
+It is this Rust struct that therefore defines the data layout used within CXX-Qt objects.</p>
+<p>We can create a new QObject class for any Rust struct we like.</p>
+<p>✅ Create a new empty Rust struct for our class</p>
+<p>The struct should implement the <code>Default</code> trait.
+Ideally name the struct <code>ImagePainterRust</code>.</p>
+<details>
+<summary>Example definition</summary>
+<pre><code class="language-rust">#[derive(Default)]
+struct ImagePainterRust {}</code></pre>
+</details>
+<p>Now we can create our <code>QQuickPaintedItem</code> subclass by using a <code>#[cxx_qt::bridge]</code> module.</p>
+<p>This bridge module is similar to a header file in C++.
+It only includes declarations, not definitions.
+Using the bridge we can declare which items exist in C++ and expose them to Rust.
+And we can also declare Rust items to be exposed to C++.</p>
+<p>The syntax is based on and compatible with CXX.
+You can read up on CXX in the <a href="https://cxx.rs">CXX book</a>.</p>
+<p>To create our <code>QQuickPaintedItem</code> subclass, we first need to include the appropriate C++ headers,
+then declare the types we want to use from Rust.
+For our first example, we'll only set the <code>fillColor</code> and not actually paint anything using the <code>QPainter</code>.</p>
+<p>✅ Create a new <code>#[cxx_qt::bridge]</code> module</p>
+<p>It should include the following declarations/includes:</p>
+<ul>
+<li>✅ An import of <code>QColor</code> from cxx-qt-lib <a href="https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/struct.QColor.html">(see the CXX-Qt documentation)</a></li>
+<li>✅ An include to the <code>QQuickPaintedItem</code> header</li>
+<li>✅ An include for the <code>QPainter</code> header, as well as a declaration of the <code>QPainter</code> type.</li>
+</ul>
+<pre><code class="language-rust">#[cxx_qt::bridge(cxx_file_stem = &quot;image_painter&quot;)]
+pub mod qobject {
+    unsafe extern &quot;C++&quot; {
+        include!(&quot;cxx-qt-lib/qcolor.h&quot;);
+        type QColor = cxx_qt_lib::QColor;
+
+        include!(&lt;QtQuick/QQuickPaintedItem&gt;);
+    }
+
+    unsafe extern &quot;C++&quot; {
+        include!(&lt;QtGui/QPainter&gt;);
+        type QPainter;
+    }
+}</code></pre>
+<blockquote>
+<p>Take a look at the <a href="https://cxx.rs">CXX documentation</a> and the <a href="https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/index.html">CXX-Qt-lib</a> documentation.</p>
+<p>❓ Is <code>QColor</code> an opaque or a trivial type? What does this mean when using QColor in Rust?<br />
+❓ What's the difference between declaring a <code>type QPainter</code> vs. <code>type QPainter = ...;</code>?<br />
+❓ What's the difference between <code>unsafe extern &quot;C++&quot;</code> and <code>extern &quot;C++&quot;</code>?<br />
+❓ (advanced) Why is the <code>include!(&quot;cxx-qt-lib/qcolor.h&quot;);</code> necessary?</p>
+</blockquote>
+<p>Now that we have our types ready to go, we can declare our new <code>QQuickPaintedItem</code> subclass.</p>
+<p>With CXX-Qt this means following these steps:</p>
+<ul>
+<li>✅ Create a new QObject subclass using <code>type X = super::Y;</code> with the <code>#[qobject]</code> attribute
+<ul>
+<li>This tells CXX-Qt to create a new QObject subclass of the name <code>X</code>.
+This class will contain an instance of the <code>super::Y</code> Rust struct which contains the actual data (nothing for now).</li>
+</ul>
+</li>
+<li>✅ Tell CXX-Qt to use <code>QQuickPaintedItem</code> as our base class using <code>#[base=&quot;...&quot;]</code></li>
+<li>✅ Declare the necessary functions
+<ul>
+<li>✅ Tell Rust that <code>setFillColor</code> is inherited from <code>QQuickPaintedItem</code></li>
+<li>✅ Declare that <code>paint</code> should override the base class implementation and is implemented in Rust.</li>
+</ul>
+</li>
+<li>✅ Tell CXX-Qt that we want a default-constructor for <code>ImagePainter</code>.
+<ul>
+<li>We'll implement this constructor later in Rust.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Whilst we won't be using the <code>paint</code> function right now, we still need to implement it as it is a pure virtual function.</p>
+<p>If you forget to implement this function, you may get an error like this:</p>
+<pre><code>ImagePainter is neither a QObject, nor default- and copy-constructible, nor uncreatable. You should not use it as a QML type.
+QQmlApplicationEngine failed to load component
+qrc:/qt/qml/com/kdab/cxx_qt/demo/qml/main.qml:75:9: Element is not creatable.
+</code></pre>
+</blockquote>
+<pre><code class="language-rust">#[cxx_qt::bridge(cxx_file_stem = &quot;image_painter&quot;)]
+pub mod qobject {
+    // ...
+
+    unsafe extern &quot;RustQt&quot; {
+        #[qml_element]
+        #[base = &quot;QQuickPaintedItem&quot;]
+        #[qobject]
+        type ImagePainter = super::ImagePainterRust;
+
+        #[inherit]
+        #[rust_name = &quot;set_fill_color&quot;]
+        fn setFillColor(self: Pin&lt;&amp;mut ImagePainter&gt;, color: &amp;QColor);
+
+        #[cxx_override]
+        unsafe fn paint(self: Pin&lt;&amp;mut ImagePainter&gt;, painter: *mut QPainter);
+    }
+
+    impl cxx_qt::Constructor&lt;()&gt; for ImagePainter {}
+}</code></pre>
+<blockquote>
+<p>Some food for thought:</p>
+<p>❓ What does the <code>#[qml_element]</code> attribute do?<br />
+❓ Why does <code>paint</code> need to be marked <code>unsafe</code>? What happens without it?<br />
+❓ Is the <code>cxx_qt::Constructor</code> declaration always needed? Why is it necessary in this case?</p>
+<p>Try figuring this out using the <a href="https://cxx.rs">CXX</a> and the <a href="https://kdab.github.io/cxx-qt/book/">CXX-Qt books</a>.</p>
+</blockquote>
+<p>Now that we've written our declarations we still need implementations for:</p>
+<ul>
+<li>✅ The <code>paint</code> function</li>
+<li>✅ The default constructor</li>
+</ul>
+<p>Remember that our CXX-Qt bridge only includes declarations.
+So any definitions go <strong>outside</strong> the bridge.</p>
+<pre><code class="language-rust">#[cxx_qt::bridge(cxx_file_stem = &quot;image_painter&quot;)]
+pub mod qobject {
+    // ...
+}
+
+impl cxx_qt::Initialize for qobject::ImagePainter {
+    fn initialize(mut self: Pin&lt;&amp;mut Self&gt;) {
+        self.as_mut().set_fill_color(&amp;QColor::from_rgb(0, 119, 200));
+    }
+}
+
+impl qobject::ImagePainter {
+    fn paint(self: Pin&lt;&amp;mut Self&gt;, _painter: *mut qobject::QPainter) {
+        // Do nothing (yet)
+    }
+}</code></pre>
+<blockquote>
+<p>Note that the constructor is implemented using the <code>cxx_qt::Initialize</code> trait
+instead of the more complex <code>cxx_qt::Constructor&lt;()&gt;</code> trait.</p>
+<p>✅ (optional) If you feel up to it, try to replace the <code>impl cxx_qt::Initialize</code>
+with a full <code>impl cxx_qt::Constructor</code> implementation.</p>
+</blockquote>
+<p>Now our type should be ready for a first test in our QML GUI.</p>
+<p>✅ Replace the placeholder rectangle with an <code>ImagePainter</code> instance in <code>qml/main.qml</code>.</p>
+<p>It should now display a more pleasant blue.</p>
+<p><img src="./qquickpainteditem.png" alt="Our previous Qt GUI with our blue ImagePainter instead of the previous red rectangle" /></p>
+<p>If you're having trouble, check out the <a href="https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/qt-gui-qquickpainteditem">full example code</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../tutorial/qt-gui/creating-the-gui.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../tutorial/qt-gui/rust-implementation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../tutorial/qt-gui/creating-the-gui.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../tutorial/qt-gui/rust-implementation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

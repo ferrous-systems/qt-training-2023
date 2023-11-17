@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tooling check - Workbook for Rust &amp; QT workshop</title>
+        <title>Tooling check - Workbook for Rust &amp; Qt workshop</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Rust and QT</a></li><li class="chapter-item expanded "><a href="preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="tooling-check.html" class="active"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="tutorial/index.html"><strong aria-hidden="true">2.</strong> Idea</a></li><li class="chapter-item expanded "><a href="tutorial/cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/cli/hello-world.html"><strong aria-hidden="true">3.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="tutorial/cli/image-filters.html"><strong aria-hidden="true">3.2.</strong> Image filter CLI application</a></li><li class="chapter-item expanded "><a href="tutorial/cli/final-code.html"><strong aria-hidden="true">3.3.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="tutorial/library.html"><strong aria-hidden="true">4.</strong> Implementing a library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/library/recreate-as-workspace.html"><strong aria-hidden="true">4.1.</strong> Recreate the project as a workspace</a></li><li class="chapter-item expanded "><a href="tutorial/library/create-library.html"><strong aria-hidden="true">4.2.</strong> Creating the library</a></li><li class="chapter-item expanded "><a href="tutorial/library/cli-with-library.html"><strong aria-hidden="true">4.3.</strong> Using the library in your CLI binary</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">5.</strong> References</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Rust and Qt</a></li><li class="chapter-item expanded "><a href="preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="tooling-check.html" class="active"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="tutorial/index.html"><strong aria-hidden="true">2.</strong> Idea</a></li><li class="chapter-item expanded "><a href="tutorial/cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/cli/hello-world.html"><strong aria-hidden="true">3.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="tutorial/cli/image-filters.html"><strong aria-hidden="true">3.2.</strong> Image filter CLI application</a></li><li class="chapter-item expanded "><a href="tutorial/cli/final-code.html"><strong aria-hidden="true">3.3.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="tutorial/library.html"><strong aria-hidden="true">4.</strong> Implementing a library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/library/recreate-as-workspace.html"><strong aria-hidden="true">4.1.</strong> Recreate the project as a workspace</a></li><li class="chapter-item expanded "><a href="tutorial/library/create-library.html"><strong aria-hidden="true">4.2.</strong> Creating the library</a></li><li class="chapter-item expanded "><a href="tutorial/library/cli-with-library.html"><strong aria-hidden="true">4.3.</strong> Using the library in your CLI binary</a></li></ol></li><li class="chapter-item expanded "><a href="tutorial/qt-gui/index.html"><strong aria-hidden="true">5.</strong> Qt GUI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/qt-gui/build-setup.html"><strong aria-hidden="true">5.1.</strong> Setting up the build system</a></li><li class="chapter-item expanded "><a href="tutorial/qt-gui/creating-the-gui.html"><strong aria-hidden="true">5.2.</strong> Creating the QML GUI</a></li><li class="chapter-item expanded "><a href="tutorial/qt-gui/qquickpainteditem.html"><strong aria-hidden="true">5.3.</strong> QQuickPaintedItem in Rust</a></li><li class="chapter-item expanded "><a href="tutorial/qt-gui/rust-implementation.html"><strong aria-hidden="true">5.4.</strong> Adding behavior in Rust</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">6.</strong> References</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -139,7 +139,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">Workbook for Rust &amp; QT workshop</h1>
+                    <h1 class="menu-title">Workbook for Rust &amp; Qt workshop</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -194,8 +194,41 @@ $ cargo run --release
 Hello, world!
 </code></pre>
 <p>This ensures that the whole toolchain works correctly and finds the system linker. This should work at all times, if it doesn't, immediately ask for a trainer.</p>
-<h1 id="qt-specifics"><a class="header" href="#qt-specifics">QT specifics</a></h1>
-<p>TODO tool check for QT, compiling a hello world app.</p>
+<h1 id="qt-specifics"><a class="header" href="#qt-specifics">Qt specifics</a></h1>
+<p>For those interested in following the Qt section of the course,
+the Rust toolchain must be able to find the Qt installation.</p>
+<p>The Rust-Qt bindings (<a href="https://github.com/kdab/cxx-qt">CXX-Qt</a>) need to be able to find your Qt installation.
+For this it relies on the <code>qmake</code> executable.
+CXX-Qt will try to find qmake in your path.</p>
+<p>✅ Confirm that qmake reports a version of Qt 6</p>
+<pre><code class="language-console">$ qmake --version
+QMake version 3.1
+Using Qt version 6.5.1 in /usr/lib64
+</code></pre>
+<blockquote>
+<p>If for some reason you do not want to add <code>qmake</code> to your path, you can use the <code>QMAKE</code> environment variable
+to tell CXX-Qt where to find the Qt6 qmake executable.
+e.g.:</p>
+<pre><code class="language-console">QMAKE=/usr/bin/qmake6 cargo run
+</code></pre>
+</blockquote>
+<h2 id="hello-world-with-qt"><a class="header" href="#hello-world-with-qt">Hello world with Qt</a></h2>
+<p>To test that the Rust toolchain can indeed find and link to your Qt installation, you can clone the training
+repository and run the <code>qt-hello-world</code> example crate.</p>
+<p><strong>✅ Clone the repository</strong></p>
+<pre><code class="language-console">$ git clone https://github.com/ferrous-systems/qt-training-2023
+</code></pre>
+<p><strong>✅ Navigate to the qt-hello-world crate</strong></p>
+<pre><code class="language-console">$ cd qt-training-2023/crates/qt-hello-world/
+</code></pre>
+<p><strong>✅ Test that it works</strong></p>
+<pre><code class="language-console">$ cargo run
+</code></pre>
+<p>If you don't have <code>qmake</code> in your PATH, use:</p>
+<pre><code class="language-console">$ QMAKE=/path/to/your/qmake cargo run
+</code></pre>
+<p>The resulting application should look like this:</p>
+<p><img src="./resources/qt-hello-world.png" alt="A Qt Application saying &quot;Hello World&quot;" /></p>
 
                     </main>
 

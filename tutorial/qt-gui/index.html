@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Creating the library - Workbook for Rust &amp; Qt workshop</title>
+        <title>Qt GUI - Workbook for Rust &amp; Qt workshop</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">Rust and Qt</a></li><li class="chapter-item expanded "><a href="../../preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="../../tooling-check.html"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="../../tutorial/index.html"><strong aria-hidden="true">2.</strong> Idea</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/cli/hello-world.html"><strong aria-hidden="true">3.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli/image-filters.html"><strong aria-hidden="true">3.2.</strong> Image filter CLI application</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli/final-code.html"><strong aria-hidden="true">3.3.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="../../tutorial/library.html"><strong aria-hidden="true">4.</strong> Implementing a library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/library/recreate-as-workspace.html"><strong aria-hidden="true">4.1.</strong> Recreate the project as a workspace</a></li><li class="chapter-item expanded "><a href="../../tutorial/library/create-library.html" class="active"><strong aria-hidden="true">4.2.</strong> Creating the library</a></li><li class="chapter-item expanded "><a href="../../tutorial/library/cli-with-library.html"><strong aria-hidden="true">4.3.</strong> Using the library in your CLI binary</a></li></ol></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/index.html"><strong aria-hidden="true">5.</strong> Qt GUI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/build-setup.html"><strong aria-hidden="true">5.1.</strong> Setting up the build system</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/creating-the-gui.html"><strong aria-hidden="true">5.2.</strong> Creating the QML GUI</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/qquickpainteditem.html"><strong aria-hidden="true">5.3.</strong> QQuickPaintedItem in Rust</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/rust-implementation.html"><strong aria-hidden="true">5.4.</strong> Adding behavior in Rust</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../references.html"><strong aria-hidden="true">6.</strong> References</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">Rust and Qt</a></li><li class="chapter-item expanded "><a href="../../preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="../../tooling-check.html"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="../../tutorial/index.html"><strong aria-hidden="true">2.</strong> Idea</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/cli/hello-world.html"><strong aria-hidden="true">3.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli/image-filters.html"><strong aria-hidden="true">3.2.</strong> Image filter CLI application</a></li><li class="chapter-item expanded "><a href="../../tutorial/cli/final-code.html"><strong aria-hidden="true">3.3.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="../../tutorial/library.html"><strong aria-hidden="true">4.</strong> Implementing a library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/library/recreate-as-workspace.html"><strong aria-hidden="true">4.1.</strong> Recreate the project as a workspace</a></li><li class="chapter-item expanded "><a href="../../tutorial/library/create-library.html"><strong aria-hidden="true">4.2.</strong> Creating the library</a></li><li class="chapter-item expanded "><a href="../../tutorial/library/cli-with-library.html"><strong aria-hidden="true">4.3.</strong> Using the library in your CLI binary</a></li></ol></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/index.html" class="active"><strong aria-hidden="true">5.</strong> Qt GUI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/build-setup.html"><strong aria-hidden="true">5.1.</strong> Setting up the build system</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/creating-the-gui.html"><strong aria-hidden="true">5.2.</strong> Creating the QML GUI</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/qquickpainteditem.html"><strong aria-hidden="true">5.3.</strong> QQuickPaintedItem in Rust</a></li><li class="chapter-item expanded "><a href="../../tutorial/qt-gui/rust-implementation.html"><strong aria-hidden="true">5.4.</strong> Adding behavior in Rust</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="../../references.html"><strong aria-hidden="true">6.</strong> References</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -174,112 +174,26 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="creating-a-library"><a class="header" href="#creating-a-library">Creating a library</a></h1>
-<p>In this section of the tutorial, you will create
-a library to handle image manipulation. This library
-will have exactly one function. It should:</p>
+                        <h1 id="building-a-qt-qml-gui-with-rust"><a class="header" href="#building-a-qt-qml-gui-with-rust">Building a Qt (QML) GUI with Rust</a></h1>
+<p>In this tutorial you'll get familiar with:</p>
 <ul>
-<li>Take a field of bytes representing an image</li>
-<li>Take a filter type</li>
+<li>Setting up the Rust build system to link with Qt</li>
+<li>Starting a Qt/QML application from Rust</li>
+<li>Creating QObjects in Rust and using them in your QML GUI</li>
 </ul>
-<p>It should not:</p>
-<ul>
-<li>Handle any I/O</li>
-<li>Do input parsing (like filter name detection, etc.)</li>
-</ul>
-<p>✅ In <code>image-manipulation/Cargo.toml</code>, add:</p>
-<pre><code class="language-toml">[dependencies]
-rustagram2 = &quot;2&quot;
-log = &quot;0.4&quot;
-</code></pre>
-<p>We use the <code>log</code> crate to get some visibility into what is happening.</p>
-<p>✅ In <code>image-manipulation/src/lib.rs</code>, add the following imports and function headers</p>
-<pre><code class="language-rust">use std::io::Cursor;
-
-use rustagram::image::io::Reader;
-use rustagram::image::ImageOutputFormat;
-use rustagram::{RustagramFilter, FilterType};
-
-pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
-    log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);
-}</code></pre>
-<p>This communicates three interesting things:</p>
-<ul>
-<li>The function is marked <code>pub</code> - this makes it a public function, callable from other libraries. The default in Rust is always private.</li>
-<li>The data of the image is an immutable reference to binary data owned outside of the function</li>
-<li>The result is a binary vector, but passed out owned - so it cannot be the initial data</li>
-</ul>
-<h2 id="reading-the-image"><a class="header" href="#reading-the-image">Reading the image</a></h2>
-<p>Looking at the signature of <a href="https://docs.rs/image/0.24.3/image/io/struct.Reader.html">Reader</a>, we find that it can only be construted using types that implement the <code>Read</code> trait. <code>&amp;[u8]</code> does not implement the <code>Read</code> trait. However, we can use the
-standard libraries <a href="https://doc.rust-lang.org/std/io/struct.Cursor.html">Cursor</a> type
-to fix that.</p>
-<p>✅ Read the image by inserting the following code</p>
-<pre><code class="language-rust">let read_cursor = Cursor::new(img);
-let img = Reader::new(cursor)
-    .with_guessed_format()
-    .unwrap()
-    .decode()
-    .unwrap();</code></pre>
-<p>Now we got the image read and know it works.</p>
-<p>✅ Apply the filter</p>
-<pre><code class="language-rust">let out = img.to_rgba8().apply_filter(filter);</code></pre>
-<p>On the output side, things are the same, but a little bit more complex.
-We need to create the output vector. For writing to it, we can again create
-a <code>Cursor</code> around it, but this time, we'll do it by <em>mutably borrowing</em> the
-<code>Cursor</code>. We can then write to it like to any other IO type.</p>
-<p>✅ Write to an output buffer</p>
-<pre><code class="language-rust">let mut bytes: Vec&lt;u8&gt; = Vec::new();
-let mut write_cursor = Cursor::new(&amp;mut bytes);
-out.write_to(&amp;mut write_cursor, ImageOutputFormat::Png)
-    .unwrap();
-
-bytes</code></pre>
-<p>The last statement - a bare <code>bytes</code> - uses Rusts expression-based nature to mark
-<code>bytes</code> as the variable to be returned. If you feel more comfortable, you may use
-<code>return bytes</code>.</p>
-<p>The final code of the library should now read:</p>
-<pre><code class="language-rust">use std::io::Cursor;
-
-use rustagram::image::io::Reader;
-use rustagram::image::ImageOutputFormat;
-use rustagram::{RustagramFilter, FilterType};
-
-pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
-    log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);
-
-    let read_cursor = Cursor::new(img);
-    let img = Reader::new(cursor)
-        .with_guessed_format()
-        .unwrap()
-        .decode()
-        .unwrap();
-
-    let out = img.to_rgba8().apply_filter(filter);
-    
-    let mut bytes: Vec&lt;u8&gt; = Vec::new();
-    let mut write_cursor = Cursor::new(&amp;mut bytes);
-    out.write_to(&amp;mut write_cursor, ImageOutputFormat::Png)
-        .unwrap();
-
-    bytes
-}</code></pre>
-<p>Now that we have a library <a href="cli-with-library.html">let's use it in our CLI</a></p>
-<hr />
-<p>Some ideas on what to do next:</p>
-<ul>
-<li>Create further utility functions</li>
-<li>Extend the signature and return a <code>Result</code></li>
-</ul>
+<p>We will create a small GUI that can load an image, apply a filter to it and display the result.</p>
+<p>The result will look something like this:</p>
+<p><img src="qt-gui-skyline.png" alt="A Qt application showing a picture of a Skyline with a lofi filter applied to it" /></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../tutorial/library/recreate-as-workspace.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../tutorial/library/cli-with-library.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../../tutorial/library/cli-with-library.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../tutorial/qt-gui/build-setup.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -289,11 +203,11 @@ pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../tutorial/library/recreate-as-workspace.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../tutorial/library/cli-with-library.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../../tutorial/library/cli-with-library.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../tutorial/qt-gui/build-setup.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
