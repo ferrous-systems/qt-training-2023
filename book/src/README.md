@@ -10,4 +10,4 @@ An installation guide for all tooling used throughout this book.
 
 ## Part 2: [Tutorial](./tutorial/index.md)
 
-A hands-on tutorial writing Rust and compiling it in 3 variations: as a command-line app, as a library and as a small Qt app using the library using cxx-qt.
+A hands-on tutorial writing Rust and compiling it in 3 variations: as a command-line app, as a library and as a small Qt app using the library using CXX-Qt.
