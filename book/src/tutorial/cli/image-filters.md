@@ -83,10 +83,10 @@ INPUT required
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-Expected output when you pass a file path and a filter name:
+Expected output when you pass a non-existing file path and a filter name:
 
 ```console
-$ cargo run -- kongelige-slott.jpg 1977
+$ cargo run -- missing-image.jpg 1977
     Finished dev [unoptimized + debuginfo] target(s) in 0.09s
      Running `target\debug\rustagram.exe kongelige-slott.jpg 1977`
 thread 'main' panicked at src\main.rs:10:34:
@@ -94,4 +94,12 @@ called `Result::unwrap()` on an `Err` value: IoError(Os { code: 2, kind: NotFoun
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-TODO: document positive case
+Expected output when you pass the file actually exists.
+
+```console
+$ cargo run -- kongelige-slott.jpg 1977
+    Finished dev [unoptimized + debuginfo] target(s) in 0.09s
+     Running `target\debug\rustagram.exe kongelige-slott.jpg 1977`
+```
+
+The result should then be stored in `output.jpg`.
