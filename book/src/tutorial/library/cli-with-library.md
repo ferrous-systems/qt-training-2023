@@ -7,9 +7,7 @@ Let's now use the library we created in our small CLI app.
 ```toml
 [dependencies]
 rustagram2 = "2"
-
-[dependencies.image-manipulation]
-path = "../image-manipulation"
+image-manipulation = { path = "../image-manipulation" }
 ```
 
 ✅ Recreate parts of the main function:

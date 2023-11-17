@@ -4,9 +4,20 @@ CXX-Qt provides helper libraries that make it easy for the Rust build system to 
 
 The goal for now is to create a simple program that just launches an Qt/QML application.
 
-✅ Create a new Rust application
+✅ In the workspace create a new Rust application
 ```console
-cargo new qt-gui
+cargo new --bin qt-gui
+```
+
+✅ Add the new crate to the workspace
+```toml
+[workspace]
+members = ["cli", "image-manipulation", "qt-gui"]
+resolver = "2"
+```
+
+✅ Then enter our new crate
+```console
 cd qt-gui
 ```
 
@@ -27,7 +38,9 @@ ApplicationWindow {
 ✅ Add dependencies to the `Cargo.toml` file
 ```toml
 [dependencies]
-rustagram2="2"
+rustagram2="*"
+image-manipulation = { path = "../image-manipulation" }
+
 cxx="1.0.95"
 cxx-qt = { git="https://github.com/LeonMatthesKDAB/cxx-qt", branch="qimage" }
 cxx-qt-lib = { git="https://github.com/LeonMatthesKDAB/cxx-qt", branch="qimage" }
@@ -38,7 +51,7 @@ cxx-qt-build = { git="https://github.com/LeonMatthesKDAB/cxx-qt", branch="qimage
 ```
 
 ```diff
-- At the time of writing (15.11.2023), CXX-Qt 0.6 hasn't been released yet.
+- At the time of writing (17.11.2023), CXX-Qt 0.6 hasn't been released yet.
 - To keep the training material up-to-date with the new API introduced in version 0.6,
 - we'll use the version from Github for now.
 - The training material on Github will be updated as soon as version 0.6 is released!
@@ -53,7 +66,9 @@ cxx-qt-build = { git="https://github.com/LeonMatthesKDAB/cxx-qt", branch="qimage
 
 ```toml
 [dependencies]
-rustagram2="2"
+rustagram2="*"
+image-manipulation = { path = "../image-manipulation" }
+
 cxx="1.0.95"
 cxx-qt="0.6"
 cxx-qt-lib="0.6"

@@ -192,7 +192,7 @@ The resulting application should look like this:
 
 ![The final application, showing the picture of a skyline that has been filtered using the "lofi" filter](./qt-gui-skyline.png)
 
-✅ Check out the [full example code](https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/qt-gui) and compare it with your implementation
+✅ Check out the [full example code](https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/with-workspace/) and compare it with your implementation
 
 [QQuickPaintedItem]: https://doc.qt.io/qt-6/qquickpainteditem-members.html
 [CXX-Qt book]: https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/

@@ -6,7 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rustagram2 = "2"
+rustagram2="*"
+image-manipulation = { path = "../image-manipulation" }
+
 cxx = "1.0.95"
 cxx-qt = { git = "https://github.com/LeonMatthesKDAB/cxx-qt", branch = "qimage" }
 cxx-qt-lib = { git = "https://github.com/LeonMatthesKDAB/cxx-qt", branch = "qimage" }

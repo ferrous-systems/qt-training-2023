@@ -7,6 +7,4 @@ edition = "2021"
 
 [dependencies]
 rustagram2 = "*"
-
-[dependencies.image-manipulation]
-path = "../image-manipulation"
+image-manipulation = { path = "../image-manipulation" }

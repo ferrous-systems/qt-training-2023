@@ -1,6 +1,7 @@
 use cxx_qt::{CxxQtType, Threading};
-use cxx_qt_lib::{QByteArray, QByteArrayCursor, QColor, QImage, QRectF, QString, QUrl};
-use rustagram::{image, FilterType, RustagramFilter};
+use cxx_qt_lib::{QByteArray, QColor, QImage, QRectF, QString, QUrl};
+use image_manipulation::apply_filter;
+use rustagram::FilterType;
 use std::{error::Error, pin::Pin};
 
 #[cxx_qt::bridge(cxx_file_stem = "image_painter")]
@@ -114,12 +115,12 @@ impl qobject::ImagePainter {
             .to_string()
             .parse()
             .unwrap_or(FilterType::NineTeenSeventySeven);
-        let image = image::open(path)?.apply_filter(filter);
+        let image = std::fs::read(path)?;
+        let image = apply_filter(&image, filter);
 
-        let mut bytes = QByteArrayCursor::new(QByteArray::default());
-        image.write_to(&mut bytes, image::ImageOutputFormat::Png)?;
+        let bytes = QByteArray::from(image.as_slice());
 
-        QImage::from_data(bytes.as_ref(), "PNG").ok_or("Failed to convert to QImage!".into())
+        QImage::from_data(&bytes, "PNG").ok_or("Failed to convert to QImage!".into())
     }
 
     fn load_file(mut self: Pin<&mut Self>) {
