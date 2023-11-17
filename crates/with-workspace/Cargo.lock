@@ -221,7 +221,7 @@ dependencies = [
 [[package]]
 name = "cxx-qt"
 version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#6491401796bcb220d1aa2120bc3c044e7a3dca91"
+source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
 dependencies = [
  "cxx",
  "cxx-qt-macro",
@@ -231,7 +231,7 @@ dependencies = [
 [[package]]
 name = "cxx-qt-build"
 version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#6491401796bcb220d1aa2120bc3c044e7a3dca91"
+source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
 dependencies = [
  "cc",
  "codespan-reporting",
@@ -248,7 +248,7 @@ dependencies = [
 [[package]]
 name = "cxx-qt-gen"
 version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#6491401796bcb220d1aa2120bc3c044e7a3dca91"
+source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
 dependencies = [
  "clang-format",
  "convert_case",
@@ -261,7 +261,7 @@ dependencies = [
 [[package]]
 name = "cxx-qt-lib"
 version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#6491401796bcb220d1aa2120bc3c044e7a3dca91"
+source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
 dependencies = [
  "cxx",
  "cxx-build",
@@ -272,12 +272,12 @@ dependencies = [
 [[package]]
 name = "cxx-qt-lib-headers"
 version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#6491401796bcb220d1aa2120bc3c044e7a3dca91"
+source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
 
 [[package]]
 name = "cxx-qt-macro"
 version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#6491401796bcb220d1aa2120bc3c044e7a3dca91"
+source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
 dependencies = [
  "cxx-qt-gen",
  "proc-macro2",
@@ -587,7 +587,7 @@ dependencies = [
 [[package]]
 name = "qt-build-utils"
 version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#6491401796bcb220d1aa2120bc3c044e7a3dca91"
+source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
 dependencies = [
  "cc",
  "thiserror",

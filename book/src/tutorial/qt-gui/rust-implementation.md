@@ -126,9 +126,7 @@ impl cxx_qt::Initialize for qobject::ImagePainter {
 
 ✅ Check that you can successfully print "Hello world from CXX-Qt!" by selecting a file path or changing the image filter
 
-Before we implement the image loading and filtering, we'll need some additional types:
-* QByteArray (and the QByteArrayCursor helper)
-* QSizeF and QRectF to calculate the size for painting
+Before we implement the image loading and filtering, we'll need to import QSizeF and QRectF to calculate the size for painting.
 
 ✅ Import these types from cxx-qt-lib
 
@@ -179,14 +177,12 @@ mod qobject {
 
 Documentation that may be useful:
 * [CXX-Qt-lib](https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/) for using Qt types from Rust
-* [rustagram2](https://docs.rs/rustagram2/latest/rustagram/)
-    * Click on the Re-export of the `image` crate to learn more about how to use the resulting image.
 * [Rust standard library documentation](https://doc.rust-lang.org/std/index.html)
 
 ✅ Add threading in Rust via [`std::thread::spawn`](https://doc.rust-lang.org/std/thread/fn.spawn.html) to load and convert the image in the background
 * Check out the [CXX-Qt book][CXX-Qt book] to learn more about Threading
 
-✅ Add a `BusyIndicator` to QML to show that the background thread is wthat the background thread is waiting.
+✅ Add a `BusyIndicator` to QML to show that the background thread is waiting.
 
 The resulting application should look like this:
 

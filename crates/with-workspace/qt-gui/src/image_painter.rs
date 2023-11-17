@@ -1,5 +1,5 @@
 use cxx_qt::{CxxQtType, Threading};
-use cxx_qt_lib::{QByteArray, QColor, QImage, QRectF, QString, QUrl};
+use cxx_qt_lib::{QColor, QImage, QRectF, QString, QUrl};
 use image_manipulation::apply_filter;
 use rustagram::FilterType;
 use std::{error::Error, pin::Pin};
@@ -118,9 +118,8 @@ impl qobject::ImagePainter {
         let image = std::fs::read(path)?;
         let image = apply_filter(&image, filter);
 
-        let bytes = QByteArray::from(image.as_slice());
-
-        QImage::from_data(&bytes, "PNG").ok_or("Failed to convert to QImage!".into())
+        QImage::from_data(image.as_slice(), Some("PNG"))
+            .ok_or("Failed to convert to QImage!".into())
     }
 
     fn load_file(mut self: Pin<&mut Self>) {
