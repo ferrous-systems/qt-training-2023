@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Rust and QT</a></li><li class="chapter-item expanded "><a href="preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="tooling-check.html"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Background</li><li class="chapter-item expanded affix "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="tutorial/index.html"><strong aria-hidden="true">2.</strong> Idea</a></li><li class="chapter-item expanded "><a href="tutorial/cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/cli/hello-world.html"><strong aria-hidden="true">3.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="tutorial/cli/image-filters.html"><strong aria-hidden="true">3.2.</strong> Image filter CLI application</a></li><li class="chapter-item expanded "><a href="tutorial/cli/final-code.html"><strong aria-hidden="true">3.3.</strong> Final application</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">4.</strong> References</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Rust and QT</a></li><li class="chapter-item expanded "><a href="preparations.html"><strong aria-hidden="true">1.</strong> Preparations</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="setup.html"><strong aria-hidden="true">1.1.</strong> Setup</a></li><li class="chapter-item expanded "><a href="tooling-check.html"><strong aria-hidden="true">1.2.</strong> Tooling check</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="tutorial/index.html"><strong aria-hidden="true">2.</strong> Idea</a></li><li class="chapter-item expanded "><a href="tutorial/cli.html"><strong aria-hidden="true">3.</strong> CLI</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/cli/hello-world.html"><strong aria-hidden="true">3.1.</strong> Hello World</a></li><li class="chapter-item expanded "><a href="tutorial/cli/image-filters.html"><strong aria-hidden="true">3.2.</strong> Image filter CLI application</a></li><li class="chapter-item expanded "><a href="tutorial/cli/final-code.html"><strong aria-hidden="true">3.3.</strong> Final application</a></li></ol></li><li class="chapter-item expanded "><a href="tutorial/library.html"><strong aria-hidden="true">4.</strong> Implementing a library</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tutorial/library/recreate-as-workspace.html"><strong aria-hidden="true">4.1.</strong> Recreate the project as a workspace</a></li><li class="chapter-item expanded "><a href="tutorial/library/create-library.html"><strong aria-hidden="true">4.2.</strong> Creating the library</a></li><li class="chapter-item expanded "><a href="tutorial/library/cli-with-library.html"><strong aria-hidden="true">4.3.</strong> Using the library in your CLI binary</a></li><li class="spacer"></li></ol></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">5.</strong> References</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -180,10 +180,7 @@
 <p>It is split into 3 parts:</p>
 <h2 id="part-1-setup"><a class="header" href="#part-1-setup">Part 1: <a href="preparations.html">Setup</a></a></h2>
 <p>An installation guide for all tooling used throughout this book.</p>
-<h2 id="part-2-background"><a class="header" href="#part-2-background">Part 2: <a href="what-is-webassembly.html">Background</a></a></h2>
-<p>A bit of common knowledge &amp; history about WebAssembly and Rust,
-as well as notable use cases.</p>
-<h2 id="part-3-tutorial"><a class="header" href="#part-3-tutorial">Part 3: <a href="./tutorial/index.html">Tutorial</a></a></h2>
+<h2 id="part-2-tutorial"><a class="header" href="#part-2-tutorial">Part 2: <a href="./tutorial/index.html">Tutorial</a></a></h2>
 <p>A hands-on tutorial writing Rust and compiling it in 3 variations: as a command-line app, as a library and as a small QT app using the library using cxx-qt.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="preparations"><a class="header" href="#preparations">Preparations</a></h1>
 <p>This chapter contains information about the course material and an installation guide.</p>
@@ -377,6 +374,185 @@ fn main() {
 <li>Run the application natively: <code>cargo run</code>. Any complications or differences?</li>
 <li>Heard of WebAssembly? You can actually run this in WebAssembly - see our <a href="https://github.com/ferrous-systems/wasm-training-2022">WASM Training</a></li>
 <li>Try a full command line parser crate - see <a href="https://blessed.rs/crates#section-cli-tools-subsection-argument-parsing">blessed.rs for suggestions</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="library"><a class="header" href="#library">Library</a></h1>
+<p>In this tutorial you'll get familiar with:</p>
+<ul>
+<li>Refactoring your Rust project into multiple libraries (crates)</li>
+<li>Running applications on the command-line</li>
+<li>Parsing command line paramenters by hand</li>
+<li>Re-using existing crates in your application</li>
+<li>Learn about borrowing</li>
+</ul>
+<p>We start with a command-line tool that takes an image and a filter name as input.
+It applies the given filter to the image and produces an <code>output.png</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="recreate-the-project-as-workspace"><a class="header" href="#recreate-the-project-as-workspace">Recreate the project as workspace</a></h1>
+<p>Let's get started by creating a so-called &quot;cargo workspace&quot;. In
+a growing project, this is a common refactoring, however, given
+the simplicity of our CLI app, it's easier to just start from
+the beginning again.</p>
+<p>✅ Create yourself an working directory</p>
+<pre><code class="language-console">$ mkdir image-workspace
+$ cd image-workspace
+</code></pre>
+<p>✅ create a library crate for image manipulation</p>
+<pre><code class="language-console">$ cargo new --lib image-manipulation
+</code></pre>
+<p>✅ create a binary crate for the CLI app</p>
+<pre><code class="language-console">$ cargo new --bin cli
+</code></pre>
+<p>You folder structure should currently look like this:</p>
+<pre><code class="language-console">$ tree
+.
+└── cli
+└── image-manipulation
+</code></pre>
+<p>✅ create a file called <code>Cargo.toml</code> in the main folder:</p>
+<pre><code class="language-console">$ tree
+.
+└── Cargo.toml
+└── cli
+└── image-manipulation
+</code></pre>
+<p>✅ fill that file with the following info:</p>
+<pre><code class="language-toml">[workspace]
+members = [&quot;cli&quot;, &quot;image-manipulation&quot;]
+resolver = &quot;2&quot;
+</code></pre>
+<p>✅ build the whole workspace once to check everything works</p>
+<pre><code class="language-console">$ cargo build
+</code></pre>
+<p>Move on to <a href="tutorial/library/create-library">creating the library</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-library"><a class="header" href="#creating-a-library">Creating a library</a></h1>
+<p>In this section of the tutorial, you will create
+a library to handle image manipulation. This library
+will have exactly one function. It should:</p>
+<ul>
+<li>Take a field of bytes representing an image</li>
+<li>Take a filter type</li>
+</ul>
+<p>It should not:</p>
+<ul>
+<li>Handle any I/O</li>
+<li>Do input parsing (like filter name detection, etc.)</li>
+</ul>
+<p>✅ In <code>image-manipulation/Cargo.toml</code>, add:</p>
+<pre><code class="language-toml">[dependencies]
+rustagram2 = &quot;2&quot;
+log = &quot;0.4&quot;
+</code></pre>
+<p>We use the <code>log</code> crate to get some visibility into what is happening.</p>
+<p>✅ In <code>image-manipulation/src/lib.rs</code>, add the following imports and function headers</p>
+<pre><code class="language-rust">use std::io::Cursor;
+
+use rustagram::image::io::Reader;
+use rustagram::image::ImageOutputFormat;
+use rustagram::{RustagramFilter, FilterType};
+
+pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
+    log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);
+}</code></pre>
+<p>This communicates three interesting things:</p>
+<ul>
+<li>The function is marked <code>pub</code> - this makes it a public function, callable from other libraries. The default in Rust is always private.</li>
+<li>The data of the image is an immutable reference to binary data owned outside of the function</li>
+<li>The result is a binary vector, but passed out owned - so it cannot be the initial data</li>
+</ul>
+<h2 id="reading-the-image"><a class="header" href="#reading-the-image">Reading the image</a></h2>
+<p>Looking at the signature of <a href="https://docs.rs/image/0.24.3/image/io/struct.Reader.html">Reader</a>, we find that it can only be construted using types that implement the <code>Read</code> trait. <code>&amp;[u8]</code> does not implement the <code>Read</code> trait. However, we can use the
+standard libraries <a href="https://doc.rust-lang.org/std/io/struct.Cursor.html">Cursor</a> type
+to fix that.</p>
+<p>✅ Read the image by inserting the following code</p>
+<pre><code class="language-rust">let read_cursor = Cursor::new(img);
+let img = Reader::new(cursor)
+    .with_guessed_format()
+    .unwrap()
+    .decode()
+    .unwrap();</code></pre>
+<p>Now we got the image read and know it works.</p>
+<p>✅ Apply the filter</p>
+<pre><code class="language-rust">let out = img.to_rgba8().apply_filter(filter);</code></pre>
+<p>On the output side, things are the same, but a little bit more complex.
+We need to create the output vector. For writing to it, we can again create
+a <code>Cursor</code> around it, but this time, we'll do it by <em>mutably borrowing</em> the
+<code>Cursor</code>. We can then write to it like to any other IO type.</p>
+<p>✅ Write to an output buffer</p>
+<pre><code class="language-rust">let mut bytes: Vec&lt;u8&gt; = Vec::new();
+let mut write_cursor = Cursor::new(&amp;mut bytes);
+out.write_to(&amp;mut write_cursor, ImageOutputFormat::Png)
+    .unwrap();
+
+bytes</code></pre>
+<p>The last statement - a bare <code>bytes</code> - uses Rusts expression-based nature to mark
+<code>bytes</code> as the variable to be returned. If you feel more comfortable, you may use
+<code>return bytes</code>.</p>
+<p>The final code of the library should now read:</p>
+<pre><code class="language-rust">use std::io::Cursor;
+
+use rustagram::image::io::Reader;
+use rustagram::image::ImageOutputFormat;
+use rustagram::{RustagramFilter, FilterType};
+
+pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
+    log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);
+
+    let read_cursor = Cursor::new(img);
+    let img = Reader::new(cursor)
+        .with_guessed_format()
+        .unwrap()
+        .decode()
+        .unwrap();
+
+    let out = img.to_rgba8().apply_filter(filter);
+    
+    let mut bytes: Vec&lt;u8&gt; = Vec::new();
+    let mut write_cursor = Cursor::new(&amp;mut bytes);
+    out.write_to(&amp;mut write_cursor, ImageOutputFormat::Png)
+        .unwrap();
+
+    bytes
+}</code></pre>
+<p>Now that we have a library <a href="tutorial/library/cli-with-library.html">let's use it in our CLI</a></p>
+<hr />
+<p>Some ideas on what to do next:</p>
+<ul>
+<li>Create further utility functions</li>
+<li>Extend the signature and return a <code>Result</code></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-a-cli-using-the-library"><a class="header" href="#creating-a-cli-using-the-library">Creating a CLI using the library</a></h1>
+<p>Let's now use the library we created in our small CLI app.</p>
+<p>✅ In <code>cli/Cargo.toml</code>, add:</p>
+<pre><code class="language-toml">[dependencies]
+rustagram2 = &quot;2&quot;
+
+[dependencies.image-manipulation]
+path = &quot;../image-manipulation&quot;
+</code></pre>
+<p>✅ Recreate parts of the main function:</p>
+<pre><code class="language-rust">use image_manipulation::apply_filter;
+use rustagram::FilterType;
+
+fn main() {
+    let mut args = std::env::args().skip(1);
+    let input = args.next().expect(&quot;INPUT required&quot;);
+    let filter = args.next().expect(&quot;FILTER required&quot;);
+    let output = args.next().unwrap_or_else(|| &quot;output.jpg&quot;.to_string());
+
+    let filter_type: FilterType = filter.parse().expect(&quot;can't parse filter name&quot;);
+}</code></pre>
+<p>As our image manipulation library does not handle IO, we will reach for the <code>std::fs::{read,write}</code> function.</p>
+<p>✅ Read the image as input</p>
+<pre><code class="language-rust">let bytes: Vec&lt;u8&gt; = std::fs::read(input).unwrap();</code></pre>
+<p>The type annotation here isn't strictly necessary and is generally omitted, but helps during explaining the example.</p>
+<p>✅ Call the <code>apply_filter</code> library function</p>
+<pre><code class="language-rust">let manipulated_image = apply_filter(&amp;bytes, filter_type);</code></pre>
+<p>Note the referencing sigil in front of <code>bytes</code>.</p>
+<p>✅ Write the output to disk</p>
+<pre><code class="language-rust">std::fs::write(output, manipulated_image).unwrap();</code></pre>
+<hr />
+<p>Some ideas on what to do next:</p>
+<ul>
+<li>Instead of unwrapping all errors, handle <code>Result</code> otherwise</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
 <p>TODO: Redo References</p>
