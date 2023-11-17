@@ -229,15 +229,20 @@ thread 'main' panicked at src\main.rs:5:29:
 INPUT required
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 </code></pre>
-<p>Expected output when you pass a file path and a filter name:</p>
-<pre><code class="language-console">$ cargo run -- kongelige-slott.jpg 1977
+<p>Expected output when you pass a non-existing file path and a filter name:</p>
+<pre><code class="language-console">$ cargo run -- missing-image.jpg 1977
     Finished dev [unoptimized + debuginfo] target(s) in 0.09s
      Running `target\debug\rustagram.exe kongelige-slott.jpg 1977`
 thread 'main' panicked at src\main.rs:10:34:
 called `Result::unwrap()` on an `Err` value: IoError(Os { code: 2, kind: NotFound, message: &quot;The system cannot find the file specified.&quot; })
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 </code></pre>
-<p>TODO: document positive case</p>
+<p>Expected output when you pass the file actually exists.</p>
+<pre><code class="language-console">$ cargo run -- kongelige-slott.jpg 1977
+    Finished dev [unoptimized + debuginfo] target(s) in 0.09s
+     Running `target\debug\rustagram.exe kongelige-slott.jpg 1977`
+</code></pre>
+<p>The result should then be stored in <code>output.jpg</code>.</p>
 
                     </main>
 
