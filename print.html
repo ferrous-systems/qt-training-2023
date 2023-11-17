@@ -670,41 +670,17 @@ ApplicationWindow {
 </code></pre>
 <p>✅ Add dependencies to the <code>Cargo.toml</code> file</p>
 <pre><code class="language-toml">[dependencies]
-rustagram2=&quot;*&quot;
+rustagram2 = &quot;*&quot;
 image-manipulation = { path = &quot;../image-manipulation&quot; }
 
-cxx=&quot;1.0.95&quot;
-cxx-qt = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot; }
-cxx-qt-lib = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot; }
+cxx = &quot;1.0.95&quot;
+cxx-qt = &quot;0.6&quot;
+cxx-qt-lib = &quot;0.6&quot;
 
 [build-dependencies]
 # The &quot;link_qt_object_files&quot; is required when using Cargo to link to Qt statically.
-cxx-qt-build = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot;, features = [ &quot;qt_qml&quot;, &quot;link_qt_object_files&quot; ] } 
+cxx-qt-build = { version = &quot;0.6&quot;, features = [ &quot;qt_qml&quot;, &quot;link_qt_object_files&quot; ] } 
 </code></pre>
-<pre><code class="language-diff">- At the time of writing (17.11.2023), CXX-Qt 0.6 hasn't been released yet.
-- To keep the training material up-to-date with the new API introduced in version 0.6,
-- we'll use the version from Github for now.
-- The training material on Github will be updated as soon as version 0.6 is released!
-
-- Do note that the public documentation for CXX-Qt is still for version 0.5.
-- You should wait before following this tutorial until version 0.6 is
-- released in the coming weeks.
-</code></pre>
-<details>
-<summary> Future imports once CXX-Qt 0.6 is released </summary>
-<pre><code class="language-toml">[dependencies]
-rustagram2=&quot;*&quot;
-image-manipulation = { path = &quot;../image-manipulation&quot; }
-
-cxx=&quot;1.0.95&quot;
-cxx-qt=&quot;0.6&quot;
-cxx-qt-lib=&quot;0.6&quot;
-
-[build-dependencies]
-# The &quot;link_qt_object_files&quot; is required when using Cargo to link to Qt statically.
-cxx-qt-build = { version=&quot;0.6&quot;, features = [ &quot;qt_qml&quot;, &quot;link_qt_object_files&quot; ] } 
-</code></pre>
-</details>
 <p>CXX-Qt is split up into multiple crates.</p>
 <ul>
 <li>CXX-Qt - Allows you to create QObjects from Rust and to interact with existing QObjects</li>
