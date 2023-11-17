@@ -242,12 +242,12 @@ bytes</code></pre>
 
 use rustagram::image::io::Reader;
 use rustagram::image::ImageOutputFormat;
-use rustagram::{RustagramFilter, FilterType};
+use rustagram::{FilterType, RustagramFilter};
 
 pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
     log::debug!(&quot;image: {} bytes, filter: {:?}&quot;, img.len(), filter);
 
-    let read_cursor = Cursor::new(img);
+    let cursor = Cursor::new(img);
     let img = Reader::new(cursor)
         .with_guessed_format()
         .unwrap()
@@ -255,14 +255,15 @@ pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
         .unwrap();
 
     let out = img.to_rgba8().apply_filter(filter);
-    
+
     let mut bytes: Vec&lt;u8&gt; = Vec::new();
     let mut write_cursor = Cursor::new(&amp;mut bytes);
     out.write_to(&amp;mut write_cursor, ImageOutputFormat::Png)
         .unwrap();
 
     bytes
-}</code></pre>
+}
+</code></pre>
 <p>Now that we have a library <a href="cli-with-library.html">let's use it in our CLI</a></p>
 <hr />
 <p>Some ideas on what to do next:</p>
