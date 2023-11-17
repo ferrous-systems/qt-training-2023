@@ -20,11 +20,57 @@ The latest Rust should work best, though older versions have no known issues.
 
 [rust-install]: https://www.rust-lang.org/tools/install
 
-### Additional tooling
+## Additional tooling
 
-For those interested in following the QT section of the course,
-installation of QT is needed.
+For those interested in following the Qt section of the course,
+installation of Qt is needed.
 
-TODO: fill QT installation instructions
+The provided examples use Qt 6 and are tested against Qt 6.5 LTS.
+If you can only install Qt 5, you will need to modify the QML code,
+as the FileDialog API has changed between Qt 5 and 6.
+Apart from that, The Rust-Qt integration ([CXX-Qt](https://github.com/KDAB/cxx-qt))
+should work the same with Qt 5 and Qt 6.
 
+How to install Qt depends a lot on the platform you're using.
+Many platforms even have multiple options on how to install Qt.
+The main goal is to ensure that `qmake` for Qt 6 is in your `PATH`.
 
+You can check this by using `qmake --version`, which should return something like this:
+```console
+$ qmake --version
+QMake version 3.1
+Using Qt version 6.5.1 in /usr/lib64
+```
+
+### Linux
+Many distributions have Qt already packaged, if your package manager doesn't offer development versions of Qt, you can always fall back to using the [Qt online installer][qt-installer].
+
+No matter which installation method you choose, make sure to install the QML (aka. QtQuick/Declarative) and Network modules, as well as any packages needed for QtQuickControls2.
+
+On Fedora for a full installation of Qt, use:
+```bash
+$ dnf install "qt6-*-devel"
+```
+
+### Windows
+
+We have had the best experience with installing Qt on Windows using the [Qt online installer][qt-installer].
+Make sure to select and install a version of Qt 6.
+
+Then add the installation directory to your `PATH` environment variable and make sure `qmake` is in your `PATH` by running `qmake --version`.
+You may have to restart your terminal for this to work correctly.
+
+### MacOS
+
+Preferrably install Qt using the [Qt online installer][qt-installer].
+Make sure to select and install a version of Qt 6.
+
+You can also try installing Qt using homebrew.
+```zsh
+$ brew install qt6
+```
+
+In any case, make sure the installation directory is added to your path and qmake can be found by your command line using `qmake --version`.
+You may have to restart your terminal for this to work correctly.
+
+[qt-installer]:https://doc.qt.io/qt-6/get-and-install-qt.html

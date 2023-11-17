@@ -2,7 +2,7 @@
 authors = ["Jan-Erik Rediger", "Florian Gilcher"]
 multilingual = false
 src = "src"
-title = "Workbook for Rust & QT workshop"
+title = "Workbook for Rust & Qt workshop"
 
 [output.html]
 git-repository-url = "https://github.com/ferrous-systems/qt-training-2023"
