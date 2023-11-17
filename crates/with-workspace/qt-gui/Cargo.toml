@@ -10,8 +10,8 @@ rustagram2="*"
 image-manipulation = { path = "../image-manipulation" }
 
 cxx = "1.0.95"
-cxx-qt = { git = "https://github.com/LeonMatthesKDAB/cxx-qt", branch = "qimage" }
-cxx-qt-lib = { git = "https://github.com/LeonMatthesKDAB/cxx-qt", branch = "qimage" }
+cxx-qt = "0.6"
+cxx-qt-lib = "0.6"
 
 [build-dependencies]
-cxx-qt-build = { git = "https://github.com/LeonMatthesKDAB/cxx-qt", branch = "qimage", features = [ "qt_qml", "link_qt_object_files" ] } 
+cxx-qt-build = { version = "0.6", features = [ "qt_qml", "link_qt_object_files" ] } 

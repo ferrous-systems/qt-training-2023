@@ -220,8 +220,9 @@ dependencies = [
 
 [[package]]
 name = "cxx-qt"
-version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a9a68e547fffeea723c374cd104a13e75bc67b3cdfbd2c0ad82769e0084d94ec"
 dependencies = [
  "cxx",
  "cxx-qt-macro",
@@ -230,8 +231,9 @@ dependencies = [
 
 [[package]]
 name = "cxx-qt-build"
-version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "122e3f57ebd3b81b346b17369958937a4ff105d7c6e9824bf09b04b0c4dbcfb8"
 dependencies = [
  "cc",
  "codespan-reporting",
@@ -247,8 +249,9 @@ dependencies = [
 
 [[package]]
 name = "cxx-qt-gen"
-version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bfce7e8223d0a10e442f56843090b3e2e3e58773e9d5be569452406802c0cdcc"
 dependencies = [
  "clang-format",
  "convert_case",
@@ -260,8 +263,9 @@ dependencies = [
 
 [[package]]
 name = "cxx-qt-lib"
-version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ceb543664986a1b368e94b14adb77dcc18dce4f0c6a0fecd3b0095335cdf4017"
 dependencies = [
  "cxx",
  "cxx-build",
@@ -271,13 +275,15 @@ dependencies = [
 
 [[package]]
 name = "cxx-qt-lib-headers"
-version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa88798ca1426b33bd772834ac718469e9a9f33d0363a17350034d15cc1609f4"
 
 [[package]]
 name = "cxx-qt-macro"
-version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "52e9ba5202d3b276f5b52d09d07b6476d0ef37950fd7c60c14f3e9f0e855930d"
 dependencies = [
  "cxx-qt-gen",
  "proc-macro2",
@@ -586,8 +592,9 @@ dependencies = [
 
 [[package]]
 name = "qt-build-utils"
-version = "0.5.3"
-source = "git+https://github.com/LeonMatthesKDAB/cxx-qt?branch=qimage#c6a70963aa027dae8c6ae3091d5e9ddb1f4ab1a5"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f8f3ef4a8dd2f774ad37f7cb2391af5fbadd5928f7364f02fb53a56d69466bb1"
 dependencies = [
  "cc",
  "thiserror",

@@ -6,8 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cxx-qt = { git="https://github.com/kdab/cxx-qt" }
-cxx-qt-lib = { git="https://github.com/kdab/cxx-qt" }
+cxx-qt = "0.6"
+cxx-qt-lib = "0.6"
 
 [build-dependencies]
-cxx-qt-build = { git="https://github.com/kdab/cxx-qt", features = [ "qt_qml", "link_qt_object_files" ] } 
+cxx-qt-build = { version = "0.6", features = [ "qt_qml", "link_qt_object_files" ] } 
