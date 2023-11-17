@@ -278,11 +278,7 @@ pub mod qobject {
 ❓ How can you change the <a href="https://doc.qt.io/qt-6/qt.html#ConnectionType-enum">connection type</a> when connecting to a signal from Rust?</p>
 </blockquote>
 <p>✅ Check that you can successfully print &quot;Hello world from CXX-Qt!&quot; by selecting a file path or changing the image filter</p>
-<p>Before we implement the image loading and filtering, we'll need some additional types:</p>
-<ul>
-<li>QByteArray (and the QByteArrayCursor helper)</li>
-<li>QSizeF and QRectF to calculate the size for painting</li>
-</ul>
+<p>Before we implement the image loading and filtering, we'll need to import QSizeF and QRectF to calculate the size for painting.</p>
 <p>✅ Import these types from cxx-qt-lib</p>
 <p>✅ Add QSizeF and QRectF to the <code>#[cxx_qt::bridge]</code></p>
 <p>We'll also need a few more functions from C++ to paint the image, get the size of the ImagePainter, etc.</p>
@@ -325,18 +321,13 @@ mod qobject {
 <p>Documentation that may be useful:</p>
 <ul>
 <li><a href="https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/">CXX-Qt-lib</a> for using Qt types from Rust</li>
-<li><a href="https://docs.rs/rustagram2/latest/rustagram/">rustagram2</a>
-<ul>
-<li>Click on the Re-export of the <code>image</code> crate to learn more about how to use the resulting image.</li>
-</ul>
-</li>
 <li><a href="https://doc.rust-lang.org/std/index.html">Rust standard library documentation</a></li>
 </ul>
 <p>✅ Add threading in Rust via <a href="https://doc.rust-lang.org/std/thread/fn.spawn.html"><code>std::thread::spawn</code></a> to load and convert the image in the background</p>
 <ul>
 <li>Check out the <a href="https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/">CXX-Qt book</a> to learn more about Threading</li>
 </ul>
-<p>✅ Add a <code>BusyIndicator</code> to QML to show that the background thread is wthat the background thread is waiting.</p>
+<p>✅ Add a <code>BusyIndicator</code> to QML to show that the background thread is waiting.</p>
 <p>The resulting application should look like this:</p>
 <p><img src="./qt-gui-skyline.png" alt="The final application, showing the picture of a skyline that has been filtered using the &quot;lofi&quot; filter" /></p>
 <p>✅ Check out the <a href="https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/with-workspace/">full example code</a> and compare it with your implementation</p>
