@@ -60,6 +60,17 @@ Make sure to select and install a version of Qt 6.
 Then add the installation directory to your `PATH` environment variable and make sure `qmake` is in your `PATH` by running `qmake --version`.
 You may have to restart your terminal for this to work correctly.
 
+> Note that on Windows the Qt installation usually shouldn't be in your system path.
+> That may cause issues with other programs that link to Qt dynamically.
+>
+> CXX-Qt still needs to be able to find the `qmake` executable however.
+> A good compromise is to create a development environment which either temporarily
+> adds the Qt installation in the PATH or assigns the `QMAKE` environment variable
+> to point to the correct `qmake` executable.
+>
+> If this is too much trouble to set up you can always fall back to providing the
+> `QMAKE` environment variable each time you execute `cargo build` or `cargo run`.
+
 ### MacOS
 
 Preferrably install Qt using the [Qt online installer][qt-installer].
