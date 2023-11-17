@@ -15,4 +15,4 @@ fn main() {
 }
 ```
 
-Next, [read how to build and run the application](building-cli.md).
+Next, [start integrating image filters](image-filters.md).

@@ -8,11 +8,6 @@ It is split into 3 parts:
 
 An installation guide for all tooling used throughout this book.
 
-## Part 2: [Background](what-is-webassembly.md)
-
-A bit of common knowledge & history about WebAssembly and Rust,
-as well as notable use cases.
-
-## Part 3: [Tutorial](./tutorial/index.md)
+## Part 2: [Tutorial](./tutorial/index.md)
 
 A hands-on tutorial writing Rust and compiling it in 3 variations: as a command-line app, as a library and as a small Qt app using the library using cxx-qt.
