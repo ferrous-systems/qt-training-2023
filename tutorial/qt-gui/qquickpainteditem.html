@@ -199,13 +199,19 @@
 <p>✅ Register this file with the build system</p>
 <p>Because we will be using the <code>#[cxx_qt::bridge]</code> macro, we have to register this file twice.</p>
 <ol>
-<li>In the <code>src/main.rs</code> file, add a line: <code>pub mod image_painter;</code><br />
-This registers the new file as a module of our application and makes it known to Cargo.</li>
-<li>In the <code>build.rs</code> file, add the file to the list of rust_files of the QmlModule.<br />
-This registers the new file with CXX-Qt.
+<li>✅ In the <code>src/main.rs</code> file, add a line: <code>pub mod image_painter;</code>
+<ul>
+<li>This registers the new file as a module of our application and makes it known to Cargo.</li>
+</ul>
+</li>
+<li>✅ In the <code>build.rs</code> file, add the file to the list of rust_files of the QmlModule.
+<ul>
+<li>This registers the new file with CXX-Qt.<br />
 It tells CXX-Qt to generate a C++ class from it, run moc and link the resulting class into our application.
 This is only necessary because we want to use CXX-Qt within the file.
 Doing this second step is not necessary for a normal Rust module.</li>
+</ul>
+</li>
 </ol>
 <pre><code class="language-rust">use cxx_qt_build::{CxxQtBuilder, QmlModule};
 

@@ -179,9 +179,7 @@
 <p>✅ In <code>cli/Cargo.toml</code>, add:</p>
 <pre><code class="language-toml">[dependencies]
 rustagram2 = &quot;2&quot;
-
-[dependencies.image-manipulation]
-path = &quot;../image-manipulation&quot;
+image-manipulation = { path = &quot;../image-manipulation&quot; }
 </code></pre>
 <p>✅ Recreate parts of the main function:</p>
 <pre><code class="language-rust">use image_manipulation::apply_filter;

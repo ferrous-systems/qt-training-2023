@@ -594,9 +594,7 @@ pub fn apply_filter(img: &amp;[u8], filter: FilterType) -&gt; Vec&lt;u8&gt; {
 <p>✅ In <code>cli/Cargo.toml</code>, add:</p>
 <pre><code class="language-toml">[dependencies]
 rustagram2 = &quot;2&quot;
-
-[dependencies.image-manipulation]
-path = &quot;../image-manipulation&quot;
+image-manipulation = { path = &quot;../image-manipulation&quot; }
 </code></pre>
 <p>✅ Recreate parts of the main function:</p>
 <pre><code class="language-rust">use image_manipulation::apply_filter;
@@ -637,9 +635,16 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="building-a-simple-qt-application-with-rust"><a class="header" href="#building-a-simple-qt-application-with-rust">Building a simple Qt application with Rust</a></h1>
 <p>CXX-Qt provides helper libraries that make it easy for the Rust build system to link to Qt.</p>
 <p>The goal for now is to create a simple program that just launches an Qt/QML application.</p>
-<p>✅ Create a new Rust application</p>
-<pre><code class="language-console">cargo new qt-gui
-cd qt-gui
+<p>✅ In the workspace create a new Rust application</p>
+<pre><code class="language-console">cargo new --bin qt-gui
+</code></pre>
+<p>✅ Add the new crate to the workspace</p>
+<pre><code class="language-toml">[workspace]
+members = [&quot;cli&quot;, &quot;image-manipulation&quot;, &quot;qt-gui&quot;]
+resolver = &quot;2&quot;
+</code></pre>
+<p>✅ Then enter our new crate</p>
+<pre><code class="language-console">cd qt-gui
 </code></pre>
 <p>✅ Add a simple QML main file in <code>qml/main.qml</code></p>
 <pre><code class="language-qml">import QtQuick 2.15
@@ -655,7 +660,9 @@ ApplicationWindow {
 </code></pre>
 <p>✅ Add dependencies to the <code>Cargo.toml</code> file</p>
 <pre><code class="language-toml">[dependencies]
-rustagram2=&quot;2&quot;
+rustagram2=&quot;*&quot;
+image-manipulation = { path = &quot;../image-manipulation&quot; }
+
 cxx=&quot;1.0.95&quot;
 cxx-qt = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot; }
 cxx-qt-lib = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot; }
@@ -664,7 +671,7 @@ cxx-qt-lib = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch
 # The &quot;link_qt_object_files&quot; is required when using Cargo to link to Qt statically.
 cxx-qt-build = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot;, features = [ &quot;qt_qml&quot;, &quot;link_qt_object_files&quot; ] } 
 </code></pre>
-<pre><code class="language-diff">- At the time of writing (15.11.2023), CXX-Qt 0.6 hasn't been released yet.
+<pre><code class="language-diff">- At the time of writing (17.11.2023), CXX-Qt 0.6 hasn't been released yet.
 - To keep the training material up-to-date with the new API introduced in version 0.6,
 - we'll use the version from Github for now.
 - The training material on Github will be updated as soon as version 0.6 is released!
@@ -676,7 +683,9 @@ cxx-qt-build = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, bran
 <details>
 <summary> Future imports once CXX-Qt 0.6 is released </summary>
 <pre><code class="language-toml">[dependencies]
-rustagram2=&quot;2&quot;
+rustagram2=&quot;*&quot;
+image-manipulation = { path = &quot;../image-manipulation&quot; }
+
 cxx=&quot;1.0.95&quot;
 cxx-qt=&quot;0.6&quot;
 cxx-qt-lib=&quot;0.6&quot;
@@ -826,13 +835,19 @@ The list of available QML types is listed <a href="https://doc.qt.io/qt-6/qtquic
 <p>✅ Register this file with the build system</p>
 <p>Because we will be using the <code>#[cxx_qt::bridge]</code> macro, we have to register this file twice.</p>
 <ol>
-<li>In the <code>src/main.rs</code> file, add a line: <code>pub mod image_painter;</code><br />
-This registers the new file as a module of our application and makes it known to Cargo.</li>
-<li>In the <code>build.rs</code> file, add the file to the list of rust_files of the QmlModule.<br />
-This registers the new file with CXX-Qt.
+<li>✅ In the <code>src/main.rs</code> file, add a line: <code>pub mod image_painter;</code>
+<ul>
+<li>This registers the new file as a module of our application and makes it known to Cargo.</li>
+</ul>
+</li>
+<li>✅ In the <code>build.rs</code> file, add the file to the list of rust_files of the QmlModule.
+<ul>
+<li>This registers the new file with CXX-Qt.<br />
 It tells CXX-Qt to generate a C++ class from it, run moc and link the resulting class into our application.
 This is only necessary because we want to use CXX-Qt within the file.
 Doing this second step is not necessary for a normal Rust module.</li>
+</ul>
+</li>
 </ol>
 <pre><code class="language-rust">use cxx_qt_build::{CxxQtBuilder, QmlModule};
 
@@ -1164,7 +1179,7 @@ mod qobject {
 <p>✅ Add a <code>BusyIndicator</code> to QML to show that the background thread is wthat the background thread is waiting.</p>
 <p>The resulting application should look like this:</p>
 <p><img src="tutorial/qt-gui/./qt-gui-skyline.png" alt="The final application, showing the picture of a skyline that has been filtered using the &quot;lofi&quot; filter" /></p>
-<p>✅ Check out the <a href="https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/qt-gui">full example code</a> and compare it with your implementation</p>
+<p>✅ Check out the <a href="https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/with-workspace/">full example code</a> and compare it with your implementation</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
 <ul>
 <li><a href="https://github.com/ferrous-systems/rust-training">The Ferrous Systems main training material</a></li>

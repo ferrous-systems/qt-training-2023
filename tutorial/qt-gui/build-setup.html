@@ -177,9 +177,16 @@
                         <h1 id="building-a-simple-qt-application-with-rust"><a class="header" href="#building-a-simple-qt-application-with-rust">Building a simple Qt application with Rust</a></h1>
 <p>CXX-Qt provides helper libraries that make it easy for the Rust build system to link to Qt.</p>
 <p>The goal for now is to create a simple program that just launches an Qt/QML application.</p>
-<p>✅ Create a new Rust application</p>
-<pre><code class="language-console">cargo new qt-gui
-cd qt-gui
+<p>✅ In the workspace create a new Rust application</p>
+<pre><code class="language-console">cargo new --bin qt-gui
+</code></pre>
+<p>✅ Add the new crate to the workspace</p>
+<pre><code class="language-toml">[workspace]
+members = [&quot;cli&quot;, &quot;image-manipulation&quot;, &quot;qt-gui&quot;]
+resolver = &quot;2&quot;
+</code></pre>
+<p>✅ Then enter our new crate</p>
+<pre><code class="language-console">cd qt-gui
 </code></pre>
 <p>✅ Add a simple QML main file in <code>qml/main.qml</code></p>
 <pre><code class="language-qml">import QtQuick 2.15
@@ -195,7 +202,9 @@ ApplicationWindow {
 </code></pre>
 <p>✅ Add dependencies to the <code>Cargo.toml</code> file</p>
 <pre><code class="language-toml">[dependencies]
-rustagram2=&quot;2&quot;
+rustagram2=&quot;*&quot;
+image-manipulation = { path = &quot;../image-manipulation&quot; }
+
 cxx=&quot;1.0.95&quot;
 cxx-qt = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot; }
 cxx-qt-lib = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot; }
@@ -204,7 +213,7 @@ cxx-qt-lib = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch
 # The &quot;link_qt_object_files&quot; is required when using Cargo to link to Qt statically.
 cxx-qt-build = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, branch=&quot;qimage&quot;, features = [ &quot;qt_qml&quot;, &quot;link_qt_object_files&quot; ] } 
 </code></pre>
-<pre><code class="language-diff">- At the time of writing (15.11.2023), CXX-Qt 0.6 hasn't been released yet.
+<pre><code class="language-diff">- At the time of writing (17.11.2023), CXX-Qt 0.6 hasn't been released yet.
 - To keep the training material up-to-date with the new API introduced in version 0.6,
 - we'll use the version from Github for now.
 - The training material on Github will be updated as soon as version 0.6 is released!
@@ -216,7 +225,9 @@ cxx-qt-build = { git=&quot;https://github.com/LeonMatthesKDAB/cxx-qt&quot;, bran
 <details>
 <summary> Future imports once CXX-Qt 0.6 is released </summary>
 <pre><code class="language-toml">[dependencies]
-rustagram2=&quot;2&quot;
+rustagram2=&quot;*&quot;
+image-manipulation = { path = &quot;../image-manipulation&quot; }
+
 cxx=&quot;1.0.95&quot;
 cxx-qt=&quot;0.6&quot;
 cxx-qt-lib=&quot;0.6&quot;
