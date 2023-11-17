@@ -1,4 +1,4 @@
-# Recreate as workspace
+# Recreate the project as workspace
 
 Let's get started by creating a so-called "cargo workspace". In
 a growing project, this is a common refactoring, however, given
