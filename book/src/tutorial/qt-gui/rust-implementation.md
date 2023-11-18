@@ -1,9 +1,9 @@
 # Adding behavior in Rust
 
-At the moment our ImagePainter doesn't do anything, not even paint an image.
+At the moment our `ImagePainter` doesn't do anything, not even paint an image.
 
 So let's add some behavior.
-We want our ImagePainter to load a file from a given path, display a status for errors, etc.
+We want our `ImagePainter` to load a file from a given path, display a status for errors, etc.
 
 ✅ First, add the necessary fields to the `ImagePainterRust` struct
 * ✅ The image path to load from
@@ -188,7 +188,9 @@ The resulting application should look like this:
 
 ![The final application, showing the picture of a skyline that has been filtered using the "lofi" filter](./qt-gui-skyline.png)
 
-✅ Check out the [full example code](https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/with-workspace/) and compare it with your implementation
+✅ Check out the full example code[^full-example] and compare it with your implementation
+
+[^full-example]: https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/with-workspace/
 
 [QQuickPaintedItem]: https://doc.qt.io/qt-6/qquickpainteditem-members.html
 [CXX-Qt book]: https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/

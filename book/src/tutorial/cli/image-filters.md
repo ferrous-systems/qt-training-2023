@@ -5,8 +5,8 @@ it's time to build some functionality into it.
 
 The goal is:
 
-* Take an input file, a filter name and, optionally, an output file (or "output.jpg" as the default).
-* Load the input file, apply the given filter to this image, then write the resulting image to the output file.
+* Take an input file, a filter name and, optionally, an output file (default: "output.jpg").
+* Load the input file, apply the filter, then write the resulting image to the output file.
 
 You can continue with the previously created project.
 

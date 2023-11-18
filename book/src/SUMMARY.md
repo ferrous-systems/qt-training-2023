@@ -26,3 +26,4 @@
 ---
 
 - [References](./references.md)
+- [License](./license.md)

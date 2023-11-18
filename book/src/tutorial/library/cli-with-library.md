@@ -22,7 +22,7 @@ fn main() {
     let filter = args.next().expect("FILTER required");
     let output = args.next().unwrap_or_else(|| "output.jpg".to_string());
 
-    let filter_type: FilterType = filter.parse().expect("can't parse filter name");
+    let filter_type: FilterType = filter.parse().expect("unknown filter");
 }
 ```
 
@@ -34,7 +34,7 @@ As our image manipulation library does not handle IO, we will reach for the `std
 let bytes: Vec<u8> = std::fs::read(input).unwrap();
 ```
 
-The type annotation here isn't strictly necessary and is generally omitted, but helps during explaining the example.
+The type annotation here isn't necessary and only for explanation.
 
 ✅ Call the `apply_filter` library function
 
@@ -49,8 +49,6 @@ Note the referencing sigil in front of `bytes`.
 ```rust
 std::fs::write(output, manipulated_image).unwrap();
 ```
-
-
 ---
 
 Some ideas on what to do next:

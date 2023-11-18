@@ -46,6 +46,8 @@ QMake version 3.1
 Using Qt version 6.5.1 in /usr/lib64
 ```
 
+<div style="break-after:page"></div>
+
 > If for some reason you do not want to add `qmake` to your path, you can use the `QMAKE` environment variable
 > to tell CXX-Qt where to find the Qt6 qmake executable.
 > e.g.:
@@ -71,10 +73,11 @@ $ cd qt-training-2023/crates/qt-hello-world/
 ```console
 $ cargo run
 ```
-If you don't have `qmake` in your PATH, use:
-```console
-$ QMAKE=/path/to/your/qmake cargo run
-```
+
+> If you don't have `qmake` in your PATH, use:
+> ```console
+> $ QMAKE=/path/to/your/qmake cargo run
+> ```
 
 The resulting application should look like this:
 

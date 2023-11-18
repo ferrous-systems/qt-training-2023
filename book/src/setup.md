@@ -9,7 +9,7 @@ and integrate them with the different environments we will look at.
 You will need the standard Rust toolchain, including `rustup`, `rustc`, and
 `cargo`.
 
-[Follow these instructions to install the Rust toolchain.][rust-install]
+Follow the instructions provided at rust-lang.org to install the Rust toolchain[^rust-install].
 
 This will install the Rust toolchain and the targets for the host platform.
 Windows users need to choose between the `msvc` and `mingw` targets.
@@ -18,7 +18,7 @@ We recommend the `msvc` target, unless you already have `mingw` installed.
 The course will only use the stable compiler, we don't require any experimental feature flags.
 The latest Rust should work best, though older versions have no known issues.
 
-[rust-install]: https://www.rust-lang.org/tools/install
+[^rust-install]: https://www.rust-lang.org/tools/install
 
 ## Additional tooling
 
@@ -42,8 +42,10 @@ QMake version 3.1
 Using Qt version 6.5.1 in /usr/lib64
 ```
 
+<div style="break-after:page"></div>
+
 ### Linux
-Many distributions have Qt already packaged, if your package manager doesn't offer development versions of Qt, you can always fall back to using the [Qt online installer][qt-installer].
+Many distributions have Qt already packaged, if your package manager doesn't offer development versions of Qt, you can always fall back to using the Qt online installer[^qt-installer].
 
 No matter which installation method you choose, make sure to install the QML (aka. QtQuick/Declarative) and Network modules, as well as any packages needed for QtQuickControls2.
 
@@ -54,7 +56,7 @@ $ dnf install "qt6-*-devel"
 
 ### Windows
 
-We have had the best experience with installing Qt on Windows using the [Qt online installer][qt-installer].
+We have had the best experience with installing Qt on Windows using the Qt online installer[^qt-installer].
 Make sure to select and install a version of Qt 6.
 
 Then add the installation directory to your `PATH` environment variable and make sure `qmake` is in your `PATH` by running `qmake --version`.
@@ -73,7 +75,7 @@ You may have to restart your terminal for this to work correctly.
 
 ### MacOS
 
-Preferrably install Qt using the [Qt online installer][qt-installer].
+Preferrably install Qt using the Qt online installer[^qt-installer].
 Make sure to select and install a version of Qt 6.
 
 You can also try installing Qt using homebrew.
@@ -84,4 +86,4 @@ $ brew install qt6
 In any case, make sure the installation directory is added to your path and qmake can be found by your command line using `qmake --version`.
 You may have to restart your terminal for this to work correctly.
 
-[qt-installer]:https://doc.qt.io/qt-6/get-and-install-qt.html
+[^qt-installer]:https://doc.qt.io/qt-6/get-and-install-qt.html

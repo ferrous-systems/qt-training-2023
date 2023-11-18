@@ -91,7 +91,7 @@ Using the bridge we can declare which items exist in C++ and expose them to Rust
 And we can also declare Rust items to be exposed to C++.
 
 The syntax is based on and compatible with CXX.
-You can read up on CXX in the [CXX book][CXX].
+You can read up on CXX in the CXX book[^CXX].
 
 To create our `QQuickPaintedItem` subclass, we first need to include the appropriate C++ headers,
 then declare the types we want to use from Rust.
@@ -100,7 +100,7 @@ For our first example, we'll only set the `fillColor` and not actually paint any
 ✅ Create a new `#[cxx_qt::bridge]` module
 
 It should include the following declarations/includes:
-* ✅ An import of `QColor` from cxx-qt-lib [(see the CXX-Qt documentation)](https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/struct.QColor.html)
+* ✅ An import of `QColor` from cxx-qt-lib (see the CXX-Qt-lib documentation[^CXX-Qt-lib])
 * ✅ An include to the `QQuickPaintedItem` header
 * ✅ An include for the `QPainter` header, as well as a declaration of the `QPainter` type.
 
@@ -120,7 +120,7 @@ pub mod qobject {
     }
 }
 ```
-> Take a look at the [CXX documentation][CXX] and the [CXX-Qt-lib](https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/index.html) documentation.
+> Take a look at the CXX documentation[^CXX] and the CXX-Qt-lib[^CXX-Qt-lib] documentation.
 >
 > ❓ Is `QColor` an opaque or a trivial type? What does this mean when using QColor in Rust?\
 > ❓ What's the difference between declaring a `type QPainter` vs. `type QPainter = ...;`?\
@@ -171,13 +171,16 @@ pub mod qobject {
     impl cxx_qt::Constructor<()> for ImagePainter {}
 }
 ```
+
+<div style="break-after:page"></div>
+
 > Some food for thought:
 >
 > ❓ What does the `#[qml_element]` attribute do?\
 > ❓ Why does `paint` need to be marked `unsafe`? What happens without it?\
 > ❓ Is the `cxx_qt::Constructor` declaration always needed? Why is it necessary in this case?
 >
-> Try figuring this out using the [CXX][CXX] and the [CXX-Qt books](https://kdab.github.io/cxx-qt/book/).
+> Try figuring this out using the CXX[^CXX] and the CXX-Qt books[^CXX-Qt].
 
 Now that we've written our declarations we still need implementations for:
 * ✅ The `paint` function
@@ -217,6 +220,12 @@ It should now display a more pleasant blue.
 
 ![Our previous Qt GUI with our blue `ImagePainter` instead of the previous red rectangle](./qquickpainteditem.png)
 
-If you're having trouble, check out the [full example code](https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/qt-gui-qquickpainteditem)
+If you're having trouble, check out the full example code[^full-example].
 
-[CXX]:https://cxx.rs
+[^CXX]:https://cxx.rs
+
+[^CXX-Qt-lib]: https://docs.rs/cxx-qt-lib/latest/cxx_qt_lib/index.html
+
+[^CXX-Qt]: https://kdab.github.io/cxx-qt/book/
+
+[^full-example]: https://github.com/ferrous-systems/qt-training-2023/tree/main/crates/qt-gui-qquickpainteditem

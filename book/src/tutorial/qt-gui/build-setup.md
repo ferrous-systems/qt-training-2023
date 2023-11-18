@@ -84,6 +84,8 @@ It uses the `cxx-qt-build` library to:
 2. Create a QML module out of the `main.qml` file.
 3. Link the QML module and Qt itself to our Rust application.
 
+<div style="break-after:page"></div>
+
 > Troubleshooting: It is important that the `build.rs` file is
 > next to the `Cargo.toml` file at the root of the crate.
 >

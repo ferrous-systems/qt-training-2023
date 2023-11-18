@@ -43,6 +43,5 @@ cargo run --release
 
 Some ideas on what to do next:
 
-* Run the application natively: `cargo run`. Any complications or differences?
 * Heard of WebAssembly? You can actually run this in WebAssembly - see our [WASM Training](https://github.com/ferrous-systems/wasm-training-2022)
 * Try a full command line parser crate - see [blessed.rs for suggestions](https://blessed.rs/crates#section-cli-tools-subsection-argument-parsing)
