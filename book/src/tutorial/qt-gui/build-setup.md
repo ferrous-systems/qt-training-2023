@@ -22,6 +22,10 @@ cd qt-gui
 ```
 
 ✅ Add a simple QML main file in `qml/main.qml`
+```console
+$ mkdir qml
+```
+
 ```qml
 import QtQuick 2.15
 import QtQuick.Controls 2.15
