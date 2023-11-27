@@ -56,3 +56,4 @@ std::fs::write(output, manipulated_image).unwrap();
 Some ideas on what to do next:
 
 * Instead of unwrapping all errors, handle `Result` otherwise
+* Enable logging in the CLI binary - try out a few different logging crates
