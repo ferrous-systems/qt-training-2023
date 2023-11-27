@@ -471,7 +471,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "rustagram"
+name = "rustagram-cli"
 version = "1.0.0"
 dependencies = [
  "rustagram2",
