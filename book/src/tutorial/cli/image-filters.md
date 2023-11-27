@@ -94,7 +94,7 @@ called `Result::unwrap()` on an `Err` value: IoError(Os { code: 2, kind: NotFoun
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
-Expected output when you pass the file actually exists.
+Expected output when you pass a file that exists.
 
 ```console
 $ cargo run -- kongelige-slott.jpg 1977
